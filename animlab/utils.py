@@ -1,7 +1,7 @@
 
 # coding: utf-8
 
-# In[11]:
+# In[ ]:
 
 
 import datetime
@@ -53,5 +53,10 @@ def seqcount(start, stop, length):
     
     return sequence
 
-print "test2"
+
+def get_weights(w = 1.7, length = 20):
+    
+    """ Returns a list of weights, based on quadratic function """
+    
+    return [w**i for i in range(length, 0, -1)]
 
