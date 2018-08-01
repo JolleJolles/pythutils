@@ -40,7 +40,7 @@ def crop(image, pt1, pt2):
     return cropped
 
 
-def newdims(img = None, dims = None, resize):
+def newdims(img = None, dims = None, resize = 1):
     
     """ Returns new dimensions based on resize value"""
     
