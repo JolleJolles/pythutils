@@ -38,7 +38,7 @@ def points_to_angle(pt1, pt2 = None):
     
     """ Returns the angle of a vector based on eiher one or two points"""
     
-    vx, vy = pt1 if pt2 is None else vec_from_points(pt, pt2)
+    vx, vy = pt1 if pt2 is None else points_to_vec(pt, pt2)
     angle = np.round(np.arctan2(vx, vy) * 180 / np.pi,2)
 
     return angle
@@ -49,7 +49,7 @@ def points_to_dist(pt1, pt2):
     if None in pt1 or None in pt2:
         vel = None
     else:
-        vx, vy = vec_from_points(pt1, pt2)
+        vx, vy = points_to_vec(pt1, pt2)
         vel = np.linalg.norm([(vx, vy)])
     
     return dist
