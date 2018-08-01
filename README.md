@@ -1,4 +1,6 @@
 # AnimLab
+**Sophisticated computational tools for studying animal behaviour**
+
 
 Installation
 ------------
