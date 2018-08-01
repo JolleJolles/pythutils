@@ -14,6 +14,10 @@ def check_dependencies():
         import numpy
     except ImportError:
         install_requires.append('numpy')
+    try:
+        import markdown
+    except ImportError:
+        install_requires.append('markdown')
 
     return install_requires
 
