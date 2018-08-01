@@ -1,21 +1,22 @@
 
 # coding: utf-8
 
-# In[ ]:
+# In[2]:
 
 
-from datetime import datetime
+import datetime
 import os
+import numpy as np
 
 def now(timeformat = "date"):
     
     """ Returns current date or time """
     
     if timeformat == "date":
-        return datetime.now().strftime("%y/%m/%d")
+        return datetime.datetime.now().strftime("%y/%m/%d")
     
     elif timeformat == "time":
-        return datetime.now().strftime("%H:%M:%S")
+        return datetime.datetime.now().strftime("%H:%M:%S")
     
     else:
         print "No right time format provided.."
@@ -38,4 +39,17 @@ def listfiles(filedir = ".", filetype = (".mp4", ".mov", ".mjpeg",".jpg"),
     outlist = sorted(outlist)
     
     return outlist
+
+
+def seqcount(start, stop, length):
+    
+    """ Returns a sequence of numbers between two values 
+        with a certain length
+    """
+    
+    step = (stop - start) / float(length)
+    step = int(np.ceil(step))
+    sequence = range(start, stop, step)
+    
+    return sequence
 
