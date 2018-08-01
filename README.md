@@ -3,19 +3,19 @@
 Installation
 ------------
 
-Install the development version:
+Install or upgrade to the latest version:
 ```bash
 pip install git+https://github.com/joljols/animlab.git
 ```
-
-Update the latest version
 ```bash
 pip2 install --upgrade git+https://github.com/joljols/animlab.git
 ```
 
-Funniest
+Example
 --------
 
-To use utility functions
+To use utility functions, e.g.:
 
-    >>> from animlab import utils
+    >>> from animlab.utils import listfiles
+    >>> from animlab.imutils import crop
+    >>> from animlab.mathutils import points_to_angle
