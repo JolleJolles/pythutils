@@ -8,11 +8,14 @@ import numpy as np
 
 def uneven(value):
     
-    """ Calculates the closest uneven value equal to or lower than provided """
+    """ Returns the closest uneven value equal to or lower than provided """
     
-    value = value + (value - 1) if value > 0 else 1
+    if value == 0:
+        newvalue = 1
+    else:
+        newvalue = value -1 if value % 2 == 0 else value
     
-    return value
+    return newvalue
 
 
 def points_to_vec(pt1, pt2):
