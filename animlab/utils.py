@@ -45,7 +45,7 @@ def hide_traceback():
     ipython.showtraceback = hide
     
 
-def namedcols(colname = None, printlist = False):
+def namedcols(colname = None, printlist = False, BRG = True):
     
     collist = [str(i) for i in mcolors.CSS4_COLORS]
 
@@ -54,7 +54,9 @@ def namedcols(colname = None, printlist = False):
     elif colname not in collist:
         print "Colname does not exist.."
     else:
-        return tuple(int(i*255) for i in mcolors.to_rgb(colname))
+        col = tuple(int(i*255) for i in mcolors.to_rgb(colname))
+        col = (col[2],col[1],col[0]) if BRG else col
+        return col
     
 
 def now(timeformat = "date"):
@@ -132,7 +134,6 @@ def create_emptydf(cols = ["x","y","fx","fy"], cids = [1], first = 1, last = Non
     emptycols = list(np.repeat(np.nan, len(cols)))
     
     for i, cid in enumerate(cids):
-        print i,cid
         sub = pd.DataFrame([[frame, cid] + emptycols for frame in framerange], columns = colnames)
         data = sub if i == 0 else pd.concat([data, sub])
         

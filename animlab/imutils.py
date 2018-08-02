@@ -39,7 +39,7 @@ def check_media(mediafile):
         cap = cv2.VideoCapture(mediafile)
         assert cap.read()[0], "Video source opened but failed to read any images.." 
     
-    print ftype, "file okay!",
+    print "File okay..",
 
 
 def getimg(mediafile):
@@ -133,8 +133,6 @@ def textdims(text, fontsize, thickness = 1):
 def draw_text(img, text, loc = (0, 0), fontsize = 1, col = (0,0,0), margin = 5, bgcol = None):
      
     (tw, th), topy, boty = textdims(text, fontsize)
-    print (tw, th), topy, boty
-    print margin
     
     if bgcol is not None:
         topleftout = (loc[0], loc[1])
@@ -145,7 +143,7 @@ def draw_text(img, text, loc = (0, 0), fontsize = 1, col = (0,0,0), margin = 5, 
     cv2.putText(img, text, botlefin, cv2.FONT_HERSHEY_SIMPLEX, fontsize, col, 1, cv2.LINE_AA)
     
 
-def draw_crosshair(img, x, y):
-    cv2.line(img, (x - 5, y), (x + 5, y), namedcols("whi"), 1)
-    cv2.line(img, (x, y - 5),( x, y + 5), namedcols("whi"), 1)
+def draw_crosshair(img, pt):
+    cv2.line(img, (pt[0] - 5, pt[1]), (pt[0] + 5, pt[1]), namedcols("white"), 1)
+    cv2.line(img, (pt[0], pt[1] - 5), (pt[0], pt[1] + 5), namedcols("white"), 1)
 
