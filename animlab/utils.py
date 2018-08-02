@@ -3,10 +3,42 @@
 
 # In[ ]:
 
-
+import sys
 import datetime
 import os
 import numpy as np
+import pandas as pd
+from matplotlib import colors as mcolors
+
+def hide_traceback():
+    
+    """ Hides traceback in jupyter when raising errors. Only shows
+        error. Only needs to be called at start of script.
+    """
+    
+    ipython = get_ipython()
+    
+    def hide(exc_tuple = None, filename = None, tb_offset = None, 
+             exception_only = False, running_compiled_code = False): 
+        etype, value, tb = sys.exc_info()
+        element = ipython.InteractiveTB.get_exception_only(etype, value)
+        
+        return ipython._showtraceback(etype, value, element)
+    
+    ipython.showtraceback = hide
+    
+
+def namedcols(colname = None, printlist = False):
+    
+    collist = [str(i) for i in mcolors.CSS4_COLORS]
+
+    if printlist:
+        print collist
+    elif colname not in collist:
+        print "Colname does not exist.."
+    else:
+        return tuple(int(i*255) for i in mcolors.to_rgb(colname))
+    
 
 def now(timeformat = "date"):
     
@@ -41,6 +73,13 @@ def listfiles(filedir = ".", filetype = (".mp4", ".mov", ".mjpeg",".jpg"),
     return outlist
 
 
+def get_ext(filename):
+    
+    """ Returns file extension in lower case"""
+    
+    return os.path.splitext(filename)[-1].lower()    
+
+
 def seqcount(start, stop, length):
     
     """ Returns a sequence of numbers between two values 
@@ -59,4 +98,29 @@ def get_weights(w = 1.7, length = 20):
     """ Returns a list of weights, based on quadratic function """
     
     return [w**i for i in range(length, 0, -1)]
+
+
+def create_emptydf(cols = ["x","y","fx","fy"], cids = [1], first = 1, last = None):
+    
+    """ Creates an emtpy pandas df with frame and cid columns
+        as well as user provided columns for provided frame range
+    """
+    
+    try:
+        framerange = range(first, last + 1)
+    except TypeError:
+        raise TypeError("No last value provided..")
+    
+    colnames = ["frame","cid"] + cols
+    emptycols = list(np.repeat(np.nan, len(cols)))
+    
+    for i, cid in enumerate(cids):
+        print i,cid
+        sub = pd.DataFrame([[frame, cid] + emptycols for frame in framerange], columns = colnames)
+        data = sub if i == 0 else pd.concat([data, sub])
+        
+    data = data.sort_values(["frame"])
+    data.index = range(0, data.index.size, 1)
+    
+    return data
 
