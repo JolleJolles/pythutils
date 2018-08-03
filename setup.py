@@ -30,7 +30,7 @@ setup(name='animlab',
       long_description=readme,
       url='http://jollejolles.com',
       download_url='https://github.com/jolleslab/animlab.git',
-      version="0.0.1",
+      version="0.0.2",
       license="MIT",
       install_requires=install_requires,
       packages=find_packages(exclude=('tests', 'docs')))
