@@ -4,9 +4,7 @@
 # In[ ]:
 
 """
-Copyright 2016 - 2018 Jolle W. Jolles <j.w.jolles@gmail.com>
-
-Copyright 2015 - 2016 Jake Graving <jgraving@gmail.com>
+Copyright 2015-2018 Jacob M. Graving <jgraving@gmail.com>
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -20,8 +18,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-This file is a modified version of the original file by J Graving, with
-minor code changes by JW Jolles.
+Modified by Jolle W. Jolles <j.w.jolles@gmail.com>
+
+All modifications are Copyright (C) 2016-2018 Jolle W. Jolles
+
 """
 
 from glob import glob
