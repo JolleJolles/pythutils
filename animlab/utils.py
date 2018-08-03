@@ -142,3 +142,11 @@ def create_emptydf(cols = ["x","y","fx","fy"], cids = [1], first = 1, last = Non
     
     return data
 
+
+def dfchange(df1, df2):
+        
+    dfchanges = df2[~df2.isin(df1)].dropna(how = 'all')
+    nchanges = dfchanges.shape[0]
+
+    return dfchanges, nchanges
+
