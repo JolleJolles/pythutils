@@ -15,19 +15,19 @@ def check_dependencies():
     except ImportError:
         install_requires.append('numpy')
     try:
-        import markdown
+        import pandas
     except ImportError:
         install_requires.append('pandas')
     try:
-        import markdown
+        import matplotlib
     except ImportError:
         install_requires.append('matplotlib')
     try:
-        import markdown
+        import yaml
     except ImportError:
         install_requires.append('pyyaml')
     try:
-        import markdown
+        import cv2
     except ImportError:
         install_requires.append('cv2')
 
@@ -42,7 +42,7 @@ setup(name='animlab',
       long_description=readme,
       url='http://jollejolles.com',
       download_url='https://github.com/joljols/animlab.git',
-      version="0.0.4",
+      version="0.0.5",
       license="MIT",
       install_requires=install_requires,
       packages=find_packages(exclude=('tests', 'docs')))
