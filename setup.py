@@ -25,7 +25,7 @@ def check_dependencies():
     try:
         import markdown
     except ImportError:
-        install_requires.append('yaml')
+        install_requires.append('pyyaml')
     try:
         import markdown
     except ImportError:
