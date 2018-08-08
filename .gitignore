@@ -1,8 +1,6 @@
-.ipynb
-.DS_Store
-.ipynb_checkpoints
-.pyc
-.html
+*.DS_Store
 *.html
 *.ipynb
 *.pyc
+*.txt
+animlab.egg-info/PKG-INFO

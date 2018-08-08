@@ -26,6 +26,24 @@ import os
 import numpy as np
 import pandas as pd
 from matplotlib import colors as mcolors
+import yaml
+
+def clock():
+    
+    """ Simple running clock that prints on the same line"""
+    
+    while True:
+        print(datetime.datetime.now().strftime("%H:%M:%S"), end="\r")
+        time.sleep(1)
+
+
+def isscript():
+    
+    """Deternimes if session is script or interactive (jupyter)"""
+    
+    import __main__ as main    
+    return hasattr(main, '__file__')
+
 
 def hide_traceback():
     
@@ -43,6 +61,13 @@ def hide_traceback():
         return ipython._showtraceback(etype, value, element)
     
     ipython.showtraceback = hide
+    
+
+def homedir():    
+
+    """ Returns the home directory """
+    
+    return os.path.expanduser("~")+"/"
     
 
 def namedcols(colname = None, printlist = False, BRG = True):
@@ -90,6 +115,22 @@ def listfiles(filedir = ".", filetype = (".mp4", ".mov", ".mjpeg",".jpg"),
     outlist = sorted(outlist)
     
     return outlist
+
+
+def loadyml(filename, value = None, add = True):
+    
+    """ Loads value from .yml file and returns literal"""
+    
+    if os.path.exists(filename):
+        with open(filename) as f:
+            newvalue = yaml.load(f)
+        if value is not None:
+            newvalue = newvalue + value if add else value
+    else:
+        newvalue = value
+    newvalue = literal_eval(str(newvalue))
+        
+    return newvalue
 
 
 def get_ext(filename):
