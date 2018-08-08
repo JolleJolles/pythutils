@@ -17,7 +17,19 @@ def check_dependencies():
     try:
         import markdown
     except ImportError:
-        install_requires.append('markdown')
+        install_requires.append('pandas')
+    try:
+        import markdown
+    except ImportError:
+        install_requires.append('matplotlib')
+    try:
+        import markdown
+    except ImportError:
+        install_requires.append('yaml')
+    try:
+        import markdown
+    except ImportError:
+        install_requires.append('cv2')
 
     return install_requires
 
@@ -30,7 +42,7 @@ setup(name='animlab',
       long_description=readme,
       url='http://jollejolles.com',
       download_url='https://github.com/jolleslab/animlab.git',
-      version="0.0.3",
+      version="0.0.4",
       license="MIT",
       install_requires=install_requires,
       packages=find_packages(exclude=('tests', 'docs')))
