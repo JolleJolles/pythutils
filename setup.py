@@ -15,19 +15,16 @@ def check_dependencies():
     except ImportError:
         install_requires.append('numpy')
     try:
-        import markdown
     except ImportError:
         install_requires.append('pandas')
     try:
-        import markdown
     except ImportError:
         install_requires.append('matplotlib')
     try:
-        import markdown
+        import yaml
     except ImportError:
-        install_requires.append('yaml')
+        install_requires.append('pyyaml')
     try:
-        import markdown
     except ImportError:
         install_requires.append('cv2')
 
@@ -41,7 +38,11 @@ setup(name='animlab',
       description='AnimLab: Sophisticated computational tools for studying animal behaviour',
       long_description=readme,
       url='http://jollejolles.com',
+<<<<<<< HEAD
       download_url='https://github.com/jolleslab/animlab.git',
+=======
+      download_url='https://github.com/joljols/animlab.git',
+>>>>>>> 2d365141846c1be0db9dd011ffcf3b2f49147a10
       version="0.0.5",
       license="MIT",
       install_requires=install_requires,
