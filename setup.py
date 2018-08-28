@@ -33,8 +33,8 @@ def check_dependencies():
     try:
         import cv2
     except ImportError:
-        print "OpenCV is not installed but will not be installed now as",
-        print "this can take considerable time. Please install manually.
+        print "OpenCV is not installed. Doing so will take considerable time,",
+        print "especially on the RPi. Please install manually"
 
     return install_requires
 
