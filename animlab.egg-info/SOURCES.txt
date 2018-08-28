@@ -1,9 +1,0 @@
-README.md
-animlab/__init__.py
-animlab/imutils.py
-animlab/mathutils.py
-animlab/utils.py
-animlab.egg-info/PKG-INFO
-animlab.egg-info/SOURCES.txt
-animlab.egg-info/dependency_links.txt
-animlab.egg-info/top_level.txt
