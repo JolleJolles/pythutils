@@ -1,6 +1,9 @@
 *.DS_Store
+*.ipynb_checkpoints
+*.pyc
 *.html
 *.ipynb
-*.pyc
-*.txt
-animlab.egg-info/PKG-INFO
+animtrack.egg-info/dependency_links.txt
+animtrack.egg-info/PKG-INFO
+animtrack.egg-info/SOURCES.txt
+animtrack.egg-info/top_level.txt

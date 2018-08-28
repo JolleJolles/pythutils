@@ -1,0 +1,33 @@
+Metadata-Version: 1.1
+Name: animlab
+Version: 0.0.5
+Summary: AnimLab: Sophisticated computational tools for studying animal behaviour
+Home-page: http://jollejolles.com
+Author: Jolle Jolles
+Author-email: j.w.jolles@gmail.com
+License: MIT
+Download-URL: https://github.com/jolleslab/animlab.git
+Description: # AnimLab
+        **Sophisticated computational tools for studying animal behaviour**
+        
+        
+        Installation
+        ------------
+        
+        Install or upgrade to the latest version:
+        ```bash
+        pip install git+https://github.com/joljols/animlab.git
+        ```
+        ```bash
+        pip2 install --upgrade git+https://github.com/joljols/animlab.git
+        ```
+        
+        Example
+        --------
+        
+        To use utility functions, e.g.:
+        
+            >>> from animlab.utils import listfiles
+            >>> from animlab.imutils import crop
+            >>> from animlab.mathutils import points_to_angle
+Platform: UNKNOWN

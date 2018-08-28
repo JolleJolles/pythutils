@@ -1,3 +1,4 @@
+
 # coding: utf-8
 
 """
@@ -20,10 +21,45 @@ limitations under the License.
 import sys
 import datetime
 import os
+import time
 import numpy as np
 import pandas as pd
+from socket import gethostname
 from matplotlib import colors as mcolors
 import yaml
+
+
+def lineprint(text, stamp=True, sameline=False, reset=False, **kwargs):
+
+    global line, label
+
+    line = line if vardefined("line") else ""
+    label = label if vardefined("label") else gethostname()
+    if not vardefined("label"):
+        label = ""
+
+    if "label" in kwargs:
+        label = kwargs["label"]
+
+    if stamp:
+        text = time.strftime("%H:%M:%S") + " [" + label + "] - " + text
+
+    if sameline:
+        if reset:
+            line = text
+            sys.stdout.write("\r")
+            sys.stdout.write(" "*100)
+        else:
+            text = line + " " + text
+        line = "\r" + text
+        print line,
+    else:
+        line = text
+        if line == "":
+            print line,
+        else:
+            print "\n" + text,
+
 
 def clock():
 
@@ -187,3 +223,7 @@ def dfchange(df1, df2):
     nchanges = dfchanges.shape[0]
 
     return dfchanges, nchanges
+
+
+def vardefined(var):
+    return var in [var for var,_ in globals().items()]
