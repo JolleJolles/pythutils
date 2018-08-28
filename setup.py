@@ -21,7 +21,7 @@ def check_dependencies():
     try:
         import pandas
     except ImportError:
-        Raise("pandas is not installed. Doing so will take considerable time.\
+        raise Exception("pandas is not installed. Doing so will take considerable time.\
                Please install manually when required: pip install pandas")
         #install_requires.append('pandas')
     try:
