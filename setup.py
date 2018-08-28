@@ -15,9 +15,11 @@ def check_dependencies():
     except ImportError:
         install_requires.append('numpy')
     try:
+        import pandas
     except ImportError:
         install_requires.append('pandas')
     try:
+        import matplotlib
     except ImportError:
         install_requires.append('matplotlib')
     try:
@@ -25,6 +27,7 @@ def check_dependencies():
     except ImportError:
         install_requires.append('pyyaml')
     try:
+        import cv2
     except ImportError:
         install_requires.append('cv2')
 
