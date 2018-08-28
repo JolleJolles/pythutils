@@ -21,8 +21,8 @@ def check_dependencies():
     try:
         import pandas
     except ImportError:
-        print "pandas is not installed. Doing so will take considerable time.",
-        print "Please install manually when required: pip install pandas"
+        Raise("pandas is not installed. Doing so will take considerable time.\
+               Please install manually when required: pip install pandas")
         #install_requires.append('pandas')
     try:
         import matplotlib
