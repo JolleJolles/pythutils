@@ -15,21 +15,26 @@ def check_dependencies():
     except ImportError:
         install_requires.append('numpy')
     try:
-        import pandas
-    except ImportError:
-        install_requires.append('pandas')
-    try:
-        import matplotlib
-    except ImportError:
-        install_requires.append('matplotlib')
-    try:
         import yaml
     except ImportError:
         install_requires.append('pyyaml')
     try:
+        import pandas
+    except ImportError:
+        print "pandas is not installed. Doing so will take considerable time.",
+        print "Please install manually when required: pip install pandas"
+        #install_requires.append('pandas')
+    try:
+        import matplotlib
+    except ImportError:
+        print "Matplotlib is not installed. Please install manually when",
+        print "required: pip install matplotlib"
+        #install_requires.append('matplotlib')
+    try:
         import cv2
     except ImportError:
-        install_requires.append('cv2')
+        print "OpenCV is not installed but will not be installed now as",
+        print "this can take considerable time. Please install manually.
 
     return install_requires
 
