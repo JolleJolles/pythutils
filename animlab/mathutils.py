@@ -32,6 +32,29 @@ def uneven(value):
     return newvalue
 
 
+def maxsteps(value, maxval = 600):
+
+    '''
+    Gives the stepsize and maximum number of steps
+    for a number that is divisible up to a maximum
+    provided value, with some small range around
+    the number to find the optimal number of divisible
+    steps.
+    '''
+
+    valrange = [value-3,value-2,value-1,value]
+    nsteps = 1
+    for val in valrange:
+        for _,n in enumerate(reversed(xrange(1, maxval))):
+            if val % n == 0:
+                if n > nsteps:
+                    nsteps = n
+                    stepsize = val/nsteps
+                break
+
+    return(nsteps, stepsize)
+
+
 def points_to_vec(pt1, pt2):
 
     vx = pt2[0] - pt1[0]
