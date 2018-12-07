@@ -21,20 +21,21 @@ def check_dependencies():
     try:
         import pandas
     except ImportError:
-        print "pandas is not installed. Doing so will take considerable time.",
-        print "Please install manually when required: pip install pandas"
+        print("pandas is not installed. Doing so will take considerable time.",end="")
+        print("Please install manually when required: pip install pandas")
         #install_requires.append('pandas')
     try:
         import matplotlib
     except ImportError:
-        print "Matplotlib is not installed. Please install manually when",
-        print "required: pip install matplotlib"
+        print("Matplotlib is not installed. Please install manually when",end="")
+        print("required: pip install matplotlib")
         #install_requires.append('matplotlib')
     try:
         import cv2
     except ImportError:
-        print "OpenCV is not installed. Doing so will take considerable time,",
-        print "especially on the RPi. Please install manually"
+        print("OpenCV is not installed. Doing so will take considerable time,",end="")
+        print("especially on the RPi. Please follow the guidelines for installing",end="")
+        print("manually on the mac here: https://git.io/fpyvq")
 
     return install_requires
 
@@ -46,7 +47,7 @@ setup(name='animlab',
       description='AnimLab: Sophisticated computational tools for studying animal behaviour',
       long_description=readme,
       url='http://jollejolles.com',
-      download_url='https://github.com/joljols/animlab.git',
+      download_url='https://github.com/JolleJolles/animlab.git',
       version="0.0.5",
       license="MIT",
       install_requires=install_requires,

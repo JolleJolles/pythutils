@@ -1,22 +1,19 @@
 # AnimLab
-**Sophisticated computational tools for studying animal behaviour**
+**Computational and analytical tools and functions for the mechanistic study of animal behaviour**
 
 
 Installation
 ------------
 
-Install or upgrade to the latest version:
+To install, simply open a terminal window and enter:
 ```bash
-pip install git+https://github.com/joljols/animlab.git
-```
-```bash
-pip2 install --upgrade git+https://github.com/joljols/animlab.git
+pip install git+https://github.com/JolleJolles/animlab.git
 ```
 
 Dependencies
 ------------
 
-- [Python 2.7+](http://www.python.org)
+- [Python 2.7 or 3.x](http://www.python.org)
 
 - [numpy](http://www.numpy.org/)
 
@@ -27,6 +24,8 @@ Dependencies
 - [matplotlib](http://matplotlib.org/)
 
 - [OpenCV](http://opencv.org/)
+
+For installing python with opencv on mac I have written a concise guide, find it here: https://git.io/fpyvq
 
 **Note**: Not all dependencies are installed automatically as some packages (like
 Matplotlib) take considerable time, especially on the RPi, and may only be

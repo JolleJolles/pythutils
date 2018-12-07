@@ -1,7 +1,4 @@
-
-# coding: utf-8
-
-# In[ ]:
+from __future__ import print_function
 
 """
 Copyright 2015-2018 Jacob M. Graving <jgraving@gmail.com>
@@ -30,10 +27,10 @@ import cv2
 import pickle
 import os
 
-def calibrate(userinput,  grid_size = (9,7), imshow = False, 
+def calibrate(userinput,  grid_size = (9,7), imshow = False,
               imstore = True, framestep = 10, delay = 500):
-    
-    """ 
+
+    """
     Calibrate camera using a video of a chessboard or a sequence of images
 
     Parameters
@@ -55,7 +52,7 @@ def calibrate(userinput,  grid_size = (9,7), imshow = False,
         source = glob(userinput)
     else:
         source = cv2.VideoCapture(userinput)
-        
+
     # Termination criteria
     criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 30, 0.001)
 
@@ -66,14 +63,14 @@ def calibrate(userinput,  grid_size = (9,7), imshow = False,
     # Arrays to store object points and image points from all the images.
     objpoints = [] # 3d point in real world space
     imgpoints = [] # 2d points in image plane.
-    
+
     # Make directory with analysed images
     if imstore == True:
         calibimgdir = userinput.split(".",1)[0]+"_calibrated_imgs"
         if not os.path.exists(calibimgdir):
             print("Directory made for calibrated images")
             os.makedirs(calibimgdir)
-        else: 
+        else:
             print("Directory of calibrated images already exists")
 
     # Start loop over images/video frames
@@ -93,35 +90,35 @@ def calibrate(userinput,  grid_size = (9,7), imshow = False,
                 break
             if i % framestep != 0:
                 continue
-                       
+
         # Search for chessboard
-        print("Searching for chessboard in image/frame " + str(i+1) + "..."),
+        print("Searching for chessboard in image/frame " + str(i+1) + "...",end='')
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-        
+
         # Find the chess board corners
         ret, corners = cv2.findChessboardCorners(gray, grid_size, None, flags = (cv2.CALIB_CB_ADAPTIVE_THRESH))
-        
+
         # If found, add object points, image points (after refining them)
         if ret == True:
-            print("Corners found on image/frame " + str(i+1) + "."),
+            print("Corners found on image/frame " + str(i+1) + ".",end='')
             objpoints.append(objp)
             corners2 = cv2.cornerSubPix(gray, corners, (11,11), (-1,-1), criteria)
             imgpoints.append(corners2)
 
             img = cv2.drawChessboardCorners(img, grid_size, corners2,ret)
             imgsmall = cv2.resize(img, None, fx = 0.5, fy = 0.5)
-        
+
             # Draw and display the corners
             if imshow == True:
                 cv2.imshow('img',imgsmall)
                 cv2.waitKey(delay)
             if imstore == True:
                 cv2.imwrite(os.path.join(calibimgdir, 'frame_%04d.png' % (i+1)), imgsmall)
-                
+
     if imshow == True:
         cv2.destroyAllWindows()
         for i in range(5):
-            cv2.waitKey(1) 
+            cv2.waitKey(1)
 
     if len(objpoints) > 0 and len(imgpoints) > 0:
         ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, gray.shape[::-1], None, None)
@@ -131,7 +128,7 @@ def calibrate(userinput,  grid_size = (9,7), imshow = False,
         for i in xrange(len(objpoints)):
             imgpoints2, _ = cv2.projectPoints(objpoints[i], rvecs[i], tvecs[i], mtx, dist)
             error = cv2.norm(imgpoints[i],imgpoints2, cv2.NORM_L2)/len(imgpoints2)
-            total_error += error 
+            total_error += error
         mean_error = total_error/len(objpoints)
 
         print("Calibration successful! Mean error: ", mean_error)
@@ -143,9 +140,9 @@ def calibrate(userinput,  grid_size = (9,7), imshow = False,
     return calib_params
 
 
-def save_calib(filename, calib_params): 
-    
-    """ 
+def save_calib(filename, calib_params):
+
+    """
     Saves calibration parameters as '.pkl' file.
 
     Parameters
@@ -157,7 +154,7 @@ def save_calib(filename, calib_params):
     -------
     saved : bool that states if saving was succesfully
     """
-    
+
     if type(calib_params) != dict:
         raise TypeError("calib_params must be 'dict'")
 
@@ -176,8 +173,8 @@ def save_calib(filename, calib_params):
 
 
 def load_calib(filename):
-    
-    """ 
+
+    """
     Loads calibration parameters from '.pkl' file.
 
     Parameters
@@ -188,7 +185,7 @@ def load_calib(filename):
     -------
     calib_params : dict; parameters for undistorting images.
     """
-        
+
     pkl_file = open(filename, 'rb')
 
     try:
@@ -203,7 +200,7 @@ def load_calib(filename):
 
 def undistort(image, calib_params, crop = True):
 
-    """ 
+    """
     Returns undistorted image using calibration parameters.
 
     Parameters
@@ -216,7 +213,7 @@ def undistort(image, calib_params, crop = True):
     -------
     dst : numpy array of undistorted image.
     """
-    
+
     try:
         ret = calib_params["ret"]
         mtx = calib_params["mtx"]
@@ -240,4 +237,3 @@ def undistort(image, calib_params, crop = True):
         dst = dst[y:y+h, x:x+w]
 
     return dst
-

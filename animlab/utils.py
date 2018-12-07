@@ -1,5 +1,5 @@
-
-# coding: utf-8
+from __future__ import division
+from __future__ import print_function
 
 """
 Copyright 2018 Jolle W Jolles <j.w.jolles@gmail.com>
@@ -52,13 +52,13 @@ def lineprint(text, stamp=True, sameline=False, reset=False, **kwargs):
         else:
             text = line + " " + text
         line = "\r" + text
-        print line,
+        print(line,end='')
     else:
         line = text
         if line == "":
-            print line,
+            print(line,end='')
         else:
-            print "\n" + text,
+            print("\n" + text,end='')
 
 
 def clock():
@@ -66,13 +66,13 @@ def clock():
     """ Simple running clock that prints on the same line"""
 
     while True:
-        print datetime.datetime.now().strftime("%H:%M:%S")+"\r"
+        print(datetime.datetime.now().strftime("%H:%M:%S")+"\r")
         time.sleep(1)
 
 
 def isscript():
 
-    """Deternimes if session is script or interactive (jupyter)"""
+    """Determines if session is script or interactive (jupyter)"""
 
     import __main__ as main
     return hasattr(main, '__file__')
@@ -108,9 +108,9 @@ def namedcols(colname = None, printlist = False, BRG = True):
     collist = [str(i) for i in mcolors.CSS4_COLORS]
 
     if printlist:
-        print collist
+        print(collist)
     elif colname not in collist:
-        print "Colname does not exist.."
+        print("Colname does not exist..")
     else:
         col = tuple(int(i*255) for i in mcolors.to_rgb(colname))
         col = (col[2],col[1],col[0]) if BRG else col
@@ -128,11 +128,11 @@ def now(timeformat = "date"):
         return datetime.datetime.now().strftime("%H:%M:%S")
 
     else:
-        print "No right time format provided.."
+        print("No right time format provided..")
 
 
 def listfiles(filedir = ".", filetype = (".mp4", ".mov", ".mjpeg",".jpg"),
-              dirs = False):
+              dirs = False, keepdir = False):
 
     """ Extracts and returns either a list of files with a specific
         extension or a list of directories at a certain location
@@ -144,6 +144,9 @@ def listfiles(filedir = ".", filetype = (".mp4", ".mov", ".mjpeg",".jpg"),
     else:
         outlist = [each for each in os.listdir(filedir) if each.endswith(filetype)]
         outlist = [i for i in outlist if not i.startswith('.')]
+
+    if keepdir:
+        outlist = [filedir + "/" + i  for i in outlist]
 
     outlist = sorted(outlist)
 
@@ -165,12 +168,48 @@ def loadyml(filename, value = None, add = True):
 
     return newvalue
 
+def loadh5data(filename, dataset = "data"):
+
+    h5file = h5py.File(filename, 'r')
+    dataset = pd.DataFrame(h5file[dataset][:])
+    h5file.close()
+
+    return dataset
+
 
 def get_ext(filename):
 
     """ Returns file extension in lower case"""
 
     return os.path.splitext(filename)[-1].lower()
+
+
+def name(filename, ext = ".csv", action = "overwrite"):
+
+    """ Returns filename with required extension or for sequence
+        returns filename that does not exist already with numeric
+        '_x' suffix appended
+    """
+
+    dirname, filename = os.path.split(filename)
+    dirname = '.' if dirname == '' else dirname
+    filename = os.path.splitext(filename)[0]
+
+    if action == "replace":
+        if os.path.exists(filename+ext):
+            os.remove(filename+ext)
+        return filename+ext
+
+    elif action == "append":
+        return filename+ext
+
+    elif action == "newfile":
+        names = [x for x in os.listdir(dirname) if x.startswith(filename)]
+        names = [os.path.splitext(x)[0] for x in names]
+        suffixes = [x.replace(filename, '') for x in names]
+        suffixes = [int(x[1]) for x in suffixes if x.startswith('_')]
+        suffix = 1 if len(suffixes)==0 else max(suffixes)+1
+        return '%s_%d%s' % (filename, suffix, ext)
 
 
 def seqcount(start, stop, length):
@@ -193,7 +232,7 @@ def get_weights(w = 1.7, length = 20):
     return [w**i for i in range(length, 0, -1)]
 
 
-def create_emptydf(cols = ["x","y","fx","fy"], cids = [1], first = 1, last = None):
+def create_emptydf(cols = ["x","y","fx","fy"], ids = [1], first = 1, last = None):
 
     """ Creates an emtpy pandas df with frame and cid columns
         as well as user provided columns for provided frame range
@@ -204,11 +243,11 @@ def create_emptydf(cols = ["x","y","fx","fy"], cids = [1], first = 1, last = Non
     except TypeError:
         raise TypeError("No last value provided..")
 
-    colnames = ["frame","cid"] + cols
+    colnames = ["frame","id"] + cols
     emptycols = list(np.repeat(np.nan, len(cols)))
 
-    for i, cid in enumerate(cids):
-        sub = pd.DataFrame([[frame, cid] + emptycols for frame in framerange], columns = colnames)
+    for i, id in enumerate(ids):
+        sub = pd.DataFrame([[frame, id] + emptycols for frame in framerange], columns = colnames)
         data = sub if i == 0 else pd.concat([data, sub])
 
     data = data.sort_values(["frame"])
@@ -226,4 +265,36 @@ def dfchange(df1, df2):
 
 
 def vardefined(var):
+
     return var in [var for var,_ in globals().items()]
+
+
+def list_to_coords(list):
+    coords = [(int(i),int(j)) for i,j in list if i==i]
+    loclist = [c for c,i in enumerate(list) if i[0] == i[0]]
+    return coords, loclist
+
+
+def pd_to_coords(pddata, loc = None, array = False, columns = ["x","y"], multiplier = 1):
+
+    '''Returns either a single coordinate of integers or a list or an array
+       of arrays with coordinates with a list of frames
+    '''
+
+    if loc != None:
+        coords = list_to_coords([list(pddata.loc[loc, columns])])[0]
+        if len(coords) == 0:
+            return None
+        else:
+            c = coords[0]
+            return (int(c[0]*multiplier),int(c[1]*multiplier))
+
+    else:
+        coords, loclist = list_to_coords(zip(pddata[columns[0]], pddata[columns[1]]))
+        framelist = [pddata.loc[i,"frame"] for i in loclist]
+        coords = [(int(c[0]*multiplier),int(c[1]*multiplier)) for c in coords]
+        if array:
+            coords = [[[i] for i in coords]]
+            coords = np.array(coords, np.int32).reshape((-1,1,2))
+
+        return coords, framelist

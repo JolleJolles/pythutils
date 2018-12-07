@@ -1,7 +1,5 @@
-
-# coding: utf-8
-
-# In[ ]:
+from __future__ import division
+from __future__ import print_function
 
 """
 Copyright 2018 Jolle W Jolles <j.w.jolles@gmail.com>
@@ -23,37 +21,37 @@ limitations under the License.
 import numpy as np
 
 def uneven(value):
-    
+
     """ Returns the closest uneven value equal to or lower than provided """
-    
+
     if value == 0:
         newvalue = 1
     else:
         newvalue = value -1 if value % 2 == 0 else value
-    
+
     return newvalue
 
 
 def points_to_vec(pt1, pt2):
-    
+
     vx = pt2[0] - pt1[0]
     vy = pt1[1] - pt2[1]
-    
+
     return vx, vy
 
 
 def angle_to_vec(angle):
-    
+
     vx = np.round(np.sin(np.radians(angle)), 3)
     vy = np.round(np.cos(np.radians(angle)), 3)
-    
+
     return vx, vy
 
 
 def points_to_angle(pt1, pt2 = None):
-    
+
     """ Returns the angle of a vector based on eiher one or two points"""
-    
+
     vx, vy = pt1 if pt2 is None else points_to_vec(pt, pt2)
     angle = np.round(np.arctan2(vx, vy) * 180 / np.pi,2)
 
@@ -61,42 +59,42 @@ def points_to_angle(pt1, pt2 = None):
 
 
 def points_to_dist(pt1, pt2):
-    
+
     if None in pt1 or None in pt2:
         vel = None
     else:
         vx, vy = points_to_vec(pt1, pt2)
         vel = np.linalg.norm([(vx, vy)])
-    
+
     return dist
 
 
 def diff_series(series, period = 1):
-    
+
     series2 = series.shift(periods = -period)
 
     return series2 - series
 
 
 def distoline(point, line):
-    
+
     """
     Calculate the distance between a point and a line segment
-    
+
     Explanation
     ----------
     To calculate the closest distance to a line segment, we first need to check
     if the point projects onto the line segment.  If it does, then we calculate
-    the orthogonal distance from the point to the line. If the point does not 
-    project to the line segment, we calculate the distance to both endpoints 
+    the orthogonal distance from the point to the line. If the point does not
+    project to the line segment, we calculate the distance to both endpoints
     and take the shortest distance.
-    
+
     Returns
     -------
     segment_dist : the perpendicular distance to the theoretical infinite line
     (x_seg, y_seg) : the relative x and y coordinates to the line
     endpoint_dist : minimum distance to the end point on the line
-    
+
     """
 
     # unit vector
@@ -108,10 +106,10 @@ def distoline(point, line):
     diff = ((norm_unit_line[0] * (point[0] - line[0][0])) + (norm_unit_line[1] * (point[1] - line[0][1])))
     x_seg = (norm_unit_line[0] * diff) + line[0][0]
     y_seg = (norm_unit_line[1] * diff) + line[0][1]
-    
+
     coords = (x_seg, y_seg)
     distance = segment_dist
-    
+
     linept1dis = np.linalg.norm(line[0] - point)
     linept2dis = np.linalg.norm(line[1] - point)
     endpoint_dist = min(linept1dis, linept2dis)
@@ -131,6 +129,5 @@ def distoline(point, line):
 #        # if not, then return the minimum distance to the segment endpoints
 #        #coords = (line[0][0],line[0][1]) if linept1dis<=linept2dis else (line[1][0],line[1][1])
 #        distance = endpoint_dist
-    
-    return segment_dist, (x_seg, y_seg), endpoint_dist
 
+    return segment_dist, (x_seg, y_seg), endpoint_dist
