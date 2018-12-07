@@ -134,8 +134,9 @@ def now(timeformat = "date"):
 def listfiles(filedir = ".", filetype = (".mp4", ".mov", ".mjpeg",".jpg"),
               dirs = False, keepdir = False):
 
-    """ Extracts and returns either a list of files with a specific
-        extension or a list of directories at a certain location
+    """
+    Extracts and returns either a list of files with a specific
+    extension or a list of directories at a certain location
     """
 
     if dirs:
