@@ -48,8 +48,8 @@ def maxsteps(value, maxval = 600):
         for _,n in enumerate(reversed(xrange(1, maxval))):
             if val % n == 0:
                 if n > nsteps:
-                    nsteps = n
-                    stepsize = val/nsteps
+                    nsteps = int(n)
+                    stepsize = int(val/nsteps)
                 break
 
     return(nsteps, stepsize)
