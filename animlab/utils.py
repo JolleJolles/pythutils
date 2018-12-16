@@ -29,6 +29,13 @@ from matplotlib import colors as mcolors
 import yaml
 
 
+def deleteline(n=1):
+
+    for _ in range(n):
+        sys.stdout.write('\x1b[1A')
+        sys.stdout.write('\x1b[2K')
+
+
 def lineprint(text, stamp=True, sameline=False, reset=False, **kwargs):
 
     global line, label
@@ -137,6 +144,13 @@ def listfiles(filedir = ".", filetype = (".mp4", ".mov", ".mjpeg",".jpg"),
     """
     Extracts and returns either a list of files with a specific
     extension or a list of directories at a certain location
+
+    Parameters
+    ==========
+    filedir: str; default="."
+    filetype: str; default=(".mp4", ".mov", ".mjpeg",".jpg")
+    dirs: bool; default=False
+    keepdir: bool; default=False
     """
 
     if dirs:

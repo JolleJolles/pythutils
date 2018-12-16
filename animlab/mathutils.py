@@ -32,7 +32,7 @@ def uneven(value):
     return newvalue
 
 
-def maxsteps(value, maxval = 600):
+def maxsteps(value, maxval = 500):
 
     '''
     Gives the stepsize and maximum number of steps
