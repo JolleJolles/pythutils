@@ -1,7 +1,6 @@
 #! /usr/bin/env python
-#
 # Copyright (C) 2018 Jolle Jolles <j.w.jolles@gmail.com>
-
+from __future__ import print_function
 from setuptools import setup, find_packages
 
 with open('README.md') as f:
