@@ -4,6 +4,7 @@
 
 from __future__ import print_function
 from setuptools import setup, find_packages
+from animlab.__version__ import __version__
 
 with open('README.md') as f:
     readme = f.read()
@@ -41,7 +42,7 @@ setup(name='animlab',
       long_description=readme,
       url='http://jollejolles.com',
       download_url='https://github.com/JolleJolles/animlab.git',
-      version="0.0.5",
+      version=__version__,
       license="MIT",
       install_requires=install_requires,
       packages=['animlab'])
