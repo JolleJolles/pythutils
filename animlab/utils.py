@@ -29,6 +29,19 @@ from matplotlib import colors as mcolors
 import yaml
 
 
+class Logger(object):
+    def __init__(self, filename):
+        self.terminal = sys.stdout
+        self.log = open(filename, "a")
+    def __getattr__(self, attr):
+        return getattr(self.terminal, attr)
+    def write(self, message):
+        self.terminal.write(message)
+        self.log.write(message)
+    def flush(self):
+        pass
+
+
 def deleteline(n=1):
 
     for _ in range(n):
