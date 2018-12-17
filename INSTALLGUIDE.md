@@ -17,20 +17,28 @@ Using terminal, make sure you are in the right virtual environment e.g. `workon(
 Now we can install the animlab utilies package:
 `pip install git+https://github.com/JolleJolles/animlab.git`
 
-To install the *animrack* package we will need install a number of additional packages and have the right credentials as it is currently still a private package in beta. Run the following:
+To install the *animtrack* package we will need install a number of additional packages:
 `pip install scipy pickle h5py warnings collections PIL ast math pathos random subprocess`
 `pip install git+https://github.com/jolleslab/animtrack.git`
 
-Similarly, to install the *animrec* package we will need install some additional packages and again the right credentials are required. Furthermore, animrec (currently) only works on the Raspbian operating system so make sure this is done on a Raspberry Pi:
+Similarly, to install the *animrec* package we will need install some additional packages. Furthermore, animrec (currently) only works on the Raspbian operating system so make sure this is done on a Raspberry Pi:
 `pip install socket picamera localconfig==0.4.2`
 `pip install git+https://github.com/jolleslab/animrec.git`
+
+As *animtrack* and *animrec* are still in beta, an alternative way to install the packages is from the zip file of the repository provided. For animrec:
+`cd animrec-master`
+`pip install -e .`
+
+And for animtrack:
+`cd animtrack-master`
+`pip install -e .`
 
 3. Installing and working with jupyter
 ------------
 Jupyter is very simple to install with pip again (making sure you are in the right virtual environment):
 `pip install jupyter`
 
-Now to run jupyter, simply enter `jupyter notebook` in terminal and press Enter. 
+Now to run jupyter, simply enter `jupyter notebook` in terminal and press Enter.
 
 4. Working with AnimLab
 ------------
