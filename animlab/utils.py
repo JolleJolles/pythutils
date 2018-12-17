@@ -65,7 +65,7 @@ def lineprint(text, stamp=True, sameline=False, reset=False, **kwargs):
         if line == "":
             print(line,end='')
         else:
-            print("\n" + text,end="\n")
+            print(text,end="\n")
 
 
 def clock():
