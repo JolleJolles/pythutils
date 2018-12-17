@@ -1,10 +1,14 @@
 #! /usr/bin/env python
+#
 # Copyright (C) 2018 Jolle Jolles <j.w.jolles@gmail.com>
+
 from __future__ import print_function
 from setuptools import setup, find_packages
 
 with open('README.md') as f:
     readme = f.read()
+
+DESCRIPTION = 'AnimLab: Sophisticated computational tools for studying animal behaviour'
 
 def check_dependencies():
     install_requires = []
@@ -20,21 +24,11 @@ def check_dependencies():
     try:
         import pandas
     except ImportError:
-        print("pandas is not installed. Doing so will take considerable time.",end="")
-        print("Please install manually when required: pip install pandas")
-        #install_requires.append('pandas')
+        install_requires.append('pandas')
     try:
         import matplotlib
     except ImportError:
-        print("Matplotlib is not installed. Please install manually when",end="")
-        print("required: pip install matplotlib")
-        #install_requires.append('matplotlib')
-    try:
-        import cv2
-    except ImportError:
-        print("OpenCV is not installed. Doing so will take considerable time,",end="")
-        print("especially on the RPi. Please follow the guidelines for installing",end="")
-        print("manually on the mac here: https://git.io/fpyvq")
+        install_requires.append('matplotlib')
 
     return install_requires
 
@@ -43,7 +37,7 @@ install_requires = check_dependencies()
 setup(name='animlab',
       author='Jolle Jolles',
       author_email='j.w.jolles@gmail.com',
-      description='AnimLab: Sophisticated computational tools for studying animal behaviour',
+      description=DESCRIPTION,
       long_description=readme,
       url='http://jollejolles.com',
       download_url='https://github.com/JolleJolles/animlab.git',
