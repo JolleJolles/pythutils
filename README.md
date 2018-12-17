@@ -40,3 +40,7 @@ To use utility functions, e.g.:
     >>> from animlab.utils import listfiles
     >>> from animlab.imutils import crop
     >>> from animlab.mathutils import points_to_angle
+
+License
+--------
+Released under a Apache 2.0 License. See [LICENSE](https://github.com/JolleJolles/animlab/blob/master/LICENSE) for details.
