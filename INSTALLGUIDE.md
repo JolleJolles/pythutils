@@ -39,6 +39,3 @@ Jupyter is very simple to install with pip again (making sure you are in the rig
 `pip install jupyter`
 
 Now to run jupyter, simply enter `jupyter notebook` in terminal and press Enter.
-
-4. Working with AnimLab
-------------

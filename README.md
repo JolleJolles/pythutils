@@ -1,6 +1,5 @@
 # AnimLab
-**Computational and analytical tools and functions for the mechanistic study of animal behaviour**
-
+**Python toolset for the mechanistic study of animal behaviour**
 
 Installation
 ------------
