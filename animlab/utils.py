@@ -256,11 +256,11 @@ def seqcount(start, stop, length):
     return sequence
 
 
-def check_frac(input_string):
+def check_frac(input_txt):
 
     """ Checks string for Fractions and converts them accordingly """
 
-    transformed_text = re.sub(r'([\d.]+)', r'Fraction("\1")', input_text)
+    transformed_text = re.sub(r'([\d.]+)', r'Fraction("\1")', input_txt)
 
     return eval(transformed_text)
 

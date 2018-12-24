@@ -18,8 +18,10 @@
 from .utils import *
 from .mathutils import *
 
-__version__ = "1.0.2"
+__version__ = "1.0.3"
 
+##24/12/18 - verson 1.0.3:
+# - Added check_frac utils function
 ## 17/12/18 - version 1.0.2:
 # - Added logger class
 # - Fixed lineprint function to show new lines when run as single command
