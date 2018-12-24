@@ -18,15 +18,17 @@
 from __future__ import division
 from __future__ import print_function
 
-import datetime
+import re
 import os
 import sys
 import time
+import yaml
+import datetime
 import numpy as np
 import pandas as pd
 from socket import gethostname
+from fractions import Fraction
 from matplotlib import colors as mcolors
-import yaml
 
 
 class Logger(object):
@@ -252,6 +254,15 @@ def seqcount(start, stop, length):
     sequence = range(start, stop, step)
 
     return sequence
+
+
+def check_frac(input_string):
+
+    """ Checks string for Fractions and converts them accordingly """
+
+    transformed_text = re.sub(r'([\d.]+)', r'Fraction("\1")', input_text)
+
+    return eval(transformed_text)
 
 
 def get_weights(w = 1.7, length = 20):
