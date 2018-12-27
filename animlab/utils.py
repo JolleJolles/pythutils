@@ -77,11 +77,9 @@ def lineprint(text, stamp=True, sameline=False, reset=False, **kwargs):
     else:
         line = text
         if line == "":
-            print(line,end='')
+            print(line, end=' ')
         else:
             print(text,end="\n")
-
-    sys.stdout.flush()
 
 
 def clock():
