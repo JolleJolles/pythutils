@@ -17,7 +17,7 @@
 
 from __future__ import print_function
 from setuptools import setup, find_packages
-from .__version__ import __version__
+from __version__ import __version__
 
 
 DESCRIPTION = 'AnimLab: Python toolset for the mechanistic study of animal behaviour'
