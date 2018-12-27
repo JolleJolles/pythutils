@@ -17,16 +17,3 @@
 
 from .utils import *
 from .mathutils import *
-
-__version__ = "1.0.3"
-
-##24/12/18 - verson 1.0.3:
-# - Added check_frac utils function
-## 17/12/18 - version 1.0.2:
-# - Added logger class
-# - Fixed lineprint function to show new lines when run as single command
-## 17/12/18 - version 1.0.1:
-# - Updated license statements
-# - Created version document that is automatically called when installing animlab
-# - Removed automatic loading of imutils for users that do not have opencv installed
-# - Started version logging in __init__ document
