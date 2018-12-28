@@ -181,7 +181,7 @@ def textdims(text, fontsize, thickness = 1):
     return (tw, th), topy, boty
 
 
-def draw_text(img, text, loc = (0, 0), fontsize = 1, col = (0,0,0), margin = 5, bgcol = None):
+def draw_text(img, text, loc = (0, 0), fontsize = 1, col = (0,0,0), margin = 5, thickness = 1, bgcol = None):
 
     (tw, th), topy, boty = textdims(text, fontsize)
 
@@ -191,7 +191,7 @@ def draw_text(img, text, loc = (0, 0), fontsize = 1, col = (0,0,0), margin = 5, 
         cv2.rectangle(img, topleftout, botrightout, bgcol, -1)
 
     botlefin = (loc[0]+margin, loc[1]+margin+th+topy)
-    cv2.putText(img, text, botlefin, cv2.FONT_HERSHEY_SIMPLEX, fontsize, col, 1, cv2.LINE_AA)
+    cv2.putText(img, text, botlefin, cv2.FONT_HERSHEY_SIMPLEX, fontsize, col, thickness, cv2.LINE_AA)
 
 
 def draw_crosshair(img, pt):
