@@ -1,0 +1,25 @@
+All notable changes to this project will be documented in this file. For a
+complete changelog, see https://github.com/JolleJolles/animlab/commits/
+
+Unreleased
+    * None
+
+2018-12-28 - version 0.1.0
+    * Added docs folder for documentation and guides
+    * Added Changelog
+    * Added logo
+    * Improved variable naming in setup file and added classifiers
+    * Added __version__ document
+
+2018-12-24 - version 0.0.3
+    * Added check_frac utils function
+
+2018-12-17 - version 0.0.2
+    * Added logger class
+    * Fixed lineprint function to show new lines when run as single command
+
+2018-12-17 - version 0.0.1
+    * Updated license statements
+    * Created version document that is automatically called when installing animlab
+    * Removed automatic loading of imutils for users that do not have opencv installed
+    * Started version logging in __init__ document

@@ -1,6 +1,8 @@
 # AnimLab
 **Python toolset for the mechanistic study of animal behaviour**
 
+![logo](https://github.com/JolleJolles/animlab/blob/master/animlab-logo.jpg)
+
 Installation
 ------------
 
@@ -24,7 +26,7 @@ Dependencies
 
 - [OpenCV](http://opencv.org/)
 
-For installing python with opencv on mac I have written a concise guide, find it here: https://git.io/fpyvq
+For installing python with opencv on a mac I have written a concise guide here: https://git.io/fpyvq
 
 **Note**: Not all dependencies are installed automatically as some packages (like
 Matplotlib) take considerable time, especially on the RPi, and may only be

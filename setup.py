@@ -19,8 +19,23 @@ from __future__ import print_function
 from setuptools import setup, find_packages
 from __version__ import __version__
 
+exec(open('animlab/__version__.py').read())
 
-DESCRIPTION = 'AnimLab: Python toolset for the mechanistic study of animal behaviour'
+DESCRIPTION = """
+AnimLab: Python toolset for the mechanistic study of animal behaviour
+"""
+LONG_DESCRIPTION = """\
+AnimLab is a collection of python methods to help facilitate the automated and
+controlled study of animal behaviour.
+"""
+
+DISTNAME = 'animlab'
+MAINTAINER = 'Jolle Jolles'
+MAINTAINER_EMAIL = 'j.w.jolles@gmail.com'
+URL = 'http://jollejolles.com'
+DOWNLOAD_URL = 'https://github.com/JolleJolles/AnimLab'
+LICENSE = 'Apache Software License 2.0'
+
 
 with open('README.md') as f:
     readme = f.read()
@@ -47,16 +62,32 @@ def check_dependencies():
 
     return install_requires
 
-install_requires = check_dependencies()
+if __name__ == "__main__":
 
-setup(name='animlab',
-      author='Jolle Jolles',
-      author_email='j.w.jolles@gmail.com',
-      description=DESCRIPTION,
-      long_description=readme,
-      url='http://jollejolles.com',
-      download_url='https://github.com/JolleJolles/animlab.git',
-      version=__version__,
-      license="MIT",
-      install_requires=install_requires,
-      packages=['animlab'])
+    install_requires = check_dependencies()
+
+    setup(name=DISTNAME,
+          author=MAINTAINER,
+          author_email=MAINTAINER_EMAIL,
+          maintainer=MAINTAINER,
+          maintainer_email=MAINTAINER_EMAIL,
+          description=DESCRIPTION,
+          long_description=LONG_DESCRIPTION,
+          url=URL,
+          download_url=DOWNLOAD_URL,
+          version=__version__,
+          install_requires=install_requires,
+          packages=['animlab'],
+          classifiers=[
+                     'Intended Audience :: Science/Research',
+                     'Programming Language :: Python :: 2.7',
+                     'Programming Language :: Python :: 3',
+                     'License :: OSI Approved :: Apache Software License',
+                     'Topic :: Scientific/Engineering :: Visualization',
+                     'Topic :: Scientific/Engineering :: Image Recognition',
+                     'Topic :: Scientific/Engineering :: Information Analysis',
+                     'Topic :: Multimedia :: Video'
+                     'Operating System :: POSIX',
+                     'Operating System :: Unix',
+                     'Operating System :: MacOS'],
+          )
