@@ -3,6 +3,8 @@
 
 ![logo](https://github.com/JolleJolles/animlab/blob/master/animlab-logo.jpg)
 
+AnimLab is a collection of methods for Python to facilitate the automated recording, tracking, and processing of data with the Behavioural Scientist in mind. All code is written and documented in such a way that its functionality should be easy to use for people with very limited coding experience.
+
 Installation
 ------------
 
@@ -26,13 +28,7 @@ Dependencies
 
 - [OpenCV](http://opencv.org/)
 
-For installing python with opencv on a mac I have written a concise guide here: https://git.io/fpyvq
-
-**Note**: Not all dependencies are installed automatically as some packages (like
-Matplotlib) take considerable time, especially on the RPi, and may only be
-required in specific cases. Please install these manually when required using
-`pip`.
-
+For installing python with OpenCV on Mac, Ubunto, or Raspberry Pi, follow the tutorial in the documentation [here](https://github.com/JolleJolles/animlab/tree/master/docs/install-opencv.md).
 
 Example
 --------
@@ -41,6 +37,10 @@ To use utility functions, e.g.:
     >>> from animlab.utils import listfiles
     >>> from animlab.imutils import crop
     >>> from animlab.mathutils import points_to_angle
+
+Development
+--------
+For an overview of version changes see the [CHANGELOG](https://github.com/JolleJolles/animlab/blob/master/CHANGELOG) and for detailed changes see the [commits page](https://github.com/JolleJolles/animlab/commits/). Please submit bugs or feature requests to the GitHub issue tracker [here](https://github.com/JolleJolles/animlab/issues).
 
 License
 --------
