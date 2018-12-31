@@ -43,6 +43,7 @@ class Logger(object):
     def flush(self):
         pass
 
+
 def deleteline(n=1):
 
     for _ in range(n):
@@ -93,7 +94,7 @@ def clock():
 
 def isscript():
 
-    """Determines if session is script or interactive (jupyter)"""
+    """ Determines if session is script or interactive (jupyter)"""
 
     import __main__ as main
     return hasattr(main, '__file__')
@@ -101,8 +102,9 @@ def isscript():
 
 def hide_traceback():
 
-    """ Hides traceback in jupyter when raising errors. Only shows
-        error. Only needs to be called at start of script.
+    """
+    Hides traceback in jupyter when raising errors. Only shows error. Only needs
+    to be called at start of script.
     """
 
     ipython = get_ipython()
@@ -215,9 +217,9 @@ def get_ext(filename):
 
 def name(filename, ext = ".csv", action = "overwrite"):
 
-    """ Returns filename with required extension or for sequence
-        returns filename that does not exist already with numeric
-        '_x' suffix appended
+    """
+    Returns filename with required extension or for sequence returns filename
+    that does not exist already with numeric '_x' suffix appended.
     """
 
     dirname, filename = os.path.split(filename)
@@ -243,9 +245,7 @@ def name(filename, ext = ".csv", action = "overwrite"):
 
 def seqcount(start, stop, length):
 
-    """ Returns a sequence of numbers between two values
-        with a certain length
-    """
+    """ Returns sequence of numbers between two values with a certain length """
 
     step = (stop - start) / float(length)
     step = int(np.ceil(step))
@@ -272,8 +272,9 @@ def get_weights(w = 1.7, length = 20):
 
 def create_emptydf(cols = ["x","y","fx","fy"], ids = [1], first = 1, last = None):
 
-    """ Creates an emtpy pandas df with frame and cid columns
-        as well as user provided columns for provided frame range
+    """
+    Creates an emtpy pandas df with frame and cid columns as well as user
+    provided columns for provided frame range
     """
 
     try:
@@ -315,9 +316,10 @@ def list_to_coords(list):
 
 def pd_to_coords(pddata, loc = None, array = False, columns = ["x","y"], multiplier = 1):
 
-    '''Returns either a single coordinate of integers or a list or an array
-       of arrays with coordinates with a list of frames
-    '''
+    """
+    Returns either a single coordinate of integers or a list or an array of
+    arrays with coordinates with a list of frames
+    """
 
     if loc != None:
         coords = list_to_coords([list(pddata.loc[loc, columns])])[0]
