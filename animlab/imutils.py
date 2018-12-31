@@ -38,9 +38,9 @@ def check_media(mediafile):
 
     if ftype == "vid":
         cap = cv2.VideoCapture(mediafile)
-        assert cap.read()[0], "Video source opened but failed to read any images.."
+        assert cap.read()[0], "Video source opened but failed to read images.."
 
-    print("Mediafile okay.. ",end='')
+    print("Mediafile okay.. ", end = "")
 
 
 def getimg(mediafile):
@@ -66,13 +66,13 @@ def get_vid_params(vid):
     return fps, width, height, fcount
 
 
-def videowriter(filein, width, height, fps, resizeval):
+def videowriter(filein, w, h, fps, resizeval):
 
     ''' Creates a vidout instance using the opencv VideoWriter class '''
 
     fourcc = cv2.VideoWriter_fourcc("m","p","4","v")
-    fileout = filein[:-5]+".mp4"
-    viddims = (width,height) if resizeval == 1 else (int(width*resizeval),int(height*resizeval))
+    fileout = filein[:-5] + ".mp4"
+    viddims = (w, h) if resizeval == 1 else (int(w*resizeval), int(h*resizeval))
     vidout = cv2.VideoWriter(fileout, fourcc, fps, viddims)
 
     return vidout
@@ -94,7 +94,7 @@ def safe_count(vidfile):
             break
         count += 1
 
-    print("video had",vidlength-count,"non-existing frames.. ",end='')
+    print("video had", vidlength-count, "non-existing frames.. ", end = "")
 
     return count
 
@@ -155,17 +155,19 @@ def imresize(img, resize = 1, dims = None, back = False):
 
 def add_transimg(bgimg, transimg, offsets):
 
-    """ Adds a semi-transparent (4-channel) image to a 3-channel
-        background image. Images are arrays
+    """
+    Adds a semi-transparent (4-channel) image to a 3-channel background
+    image. Images are arrays.
     """
 
     h, w, c = transimg.shape
     fix = np.zeros((h, w, 3), np.uint8)
-    alpha = transimg[:, :, 3] / 255.0
-    fix[:,:,0] = (1.-alpha) * bgimg[offsets[1]:offsets[1]+h, offsets[0]:offsets[0]+w, 0] + alpha * transimg[:,:,0]
-    fix[:,:,1] = (1.-alpha) * bgimg[offsets[1]:offsets[1]+h, offsets[0]:offsets[0]+w, 1] + alpha * transimg[:,:,1]
-    fix[:,:,2] = (1.-alpha) * bgimg[offsets[1]:offsets[1]+h, offsets[0]:offsets[0]+w, 2] + alpha * transimg[:,:,2]
-    bgimg[offsets[1]:offsets[1]+h, offsets[0]:offsets[0]+w] = fix
+    a = transimg[:, :, 3] / 255.0  #alpha
+    o = offsets
+    fix[:,:,0] = (1.-a)*bgimg[o[1]:o[1]+h, o[0]:o[0]+w, 0]+a*transimg[:,:,0]
+    fix[:,:,1] = (1.-a)*bgimg[o[1]:o[1]+h, o[0]:o[0]+w, 1]+a*transimg[:,:,1]
+    fix[:,:,2] = (1.-a)*bgimg[o[1]:o[1]+h, o[0]:o[0]+w, 2]+a*transimg[:,:,2]
+    bgimg[o[1]:o[1]+h, o[0]:o[0]+w] = fix
 
     return bgimg
 
@@ -181,17 +183,21 @@ def textdims(text, fontsize, thickness = 1):
     return (tw, th), topy, boty
 
 
-def draw_text(img, text, loc = (0, 0), fontsize = 1, col = (0,0,0), margin = 5, thickness = 1, bgcol = None):
+def draw_text(img, text, loc = (0, 0), fontsize = 1, col = (0,0,0), margin = 5,
+              thickness = 1, bgcol = None):
 
     (tw, th), topy, boty = textdims(text, fontsize)
 
     if bgcol is not None:
         topleftout = (loc[0], loc[1])
-        botrightout = (loc[0]+margin+tw+margin, loc[1]+margin+th+topy+boty+margin)
+        botrightx = loc[0] + margin + tw + margin
+        botrighty = loc[1] + margin + th + topy + boty + margin
+        botright = (botrightx, botrighty)
         cv2.rectangle(img, topleftout, botrightout, bgcol, -1)
 
     botlefin = (loc[0]+margin, loc[1]+margin+th+topy)
-    cv2.putText(img, text, botlefin, cv2.FONT_HERSHEY_SIMPLEX, fontsize, col, thickness, cv2.LINE_AA)
+    cv2.putText(img, text, botlefin, cv2.FONT_HERSHEY_SIMPLEX, fontsize,
+                col, thickness, cv2.LINE_AA)
 
 
 def draw_crosshair(img, pt):
