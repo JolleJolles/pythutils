@@ -34,13 +34,11 @@ def uneven(value):
 
 def maxsteps(value, maxval = 500):
 
-    '''
-    Gives the stepsize and maximum number of steps
-    for a number that is divisible up to a maximum
-    provided value, with some small range around
-    the number to find the optimal number of divisible
-    steps.
-    '''
+    """
+    Gives the stepsize and maximum number of steps for a number that is
+    divisible up to a maximum provided value, with some small range around the
+    number to find the optimal number of divisible steps.
+    """
 
     valrange = [value-3,value-2,value-1,value]
     nsteps = 1
