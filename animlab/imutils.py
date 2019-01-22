@@ -195,7 +195,7 @@ def draw_text(img, text, loc = (0, 0), fontsize = 1, col = (0,0,0), margin = 5,
         botright = (botrightx, botrighty)
         cv2.rectangle(img, topleftout, botrightout, bgcol, -1)
 
-    botlefin = (loc[0]+margin, loc[1]+margin+th+topy)
+    botlefin = (int(loc[0]+margin), int(loc[1]+margin+th+topy))
     cv2.putText(img, text, botlefin, cv2.FONT_HERSHEY_SIMPLEX, fontsize,
                 col, thickness, cv2.LINE_AA)
 
