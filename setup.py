@@ -17,7 +17,6 @@
 
 from __future__ import print_function
 from setuptools import setup, find_packages
-from __version__ import __version__
 
 exec(open('animlab/__version__.py').read())
 
