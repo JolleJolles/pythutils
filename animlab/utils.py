@@ -309,8 +309,8 @@ def vardefined(var):
 
 
 def list_to_coords(list):
-    coords = [(int(i),int(j)) for i,j in list if i==i]
-    loclist = [c for c,i in enumerate(list) if i[0] == i[0]]
+    coords = [(int(i),int(j)) for i,j in list(list) if i==i]
+    loclist = [c for c,i in enumerate(list(list)) if i[0] == i[0]]
     return coords, loclist
 
 
