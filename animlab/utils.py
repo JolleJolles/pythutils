@@ -309,8 +309,8 @@ def vardefined(var):
 
 
 def list_to_coords(list):
-    coords = [(int(i),int(j)) for i,j in list(list) if i==i]
-    loclist = [c for c,i in enumerate(list(list)) if i[0] == i[0]]
+    coords = [(int(i),int(j)) for i,j in list if i==i]
+    loclist = [c for c,i in enumerate(list) if i[0] == i[0]]
     return coords, loclist
 
 
@@ -330,7 +330,7 @@ def pd_to_coords(pddata, loc = None, array = False, columns = ["x","y"], multipl
             return (int(c[0]*multiplier),int(c[1]*multiplier))
 
     else:
-        coords, loclist = list_to_coords(zip(pddata[columns[0]], pddata[columns[1]]))
+        coords, loclist = list_to_coords(list(zip(pddata[columns[0]], pddata[columns[1]])))
         framelist = [pddata.loc[i,"frame"] for i in loclist]
         coords = [(int(c[0]*multiplier),int(c[1]*multiplier)) for c in coords]
         if array:
