@@ -43,7 +43,7 @@ def maxsteps(value, maxval = 500):
     valrange = [value-3,value-2,value-1,value]
     nsteps = 1
     for val in valrange:
-        for _,n in enumerate(reversed(xrange(1, maxval))):
+        for _,n in enumerate(reversed(list(range(1, maxval)))):
             if val % n == 0:
                 if n > nsteps:
                     nsteps = int(n)
