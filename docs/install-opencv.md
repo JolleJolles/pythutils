@@ -1,5 +1,5 @@
 <small>Copyright (c) 2018 - 2019 Jolle Jolles<br/>
-Last updated: 31 Dec 2018</small>
+Last updated: 31 Jan 2019</small>
 
 <h2>Install OpenCV for Python on Mac, Ubuntu and Raspberry Pi</h2>
 Installing [OpenCV](https://opencv.org) has never been easy and always required a lot of careful usage of the command line to build from source. This was especially painful when working with a Raspberry Pi as building and installing OpenCV took a lot of time on the RPi, especially on the older models. Luckily this has changed very recently as it is now possible to [install OpenCV with pip](https://pypi.org/project/opencv-python)!
@@ -54,3 +54,10 @@ Type "help", "copyright", "credits" or "license" for more information.
 ```
 
 You are done!
+
+<strong>Update 1:</strong> If you are using Python 2.7 and get an error message such as <em>Could not find a version that satisfies the requirement opencv-contrib-python (from versions: ) No matching distribution found for opencv-contrib-python</em>, a quick solution is to not use pip but apt-get instead:
+
+```
+sudo apt-get install python-opencv
+```
+
