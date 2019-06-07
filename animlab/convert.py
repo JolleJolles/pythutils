@@ -94,7 +94,7 @@ class Converter:
 
         for filein in self.conv_files:
             if self.resizeval != 1:
-                comm = "' -vf 'scale=iw*" + str(self.resizeval) + ":ih*" +\
+                comm = "' -vf 'scale=iw*" + str(self.resizeval) + ":ih*"
                 comm = comm + str(self.resizeval) + "' '"
             else:
                 comm = "' -vcodec copy '"
