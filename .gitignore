@@ -2,7 +2,6 @@
 *.ipynb_checkpoints
 *.pyc
 *.html
-*.ipynb
 animtrack.egg-info/dependency_links.txt
 animtrack.egg-info/PKG-INFO
 animtrack.egg-info/SOURCES.txt
