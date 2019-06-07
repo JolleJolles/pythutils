@@ -5,6 +5,8 @@ Last updated: 31 Jan 2019</small>
 
 When you start working with Python it is great practice to create isolated Python environments to work on your specific projects. The standard python environment is used by a large number of system scripts and therefore best to leave alone. In addition, when working on different projects, those projects may have different and conflicting dependencies and therefore should ideally be installed in their own python environments. The ability to create different python environments can also be really beneficial when developing your own python packages and thereby test its installation and performance in different versions of python.
 
+**Note**: virtual environments can be installed for both Python 2.7 and Python 3.x. Therefore make sure to use the right pip installer, i.e. pip and pip3 respectively. Ther rest of this guide will presume you are using python and use pip.
+
 <h3>Installing virtualenv and virtualenvwrapper</h3>
 
 To create different virtual environments we will use the `virtualenv` and accompanying `virtualenvwrapper` packages. To do so, enter the following commands in terminal:
@@ -19,13 +21,13 @@ Now, to finish the installation and make it easy to use this functionality we ne
 ```
 echo -e "\n# Virtual python environments" >> ~/.profile
 echo "export WORKON_HOME=$HOME/.virtualenvs" >> ~/.profile
-echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3" >> ~/.profile
+echo "export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python" >> ~/.profile
 echo "source /usr/local/bin/virtualenvwrapper.sh" >> ~/.profile
 ```
 
-*Note 1: Make sure that the python version you are using is correctly specified in the third line, e.g. for python2.7 the end of the line would look like `/usr/bin/python2" >> ~/.profile`.*
+*Note 1: Make sure that the python version you are using is correctly specified in the third line, e.g. for python3 the end of the line would look like `/usr/bin/python3" >> ~/.profile`.*
 
-*Note 2: Different systems make use of different shell startup files `~/.bash_profile` and `~/.bashrc`. Make sure which file your system uses.*
+*Note 2: Different systems make use of different shell startup files such as `~/.bash_profile` and `~/.bashrc`. Make sure which file your system uses.*
 
 Next, source the profile file:
 

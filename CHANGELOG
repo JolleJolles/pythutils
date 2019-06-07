@@ -4,6 +4,10 @@ complete changelog, see https://github.com/JolleJolles/animlab/commits/
 Unreleased
     * None
 
+2019-06-07 - version 1.2.0
+    * Added convert function and jupyter notebook tutorial for converting videos
+    * Updated copyright statements 
+
 2019-01-31 - version 1.1.0
     * Added documentation how to install python virtual environments
 

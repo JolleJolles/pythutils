@@ -16,4 +16,6 @@
 # limitations under the License.
 
 from .utils import *
+from .convert import *
+from .imutils import *
 from .mathutils import *
