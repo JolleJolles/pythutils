@@ -43,6 +43,10 @@ def check_dependencies():
     install_requires = []
 
     try:
+        import pathos
+    except ImportError:
+        install_requires.append('pathos')
+    try:
         import numpy
     except ImportError:
         install_requires.append('numpy')
