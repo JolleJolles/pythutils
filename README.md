@@ -8,7 +8,7 @@ AnimLab is a collection of methods for Python to facilitate the automated record
 Installation
 ------------
 
-To install, simply open a terminal window and enter:
+To install animlab, simply open a terminal window and enter:
 ```bash
 pip install git+https://github.com/JolleJolles/animlab.git
 ```
@@ -18,17 +18,21 @@ Dependencies
 
 - [Python 2.7 or 3.x](http://www.python.org)
 
-- [numpy](http://www.numpy.org/)
+- [numpy](http://www.numpy.org)
 
 - [pandas](https://pandas.pydata.org)
 
 - [pyyaml](https://pyyaml.org)
 
-- [matplotlib](http://matplotlib.org/)
+- [matplotlib](http://matplotlib.org)
 
-- [OpenCV](http://opencv.org/)
+- [OpenCV](http://opencv.org)<sup>1</sup>
 
-For installing python with OpenCV on Mac, Ubunto, or Raspberry Pi, follow the tutorial in the documentation [here](https://github.com/JolleJolles/animlab/tree/master/docs/install-opencv.md).
+- [ffmpeg](http://ffmpeg.org)<sup>2</sup>
+
+<sup>1</sup> OpenCV is required only for some of the functionality of AnimLab. For installing python with OpenCV on either Mac, Ubunto, or Raspberry Pi, follow the tutorial in the documentation [here](https://github.com/JolleJolles/animlab/tree/master/docs/install-opencv.md).
+
+<sup>2</sup> FFmpeg is required only for the convert functionality of Animlab. For installing ffmpeg on Mac OS follow the tutorial [here](https://github.com/JolleJolles/animlab/blob/master/docs/install-ffmpeg-for-mac.md) and for the RaspberryPi [here](https://github.com/JolleJolles/animlab/blob/master/docs/install-ffmpeg-with-h264.md).
 
 Example
 --------
@@ -37,6 +41,7 @@ To use utility functions, e.g.:
     >>> from animlab.utils import listfiles
     >>> from animlab.imutils import crop
     >>> from animlab.mathutils import points_to_angle
+    >>> from animlab import Converter
 
 Development
 --------
