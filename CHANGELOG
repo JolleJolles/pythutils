@@ -4,10 +4,13 @@ complete changelog, see https://github.com/JolleJolles/animlab/commits/
 Unreleased
     * None
 
+2019-06-10 - version 1.2.3
+    * Updated readme
+
 2019-06-10 - version 1.2.2
     * Changed videowriter fourcc code
     * Fixed converter class keyboardinterrupt error
-    * Ffmpeg headers and frames are now hidden
+    * FFmpeg headers and frames are now hidden
     * Fixed resize issue when width or height is not divisible by 2
     * Added doc to main Converter class
     * Fixed multiprocessing pools error when less than provided are needed

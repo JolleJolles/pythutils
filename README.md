@@ -38,10 +38,30 @@ Example
 --------
 To use utility functions, e.g.:
 
-    >>> from animlab.utils import listfiles
-    >>> from animlab.imutils import crop
-    >>> from animlab.mathutils import points_to_angle
-    >>> from animlab import Converter
+    from animlab.utils import listfiles
+    from animlab.imutils import crop
+    from animlab.mathutils import points_to_angle
+
+To convert a folder of videos to .mp4 files:
+
+    # Import Converter module
+    from animlab import Converter
+    
+    # Read converter documentation
+	 print(Converter.__doc__)
+	 
+	 # Set directory and nr of pools to use (best to base on max cores)
+	 dir = "~/Desktop/videos"
+	 pools = 4
+
+	 # Example 1: Very fast, simple conversion
+    convert = Converter(dir)
+    
+    # Example 1: Conversion with resizing
+    convert = Converter(dir, rezizeval = 0.3)
+    
+    # Example 3: Conversion with adding framenumbers
+    convert = Converter(dir, withframe = True)
 
 Development
 --------
