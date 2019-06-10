@@ -70,10 +70,10 @@ def videowriter(filein, w, h, fps, resizeval):
 
     ''' Creates a vidout instance using the opencv VideoWriter class '''
 
-    fourcc = cv2.VideoWriter_fourcc("m","p","4","v")
+    #fourcc = cv2.VideoWriter_fourcc("M","P","4","V")
     fileout = filein[:-5] + ".mp4"
     viddims = (w, h) if resizeval == 1 else (int(w*resizeval), int(h*resizeval))
-    vidout = cv2.VideoWriter(fileout, fourcc, fps, viddims)
+    vidout = cv2.VideoWriter(fileout, 0x00000020, fps, viddims)
 
     return vidout
 

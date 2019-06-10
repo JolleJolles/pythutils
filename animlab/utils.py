@@ -63,7 +63,7 @@ def lineprint(text, stamp=True, sameline=False, reset=False, **kwargs):
     if "label" in kwargs:
         label = kwargs["label"]
 
-    if stamp:
+    if stamp and not sameline:
         text = time.strftime("%H:%M:%S") + " [" + label + "] - " + text
 
     if sameline:
@@ -198,6 +198,7 @@ def loadyml(filename, value = None, add = True):
     newvalue = literal_eval(str(newvalue))
 
     return newvalue
+
 
 def loadh5data(filename, dataset = "data"):
 
