@@ -69,7 +69,6 @@ class Converter:
         self.remove = remove
         self.pools = int(pools)
         self.resizeval = float(resizeval)
-        self.displayframenr = int(displayframenr)
 
         self.conv_files = alu.listfiles(self.dir, self.vidtype, keepdir = True)
         self.flen = len(self.conv_files)
