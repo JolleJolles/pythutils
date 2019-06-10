@@ -106,7 +106,6 @@ class Converter:
                     comm = "' -vcodec copy '"
                 bashcomm = "ffmpeg -i '" + filein + comm + filein[:-5] + ".mp4'"
                 bashcomm = bashcomm + " -y -nostats -loglevel 0"
-                print(bashcomm)
                 output = subprocess.check_output(['bash','-c', bashcomm])
 
             alu.lineprint("Finished converting "+fileprint, label = "AnimRec")
