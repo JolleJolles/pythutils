@@ -43,9 +43,9 @@ def check_dependencies():
     install_requires = []
 
     try:
-        import pathos
+        import multiprocess
     except ImportError:
-        install_requires.append('pathos')
+        install_requires.append('multiprocess')
     try:
         import numpy
     except ImportError:
