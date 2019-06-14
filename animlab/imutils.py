@@ -200,7 +200,50 @@ def draw_text(img, text, loc = (0, 0), fontsize = 1, col = (0,0,0), margin = 5,
                 col, thickness, cv2.LINE_AA)
 
 
-def draw_crosshair(img, pt):
+class mouse_events:
 
-    cv2.line(img, (pt[0] - 5, pt[1]), (pt[0] + 5, pt[1]), namedcols("white"), 1)
-    cv2.line(img, (pt[0], pt[1] - 5), (pt[0], pt[1] + 5), namedcols("white"), 1)
+    """ Stores a series of coordinates related to mouse events """
+
+    def __init__(self):
+
+        self.drawing = False
+        self.rect = ()
+        self.pointer = ()
+
+
+    def draw(self,event,x,y,flags,param):
+
+        self.pointer = (x,y)
+
+        if event == cv2.EVENT_LBUTTONDOWN:
+            self.drawing = True
+            self.rect = [(x,y)]
+
+        elif event == cv2.EVENT_LBUTTONUP:
+            self.drawing = False
+            self.rect.append((x, y))
+
+
+def draw_crosshair(img, mouse, radius = 5, col = "white"):
+
+    """ Draws a crosshair. Relies on the mouse_events class """
+
+    pt = mouse.pointer
+
+    if pt:
+        hline = (pt[0] - radius, pt[1]), (pt[0] + radius, pt[1])
+        tline = (pt[0], pt[1] - radius), (pt[0], pt[1] + radius)
+        cv2.line(img, hline[0], hline[1], namedcols(col), 1)
+        cv2.line(img, tline[0], tline[1], namedcols(col), 1)
+
+
+def draw_rectangle(img, mouse, col = "red"):
+
+    """ Dynamically draws a rectangle. Relies on the mouse_events class """
+
+    if mouse.drawing:
+        cv2.rectangle(img, mouse.rect[0], pt, namedcols(col), 2)
+
+    else:
+        if mouse.rect:
+            cv2.rectangle(img, mouse.rect[0], mouse.rect[1], namedcols(col), 2)
