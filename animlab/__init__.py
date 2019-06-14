@@ -15,9 +15,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from .__version__ import __version__
+
 from .utils import *
 from .imutils import *
 from .mathutils import *
 from .convert import *
-from .position import *
-from .calibrate import *
