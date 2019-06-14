@@ -1,4 +1,21 @@
-# Simple script that draws a crosshair and rectangle Dynamically
+#! /usr/bin/env python
+#
+# Python toolset for the mechanistic study of animal behaviour
+# Copyright (c) 2018 - 2019 Jolle Jolles <j.w.jolles@gmail.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at:
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# A simple script that draws a crosshair and rectangle Dynamically
 
 import cv2
 import numpy as np
@@ -13,8 +30,8 @@ while(1):
     frame = np.zeros((512,512,3), np.uint8)+55
     draw_frame = frame.copy()
 
-    animu.draw_crosshair(draw_frame, mouse)
-    animu.draw_rectangle(draw_frame, mouse)
+    animu.draw_crosshair(draw_frame, mouse.pointer)
+    animu.draw_rectangle(draw_frame, mouse.pointer, mouse.rect, mouse.drawing)
 
     cv2.imshow('image', draw_frame)
 

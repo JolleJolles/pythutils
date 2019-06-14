@@ -224,11 +224,9 @@ class mouse_events:
             self.rect.append((x, y))
 
 
-def draw_crosshair(img, mouse, radius = 5, col = "white"):
+def draw_crosshair(img, pt, radius = 5, col = "white"):
 
-    """ Draws a crosshair. Relies on the mouse_events class """
-
-    pt = mouse.pointer
+    """ Draws a crosshair """
 
     if pt:
         hline = (pt[0] - radius, pt[1]), (pt[0] + radius, pt[1])
@@ -237,13 +235,13 @@ def draw_crosshair(img, mouse, radius = 5, col = "white"):
         cv2.line(img, tline[0], tline[1], namedcols(col), 1)
 
 
-def draw_rectangle(img, mouse, col = "red"):
+def draw_rectangle(img, pointer, rect, drawing = False, col = "red"):
 
-    """ Dynamically draws a rectangle. Relies on the mouse_events class """
+    """ Draws a rectangle with option to show it dynamically """
 
-    if mouse.drawing:
-        cv2.rectangle(img, mouse.rect[0], mouse.pointer, namedcols(col), 2)
+    if drawing:
+        cv2.rectangle(img, rect[0], pointer, namedcols(col), 2)
 
     else:
-        if mouse.rect:
-            cv2.rectangle(img, mouse.rect[0], mouse.rect[1], namedcols(col), 2)
+        if rect:
+            cv2.rectangle(img, rect[0], rect[1], namedcols(col), 2)
