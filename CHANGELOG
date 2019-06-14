@@ -1,8 +1,9 @@
 All notable changes to this project will be documented in this file. For a
 complete changelog, see https://github.com/JolleJolles/animlab/commits/
 
-Unreleased
-    * None
+
+2019-06-14 - version 1.4.1
+    * Added sample script for drawing
 
 2019-06-14 - version 1.4.0
     * Incorporated mouse events class and drawing functions for crosshair
