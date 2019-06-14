@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 """
 Copyright 2015-2018 Jacob M. Graving <jgraving@gmail.com>
 
@@ -20,6 +18,8 @@ Modified by Jolle W. Jolles <j.w.jolles@gmail.com>
 All modifications are Copyright (C) 2016-2018 Jolle W. Jolles
 
 """
+
+from __future__ import print_function
 
 from glob import glob
 import numpy as np

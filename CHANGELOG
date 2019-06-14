@@ -4,6 +4,10 @@ complete changelog, see https://github.com/JolleJolles/animlab/commits/
 Unreleased
     * None
 
+2019-06-10 - version 1.3.0
+    * Incorporated calibrate function for undistorting camera input
+    * Incorporated positioncam function to help correctly position the camera
+
 2019-06-10 - version 1.2.3
     * Updated readme
 
