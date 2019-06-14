@@ -6,6 +6,7 @@ complete changelog, see https://github.com/JolleJolles/animlab/commits/
     * Added sample script for drawing
     * Updated drawing functions to make them more generic
     * Added small cross drawing function
+    * Added small function to get closestnumber of n divisible by m
 
 2019-06-14 - version 1.4.0
     * Incorporated mouse events class and drawing functions for crosshair

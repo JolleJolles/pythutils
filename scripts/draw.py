@@ -19,7 +19,7 @@
 
 import cv2
 import numpy as np
-import animlab.imutils as animu
+import animlab.imutils as alimu
 
 mouse = animu.mouse_events()
 
@@ -30,8 +30,8 @@ while(1):
     frame = np.zeros((512,512,3), np.uint8)+55
     draw_frame = frame.copy()
 
-    animu.draw_crosshair(draw_frame, mouse.pointer)
-    animu.draw_rectangle(draw_frame, mouse.pointer, mouse.rect, mouse.drawing)
+    alimu.draw_crosshair(draw_frame, mouse.pointer)
+    alimu.draw_rectangle(draw_frame, mouse.pointer, mouse.rect, mouse.drawing)
 
     cv2.imshow('image', draw_frame)
 
