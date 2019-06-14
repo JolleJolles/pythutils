@@ -224,6 +224,15 @@ class mouse_events:
             self.rect.append((x, y))
 
 
+def draw_cross(img, pts, col = "white", thickness = 2):
+
+    """ Draws a cross """
+
+    if pts:
+        cv2.line(img, (1,1), (pts[0], pts[1]), namedcols(col), thickness)
+        cv2.line(img, (pts[0], 1), (1, pts[1]), namedcols(col), thickness)
+
+
 def draw_crosshair(img, pt, radius = 5, col = "white"):
 
     """ Draws a crosshair """
