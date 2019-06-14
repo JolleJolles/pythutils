@@ -242,7 +242,7 @@ def draw_rectangle(img, mouse, col = "red"):
     """ Dynamically draws a rectangle. Relies on the mouse_events class """
 
     if mouse.drawing:
-        cv2.rectangle(img, mouse.rect[0], pt, namedcols(col), 2)
+        cv2.rectangle(img, mouse.rect[0], mouse.pointer, namedcols(col), 2)
 
     else:
         if mouse.rect:
