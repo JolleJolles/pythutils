@@ -55,3 +55,4 @@ def positioncam(res = (832,624), compensation = 0):
     cam.close()
     cv2.destroyWindow('Image')
     cv2.waitKey(1)
+    cv2.destroyAllWindows()
