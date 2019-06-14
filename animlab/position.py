@@ -22,28 +22,28 @@ from picamera import PiCamera
 import time
 import cv2
 
-def positioncam(resolution = (832,624), compensation = 0):
+def positioncam(res = (832,624), compensation = 0):
 
     """
     Videostream of raspberry pi with cross to accurately position the camera
     """
 
-    camera = PiCamera()
-    camera.resolution = resolution
-    camera.framerate = 32
-    camera.zoom = (0.0,0.0,1.0,1.0)
-    camera.exposure_compensation = compensation
+    cam = PiCamera()
+    cam.resolution = res
+    cam.framerate = 32
+    cam.zoom = (0.0,0.0,1.0,1.0)
+    cam.exposure_compensation = compensation
 
-    rawCapture = PiRGBArray(camera)
+    rawCapture = PiRGBArray(cam)
 
     time.sleep(0.1)
 
-    for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+    for frame in cam.capture_continuous(rawCapture, format="bgr", use_video_port=True):
 
         image = frame.array
 
-        cv2.line(image, (1,1), (832, 624), color=(255,255,255), thickness=2)
-        cv2.line(image, (832, 1), (1, 624), color=(255,255,255), thickness=2)
+        cv2.line(image, (1,1), (res[0], res[1]), color=(255,255,255), thickness=2)
+        cv2.line(image, (res[0], 1), (1, res[1]), color=(255,255,255), thickness=2)
         cv2.imshow("Image", image)
         k = cv2.waitKey(1) & 0xFF
 
@@ -51,3 +51,7 @@ def positioncam(resolution = (832,624), compensation = 0):
 
         if k == 27:
             break
+
+    cam.close()
+    cv2.destroyWindow('Image')
+    cv2.waitKey(1)
