@@ -20,6 +20,7 @@ from __future__ import print_function
 
 import numpy as np
 
+
 def uneven(value):
 
     """ Returns the closest uneven value equal to or lower than provided """
