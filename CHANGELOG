@@ -1,27 +1,23 @@
 All notable changes to this project will be documented in this file. For a
 complete changelog, see https://github.com/JolleJolles/animlab/commits/
 
-
+2019-06-14 - version 1.4.2
+    * Added get_reccoords function
 2019-06-14 - version 1.4.1
     * Added sample script for drawing
     * Updated drawing functions to make them more generic
     * Added small cross drawing function
     * Added small function to get closestnumber of n divisible by m
-
 2019-06-14 - version 1.4.0
     * Incorporated mouse events class and drawing functions for crosshair
       and rectangle
-
 2019-06-14 - version 1.3.0
     * Moved calibrate and positioncam functions to the animrec package
-
 2019-06-14 - version 1.3.0
     * Set up calibrate function for undistorting camera input
     * Set up positioncam function to help correctly position the camera
-
 2019-06-10 - version 1.2.3
     * Updated readme
-
 2019-06-10 - version 1.2.2
     * Changed videowriter fourcc code
     * Fixed converter class keyboardinterrupt error
@@ -30,31 +26,24 @@ complete changelog, see https://github.com/JolleJolles/animlab/commits/
     * Added doc to main Converter class
     * Fixed multiprocessing pools error when less than provided are needed
     * Fixed issue with Fourcc in video converter function
-
 2019-06-07 - version 1.2.0
     * Added convert function and jupyter notebook tutorial for converting videos
     * Updated copyright statements
-
 2019-01-31 - version 1.1.0
     * Added documentation how to install python virtual environments
-
 2018-12-31 - version 1.0.0
     * Initial release, created the package, made publicly available on Github
-
 2018-12-23 - version 0.1.3
     * Added docs folder for documentation and guides
     * Added Changelog
     * Added logo
     * Improved variable naming in setup file and added classifiers
     * Added __version__ document
-
 2018-12-22 - version 0.1.2
     * Added check_frac utils function
-
 2018-12-17 - version 0.1.1
     * Added logger class
     * Fixed lineprint function to show new lines when run as single command
-
 2018-12-17 - version 0.1.0
     * Updated license statements
     * Created version document that is automatically called when installing animlab
