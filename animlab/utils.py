@@ -116,6 +116,7 @@ def is_rpi():
     except IOError:
         return False
 
+    lineprint("rpi system detected..")
     return True
 
 
