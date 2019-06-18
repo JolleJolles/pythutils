@@ -128,9 +128,9 @@ def get_reccoords(rectangle):
 def zoom_to_roi(zoom, resolution):
 
     x1 = int(zoom[0] * resolution[0])
-    x2 = int((zoom[2]-zoom[0]) * resolution[0])
+    x2 = int((zoom[0]+zoom[2]) * resolution[0])
     y1 = int(zoom[1] * resolution[1])
-    y2 = int((zoom[3]-zoom[1]) * resolution[1])
+    y2 = int((zoom[1]+zoom[3]) * resolution[1])
 
     return ((x1,y1),(x2,y2))
 
