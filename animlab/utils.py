@@ -93,7 +93,7 @@ def clock():
         time.sleep(1)
 
 
-def is_rpi():
+def is_rpi(message=False):
 
     """ Checks if current system is a Raspberry Pi """
 
@@ -112,9 +112,12 @@ def is_rpi():
                                  not. Set system manually""")
 
     except IOError:
+        if message:
+            lineprint("non-rpi system detected..")
         return False
 
-    lineprint("rpi system detected..")
+    if message:
+        lineprint("rpi system detected..")
     return True
 
 
