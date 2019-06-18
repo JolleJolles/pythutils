@@ -108,10 +108,8 @@ def is_rpi():
                     if value not in ('BCM2708','BCM2709','BCM2835','BCM2836'):
                         return False
             if not found:
-                raise ValueError('Unable to determine if system is rpi or\n
-                      not. Set system manually')
-                else:
-                    return False
+                raise ValueError("""Unable to determine if system is rpi or
+                                 not. Set system manually""")
 
     except IOError:
         return False
