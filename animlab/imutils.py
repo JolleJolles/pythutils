@@ -110,6 +110,41 @@ def crop(image, pt1, pt2):
     return cropped
 
 
+def get_reccoords(rectangle):
+
+    """ Gets the top-left and bottom-right coordinates of a rectangle """
+
+    if len(rectangle) < 2:
+        raise Exception("Not enough coordinates provided")
+
+    x1 = min(rectangle[0][0], rectangle[1][0])
+    y1 = min(rectangle[0][1], rectangle[1][1])
+    x2 = max(rectangle[0][0], rectangle[1][0])
+    y2 = max(rectangle[0][1], rectangle[1][1])
+
+    return ((x1,y1),(x2,y2))
+
+
+def zoom_to_roi(zoom, resolution):
+
+    x1 = int(zoom[0] * resolution[0])
+    x2 = int((zoom[2]-zoom[0]) * resolution[0])
+    y1 = int(zoom[1] * resolution[1])
+    y2 = int((zoom[3]-zoom[1]) * resolution[1])
+
+    return ((x1,y1),(x2,y2))
+
+
+def roi_to_zoom(roi, resolution):
+    ((x1,y1),(x2,y2)) = roi
+    z0 = x1 / float(resolution[0])
+    z1 = y1 / float(resolution[1])
+    z2 = (x2-x1) / float(resolution[0])
+    z3 = (y2-y1) / float(resolution[1])
+
+    return (z0, z1, z2, z3)
+
+
 def newdims(img = None, resize = 1, dims = None):
 
     """ Returns new dimensions based on resize value"""

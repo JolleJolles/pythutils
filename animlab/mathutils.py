@@ -115,23 +115,6 @@ def diff_series(series, period = 1):
     return series2 - series
 
 
-def get_reccoords(rectangle):
-
-    """ Gets the top-left coordinates and width and height of a rectangle """
-
-    if len(rectangle) < 2:
-        raise Exception("Not enough coordinates provided")
-
-    x1 = min(rectangle[0][0], rectangle[1][0])
-    y1 = min(rectangle[0][1], rectangle[1][1])
-    x2 = max(rectangle[0][0], rectangle[1][0])
-    y2 = max(rectangle[0][1], rectangle[1][1])
-    w = x2-x1
-    h = y2-y1
-
-    return (x1,y1,x2,y2,w,h)
-
-
 def distoline(point, line):
 
     """
