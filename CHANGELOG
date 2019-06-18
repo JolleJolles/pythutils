@@ -1,6 +1,8 @@
 All notable changes to this project will be documented in this file. For a
 complete changelog, see https://github.com/JolleJolles/animlab/commits/
 
+2019-06-18 - version 1.4.4
+    * Added function to check if system is rpi or not
 2019-06-18 - version 1.4.3
     * Added zoom_to_roi and roi_to_zoom functions
 2019-06-14 - version 1.4.2
