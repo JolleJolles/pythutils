@@ -110,21 +110,6 @@ def crop(image, pt1, pt2):
     return cropped
 
 
-def get_reccoords(rectangle):
-
-    """ Gets the top-left and bottom-right coordinates of a rectangle """
-
-    if len(rectangle) < 2:
-        raise Exception("Not enough coordinates provided")
-
-    x1 = min(rectangle[0][0], rectangle[1][0])
-    y1 = min(rectangle[0][1], rectangle[1][1])
-    x2 = max(rectangle[0][0], rectangle[1][0])
-    y2 = max(rectangle[0][1], rectangle[1][1])
-
-    return ((x1,y1),(x2,y2))
-
-
 def zoom_to_roi(zoom, resolution):
 
     x1 = int(zoom[0] * resolution[0])
@@ -263,6 +248,11 @@ class mouse_events:
         elif event == cv2.EVENT_LBUTTONUP:
             self.drawing = False
             self.rect.append((x, y))
+            x1 = min(self.rect[0][0], self.rect[1][0])
+            y1 = min(self.rect[0][1], self.rect[1][1])
+            x2 = max(self.rect[0][0], self.rect[1][0])
+            y2 = max(self.rect[0][1], self.rect[1][1])
+            self.rect = ((x1,y1),(x2,y2))
 
 
 def draw_cross(img, pts, col = "white", thickness = 2):
