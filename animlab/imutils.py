@@ -141,9 +141,9 @@ def fix_vidshape(res1,res2):
     xmult = (float(res2[0])/res1[0])
     ymult = (float(res2[1])/res1[1])
     if xmult > ymult:
-        xmin = int(((res1[1]*2)-res2[1])/2.)
+        xmin = int(((res1[1]*xmult)-res2[1])/2.)
     if ymult > xmult:
-        ymin = int((res2[1]-(res1[1]*2))/2.)
+        ymin = int((res2[1]-(res1[1]*xmult))/2.)
 
     return xmin, ymin
 
