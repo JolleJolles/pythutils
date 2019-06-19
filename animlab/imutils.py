@@ -136,6 +136,18 @@ def picamconv(resolution):
     return (width, height)
 
 
+def fix_vidshape(res1,res2):
+    xmin,ymin = 0,0
+    xmult = (float(res2[0])/res1[0])
+    ymult = (float(res2[1])/res1[1])
+    if xmult > ymult:
+        xmin = int(((res1[1]*2)-res2[1])/2.)
+    if ymult > xmult:
+        ymin = int((res2[1]-(res1[1]*2))/2.)
+
+    return xmin, ymin
+
+
 def newdims(img = None, resize = 1, dims = None):
 
     """ Returns new dimensions based on resize value"""

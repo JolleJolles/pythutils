@@ -4,6 +4,7 @@ complete changelog, see https://github.com/JolleJolles/animlab/commits/
 Not committed yet
     * Added new function for converting rpi camera stream to right dims
     * Drawing of rectangle now automatically gets coordinates in right order
+    * Added fix_vidshape function
 
 2019-06-18 - version 1.4.4
     * Added function to check if system is rpi or not
