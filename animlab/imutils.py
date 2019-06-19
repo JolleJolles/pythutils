@@ -21,7 +21,7 @@ from __future__ import print_function
 import os
 import cv2
 from animlab.utils import *
-
+from animlab.mathutils import *
 
 def check_media(mediafile):
 
@@ -143,6 +143,12 @@ def roi_to_zoom(roi, resolution):
     z3 = (y2-y1) / float(resolution[1])
 
     return (z0, z1, z2, z3)
+
+
+def picamconv(resolution):
+    width = closenr(resolution[0],32)
+    height = closenr(resolution[1],16)
+    return (width, height)
 
 
 def newdims(img = None, resize = 1, dims = None):
