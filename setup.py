@@ -54,10 +54,6 @@ def check_dependencies():
         import yaml
     except ImportError:
         install_requires.append('pyyaml')
-    try:
-        import pandas
-    except ImportError:
-        install_requires.append('pandas')
 
     return install_requires
 
