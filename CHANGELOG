@@ -1,6 +1,8 @@
 All notable changes to this project will be documented in this file. For a
 complete changelog, see https://github.com/JolleJolles/animlab/commits/
 
+2019-07-31 - version 1.4.6
+    * Updated readme with converter documentation
 2019-06-26 - version 1.4.5
     * Added new function for converting rpi camera stream to right dims
     * Drawing of rectangle now automatically gets coordinates in right order
