@@ -3,7 +3,7 @@
 
 ![logo](https://github.com/JolleJolles/animlab/blob/master/animlab-logo.jpg)
 
-AnimLab is a collection of methods for Python to facilitate the automated recording, tracking, and processing of data with the Behavioural Scientist in mind. All code is written and documented in such a way that its functionality should be easy to use for people with very limited coding experience.
+AnimLab is a collection of utility functions for Python to facilitate the automated recording, tracking, and processing of data with the Behavioural Scientist in mind. It's function are linked with the associated [AnimRec](https://github.com/JolleJolles/animrec) and AnimTrack (currently still private) packages, but should be of use when using once ones functions as well.
 
 Installation
 ------------
