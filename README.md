@@ -43,7 +43,7 @@ To use utility functions, e.g.:
     from animlab.mathutils import points_to_angle
 
    
-####Converting video recordings
+#### Converting video recordings
 1. It is very tricky to record to compressed formats like `.mp4` directly with the rpi and therefore videos are standard stored in the `.h264` format. These videos are very hard to open (I only know of VLC player to make it work partly) but luckily we can easily convert them with the `Converter` class of the package.
 
 2. First import the Convert class and read the documentation:
