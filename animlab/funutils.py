@@ -15,6 +15,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import datetime
+
 def clock():
 
     """ Simple running clock that prints on the same line"""
