@@ -82,16 +82,6 @@ def lineprint(text, stamp=True, sameline=False, reset=False, **kwargs):
         else:
             print(text,end="\n")
 
-
-def clock():
-
-    """ Simple running clock that prints on the same line"""
-
-    while True:
-        print(datetime.datetime.now().strftime("%H:%M:%S")+"\r")
-        time.sleep(1)
-
-
 def is_rpi(message=False):
 
     """ Checks if current system is a Raspberry Pi """
