@@ -21,7 +21,7 @@ def clock():
     """Simple running clock that prints on the same line"""
 
     while True:
-        print(datetime.datetime.now().strftime("%H:%M:%S")+"\r")
+        print(datetime.datetime.now().strftime("%H:%M:%S"), end="\r", flush=True)
         time.sleep(1)
 
 
