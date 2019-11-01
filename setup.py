@@ -15,18 +15,18 @@
 
 from setuptools import setup, find_packages
 
-exec(open('py-utils/__version__.py').read())
+exec(open('pyutilspack/__version__.py').read())
 
-DESCRIPTION = """py-utils: A collection of python utilities."""
+DESCRIPTION = """pyutilspack: A collection of python utilities."""
 LONG_DESCRIPTION = """\
-py-utils is a python package with a collection of python utilities functions
+pyutilspack is a python package with a collection of python utilities functions
 """
 
-DISTNAME = 'py-utils'
+DISTNAME = 'pyutilspack'
 MAINTAINER = 'Jolle Jolles'
 MAINTAINER_EMAIL = 'j.w.jolles@gmail.com'
 URL = 'http://jollejolles.com'
-DOWNLOAD_URL = 'https://github.com/JolleJolles/py-utils'
+DOWNLOAD_URL = 'https://github.com/JolleJolles/pyutilspack'
 LICENSE = 'Apache Software License 2.0'
 
 
@@ -70,7 +70,7 @@ if __name__ == "__main__":
           download_url=DOWNLOAD_URL,
           version=__version__,
           install_requires=install_requires,
-          packages=['py-utils'],
+          packages=['pyutilspack'],
           classifiers=[
                      'Intended Audience :: Science/Research',
                      'Programming Language :: Python :: 2.7',

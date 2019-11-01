@@ -1,12 +1,12 @@
 # AnimLab
-**py-utils: a collection of utility functions for Python**
+**pyutilspack: a collection of utility functions for Python**
 
 Installation
 ------------
 
-To install py-utils, open a terminal window and enter:
+To install pyutilspack, open a terminal window and enter:
 ```bash
-pip install git+https://github.com/JolleJolles/py-utils.git
+pip install git+https://github.com/JolleJolles/pyutilspack.git
 ```
 
 Usage
@@ -21,8 +21,8 @@ To use utility functions, e.g.:
 
 Development
 --------
-For an overview of version changes see the [CHANGELOG](https://github.com/JolleJolles/py-utils/blob/master/CHANGELOG) and for detailed changes see the [commits page](https://github.com/JolleJolles/py-utils/commits/). Please submit bugs or feature requests to the GitHub issue tracker [here](https://github.com/JolleJolles/py-utils/issues).
+For an overview of version changes see the [CHANGELOG](https://github.com/JolleJolles/pyutilspack/blob/master/CHANGELOG) and for detailed changes see the [commits page](https://github.com/JolleJolles/pyutilspack/commits/). Please submit bugs or feature requests to the GitHub issue tracker [here](https://github.com/JolleJolles/pyutilspack/issues).
 
 License
 --------
-Released under a Apache 2.0 License. See [LICENSE](https://github.com/JolleJolles/py-utils/blob/master/LICENSE) for details.
+Released under a Apache 2.0 License. See [LICENSE](https://github.com/JolleJolles/pyutilspack/blob/master/LICENSE) for details.

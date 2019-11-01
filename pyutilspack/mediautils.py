@@ -20,8 +20,8 @@ import os
 import cv2
 import numpy as np
 
-from animlab.fileutils import get_ext
-from animlab.mathutils import closenr
+from pyutilspack.fileutils import get_ext
+from pyutilspack.mathutils import closenr
 
 
 def check_media(mediafile):
