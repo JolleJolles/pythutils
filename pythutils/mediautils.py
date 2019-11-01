@@ -20,8 +20,8 @@ import os
 import cv2
 import numpy as np
 
-from pyutilspack.fileutils import get_ext
-from pyutilspack.mathutils import closenr
+from pythutils.fileutils import get_ext
+from pythutils.mathutils import closenr
 
 
 def check_media(mediafile):
