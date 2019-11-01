@@ -45,9 +45,12 @@ def closenr(n, m) :
     return n2
 
 
-def seqcount(start, stop, length):
+def seqcount(start, stop, steplength):
 
-    """Returns sequence of numbers between two values with a certain length"""
+    """
+    Returns a sequence of numbers between a start and stop value with a
+    certain steplength
+    """
 
     step = (stop - start) / float(length)
     step = int(np.ceil(step))
@@ -59,9 +62,10 @@ def seqcount(start, stop, length):
 def maxsteps(value, maxval = 500):
 
     """
-    Gives the stepsize and maximum number of steps for a number that is
-    divisible up to a maximum provided value, with some small range around the
-    number to find the optimal number of divisible steps.
+    Returns the maximum number of steps and stepsize for a value that may be
+    divided up to a maximum value, all being rounded value. For example, if one
+    wants to get the maximum number of steps to get to a value of 100 where it
+    can be maximally divided 7 times, it will return nsteps=5, stepsize=20.
     """
 
     valrange = [value-3,value-2,value-1,value]
@@ -86,6 +90,8 @@ def get_weights(w = 1.7, length = 20):
 
 def points_to_vec(pt1, pt2):
 
+    """Converts the coordinate of two points (pt1 > pt2) to a vector"""
+
     vx = pt2[0] - pt1[0]
     vy = pt1[1] - pt2[1]
 
@@ -93,6 +99,11 @@ def points_to_vec(pt1, pt2):
 
 
 def angle_to_vec(angle):
+
+    """
+    Converts an angle in degrees to a vector. Uses a coordinate system that
+    points north and ranges from -180 to 180 degrees.
+    """
 
     vx = np.round(np.sin(np.radians(angle)), 3)
     vy = np.round(np.cos(np.radians(angle)), 3)
@@ -102,9 +113,13 @@ def angle_to_vec(angle):
 
 def points_to_angle(pt1, pt2 = None):
 
-    """Returns the angle of a vector based on eiher one or two points"""
+    """
+    Returns the angle of a vector from the origin to a single point or the angle
+    between two points. Uses a coordinate system that points north and ranges
+    from -180 to 180 degrees.
+    """
 
-    vx, vy = pt1 if pt2 is None else points_to_vec(pt, pt2)
+    vx, vy = pt1 if pt2 is None else points_to_vec(pt1, pt2)
     angle = np.round(np.arctan2(vx, vy) * 180 / np.pi,2)
 
     return angle
