@@ -14,27 +14,34 @@
 # limitations under the License.
 
 import os
+import ast
 import yaml
 import h5py
 import pandas
 
-def listfiles(filedir = ".", filetype = (".mp4", ".mov", ".mjpeg",".jpg"),
-              dirs = False, keepdir = False):
+def listfiles(filedir = ".", filetype = "", keepdir = False, nested = False):
 
     """
-    Extracts and returns either a list of files with a specific
-    extension or a list of directories at a certain location
+    Returns a list of (nested) files or directories
 
-    Parameters
-    ==========
     filedir: str; default="."
-    filetype: str; default=(".mp4", ".mov", ".mjpeg",".jpg")
-    dirs: bool; default=False
+    filetype: str or tuple of strings; default=""
+        Filetype for the files to be listed. If filetype is dir, it will return
     keepdir: bool; default=False
+        If the original directory should be kept as part of the filename
+    nested: bool; default=False
+        If all nested files should be listed
     """
 
-    if dirs:
+    if filetype == "dir":
         outlist = [i for i in os.listdir(filedir) if os.path.isdir(os.path.join(filedir, i))]
+
+    elif nested:
+        outlist = []
+        for root, dirs, files in os.walk(filedir):
+             for file in files:
+                if file.endswith(filetype):
+                    outlist.append(file)
 
     else:
         outlist = [each for each in os.listdir(filedir) if each.endswith(filetype)]
@@ -66,7 +73,7 @@ def loadyml(filename, value = None, add = True):
             newvalue = newvalue + value if add else value
     else:
         newvalue = value
-    newvalue = literal_eval(str(newvalue))
+    newvalue = ast.literal_eval(str(newvalue))
 
     return newvalue
 
@@ -80,27 +87,27 @@ def loadh5data(filename, dataset = "data"):
     return dataset
 
 
-def name(filename, ext = ".csv", action = "overwrite"):
+def name(filename, ext = ".csv", action = "newfile"):
 
     """
-    Returns filename with required extension or for sequence returns filename
-    that does not exist already with numeric '_x' suffix appended.
+    Gets the name for a file with required extension, and will either overwrite
+    the existing file or generate a new file with a sequence.
     """
 
     dirname, filename = os.path.split(filename)
     dirname = '.' if dirname == '' else dirname
     filename = os.path.splitext(filename)[0]
+    names = [x for x in os.listdir(dirname) if x.startswith(filename)]
 
-    if action == "replace":
+    if len(names) == 0 or action == "append":
+        return filename+ext
+
+    elif action == "overwrite":
         if os.path.exists(filename+ext):
             os.remove(filename+ext)
         return filename+ext
 
-    elif action == "append":
-        return filename+ext
-
     elif action == "newfile":
-        names = [x for x in os.listdir(dirname) if x.startswith(filename)]
         names = [os.path.splitext(x)[0] for x in names]
         suffixes = [x.replace(filename, '') for x in names]
         suffixes = [int(x[1]) for x in suffixes if x.startswith('_')]
