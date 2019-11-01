@@ -47,7 +47,7 @@ def removeline(linenr=1):
 
     """Removes printed lines in terminal. Linenr starts with current line"""
 
-     _ in range(n):
+    _ in range(n):
         sys.stdout.write('\x1b[1A')
         sys.stdout.write('\x1b[2K')
 
