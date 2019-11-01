@@ -47,24 +47,38 @@ def removeline(linenr=1):
 
     """Removes printed lines in terminal. Linenr starts with current line"""
 
-    for _ in range(n):
+    for _ in range(linenr):
         sys.stdout.write('\x1b[1A')
         sys.stdout.write('\x1b[2K')
 
 
-def lineprint(text, stamp=True, sameline=False, reset=False, **kwargs):
+def lineprint(text, stamp=True, sameline=False, newline=True, reset=False,
+              **kwargs):
+
+    """
+    Advanced printing functionality. Can add a simple timestap at the start of
+    the to be printed line with the hostname (stamp=True) or with a custom label
+    (stamp=True, label=CUS), add text add the end of the previous line of text
+    (sameline=True), or overwrite the previous line completely (sameline=True,
+    reset=True). To not have whiteline at beginning of new lineprint add
+    newline=False.
+    """
 
     global line, label
 
-    line = line if vardefined("line") else ""
-    label = label if vardefined("label") else socket.gethostname()
-    if not vardefined("label"):
+    def _vardefined(var):
+
+        return var in [var for var,_ in globals().items()]
+
+    line = line if _vardefined("line") else ""
+    label = label if _vardefined("label") else socket.gethostname()
+    if not _vardefined("label"):
         label = ""
 
     if "label" in kwargs:
         label = kwargs["label"]
 
-    if stamp and not sameline:
+    if stamp:
         text = time.strftime("%H:%M:%S") + " [" + label + "] - " + text
 
     if sameline:
@@ -75,32 +89,16 @@ def lineprint(text, stamp=True, sameline=False, reset=False, **kwargs):
         else:
             text = line + " " + text
         line = "\r" + text
-        print(line,end='')
+        print(line, end="\r")
+    elif newline:
+        line = "\n"+text
+        print(line, end="\r")
     else:
         line = text
         if line == "":
             print(line, end=' ')
         else:
-            print(text,end="\n")
-
-
-def hide_traceback():
-
-    """
-    Hides traceback in jupyter when raising errors. Only shows error. Only needs
-    to be called at start of script.
-    """
-
-    ipython = get_ipython()
-
-    def hide(exc_tuple = None, filename = None, tb_offset = None,
-             exception_only = False, running_compiled_code = False):
-        etype, value, tb = sys.exc_info()
-        element = ipython.InteractiveTB.get_exception_only(etype, value)
-
-        return ipython._showtraceback(etype, value, element)
-
-    ipython.showtraceback = hide
+            print(text, end="\r")
 
 
 def homedir():
@@ -118,7 +116,7 @@ def isscript():
     return hasattr(main, '__file__')
 
 
-def is_rpi(message=False):
+def isrpi(message=False):
 
     """Checks if current system is a Raspberry Pi"""
 
@@ -146,15 +144,10 @@ def is_rpi(message=False):
     return True
 
 
-def vardefined(var):
-
-    return var in [var for var,_ in globals().items()]
-
-
-def check_frac(input_txt):
+def checkfrac(input):
 
     """Checks string for Fractions and converts them accordingly"""
 
-    transformed_text = re.sub(r'([\d.]+)', r'Fraction("\1")', input_txt)
+    transformed_text = re.sub(r'([\d.]+)', r'fractions.Fraction("\1")', input)
 
     return eval(transformed_text)
