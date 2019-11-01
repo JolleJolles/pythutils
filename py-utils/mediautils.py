@@ -1,6 +1,4 @@
 #! /usr/bin/env python
-#
-# Python toolset for the mechanistic study of animal behaviour
 # Copyright (c) 2018 - 2019 Jolle Jolles <j.w.jolles@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +18,11 @@ from __future__ import print_function
 
 import os
 import cv2
-from animlab.utils import *
-from animlab.mathutils import *
+import numpy as np
+
+from animlab.fileutils import get_ext
+from animlab.mathutils import closenr
+
 
 def check_media(mediafile):
 
@@ -45,7 +46,7 @@ def check_media(mediafile):
 
 def getimg(mediafile):
 
-    """ Acquires numpy array from media file, video or image """
+    """Acquires numpy array from media file, video or image"""
 
     try:
         cap = cv2.VideoCapture(mediafile)
@@ -68,7 +69,7 @@ def get_vid_params(vid):
 
 def videowriter(filein, w, h, fps, resizeval):
 
-    ''' Creates a vidout instance using the opencv VideoWriter class '''
+    """Creates a vidout instance using the opencv VideoWriter class"""
 
     #fourcc = cv2.VideoWriter_fourcc("M","P","4","V")
     fileout = filein[:-5] + ".mp4"
@@ -80,8 +81,8 @@ def videowriter(filein, w, h, fps, resizeval):
 
 def safe_count(vidfile):
 
-    """ Returns a safe total framecount of a video by going
-        through the video frame-by-frame
+    """
+    Returns a safe total framecount of a video by frame-by-frame counting
     """
 
     cap = cv2.VideoCapture(vidfile)
@@ -101,8 +102,8 @@ def safe_count(vidfile):
 
 def crop(image, pt1, pt2):
 
-    """ Returns an imaged cropped to a region of interest
-        based on topleft and bottomright corner
+    """
+    Returns an imaged cropped to a region of interest based on TL and BR corner
     """
 
     cropped = image[pt1[1]:pt2[1], pt1[0]:pt2[0]]
@@ -150,7 +151,7 @@ def fix_vidshape(res1,res2):
 
 def newdims(img = None, resize = 1, dims = None):
 
-    """ Returns new dimensions based on resize value"""
+    """Returns new dimensions based on resize value"""
 
     if dims is None:
         if img is not None:
@@ -208,92 +209,3 @@ def add_transimg(bgimg, transimg, offsets):
     bgimg[o[1]:o[1]+h, o[0]:o[0]+w] = fix
 
     return bgimg
-
-
-def textdims(text, fontsize, thickness = 1):
-
-    tw, th = cv2.getTextSize(text, cv2.FONT_HERSHEY_SIMPLEX, fontsize, thickness)[0]
-
-    topy = fontsize*1 if any(x in ["i","j"] for x in text) else 0
-    boty = fontsize*2 if any(x in "Q" for x in text) else 0
-    boty = fontsize*7 if any(x in ["g","j","y","p","q"] for x in text) else boty
-
-    return (tw, th), topy, boty
-
-
-def draw_text(img, text, loc = (0, 0), fontsize = 1, col = (0,0,0), margin = 5,
-              thickness = 1, bgcol = None):
-
-    (tw, th), topy, boty = textdims(text, fontsize)
-
-    if bgcol is not None:
-        topleftout = (loc[0], loc[1])
-        botrightx = loc[0] + margin + tw + margin
-        botrighty = loc[1] + margin + th + topy + boty + margin
-        botright = (botrightx, botrighty)
-        cv2.rectangle(img, topleftout, botrightout, bgcol, -1)
-
-    botlefin = (int(loc[0]+margin), int(loc[1]+margin+th+topy))
-    cv2.putText(img, text, botlefin, cv2.FONT_HERSHEY_SIMPLEX, fontsize,
-                col, thickness, cv2.LINE_AA)
-
-
-class mouse_events:
-
-    """ Stores a series of coordinates related to mouse events """
-
-    def __init__(self):
-
-        self.drawing = False
-        self.rect = ()
-        self.pointer = ()
-
-
-    def draw(self,event,x,y,flags,param):
-
-        self.pointer = (x,y)
-
-        if event == cv2.EVENT_LBUTTONDOWN:
-            self.drawing = True
-            self.rect = [(x,y)]
-
-        elif event == cv2.EVENT_LBUTTONUP:
-            self.drawing = False
-            self.rect.append((x, y))
-            x1 = min(self.rect[0][0], self.rect[1][0])
-            y1 = min(self.rect[0][1], self.rect[1][1])
-            x2 = max(self.rect[0][0], self.rect[1][0])
-            y2 = max(self.rect[0][1], self.rect[1][1])
-            self.rect = ((x1,y1),(x2,y2))
-
-
-def draw_cross(img, pts, col = "white", thickness = 2):
-
-    """ Draws a cross """
-
-    if pts:
-        cv2.line(img, (1,1), (pts[0], pts[1]), namedcols(col), thickness)
-        cv2.line(img, (pts[0], 1), (1, pts[1]), namedcols(col), thickness)
-
-
-def draw_crosshair(img, pt, radius = 5, col = "white"):
-
-    """ Draws a crosshair """
-
-    if pt:
-        hline = (pt[0] - radius, pt[1]), (pt[0] + radius, pt[1])
-        tline = (pt[0], pt[1] - radius), (pt[0], pt[1] + radius)
-        cv2.line(img, hline[0], hline[1], namedcols(col), 1)
-        cv2.line(img, tline[0], tline[1], namedcols(col), 1)
-
-
-def draw_rectangle(img, pointer, rect, drawing = False, col = "red"):
-
-    """ Draws a rectangle with option to show it dynamically """
-
-    if drawing:
-        cv2.rectangle(img, rect[0], pointer, namedcols(col), 2)
-
-    else:
-        if rect:
-            cv2.rectangle(img, rect[0], rect[1], namedcols(col), 2)

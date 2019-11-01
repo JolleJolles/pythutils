@@ -1,6 +1,4 @@
 #! /usr/bin/env python
-#
-# Python toolset for the mechanistic study of animal behaviour
 # Copyright (c) 2018 - 2019 Jolle Jolles <j.w.jolles@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,8 +18,22 @@ import datetime
 
 def clock():
 
-    """ Simple running clock that prints on the same line"""
+    """Simple running clock that prints on the same line"""
 
     while True:
         print(datetime.datetime.now().strftime("%H:%M:%S")+"\r")
         time.sleep(1)
+
+
+def now(timeformat = "date"):
+
+    """Returns current date or time"""
+
+    if timeformat == "date":
+        return datetime.datetime.now().strftime("%y/%m/%d")
+
+    elif timeformat == "time":
+        return datetime.datetime.now().strftime("%H:%M:%S")
+
+    else:
+        print("No right time format provided..")

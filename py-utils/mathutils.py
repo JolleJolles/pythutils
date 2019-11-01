@@ -1,6 +1,4 @@
 #! /usr/bin/env python
-#
-# Python toolset for the mechanistic study of animal behaviour
 # Copyright (c) 2018 - 2019 Jolle Jolles <j.w.jolles@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,14 +14,11 @@
 # limitations under the License.
 
 from __future__ import division
-from __future__ import print_function
-
 import numpy as np
-
 
 def uneven(value):
 
-    """ Returns the closest uneven value equal to or lower than provided """
+    """Returns the closest uneven value equal to or lower than provided"""
 
     if value == 0:
         newvalue = 1
@@ -35,7 +30,7 @@ def uneven(value):
 
 def closenr(n, m) :
 
-    """ Find the number closest to n and divisible by m """
+    """Find the number closest to n and divisible by m"""
 
     q = int(n / m)
     n1 = m * q
@@ -48,6 +43,17 @@ def closenr(n, m) :
         return n1
 
     return n2
+
+
+def seqcount(start, stop, length):
+
+    """Returns sequence of numbers between two values with a certain length"""
+
+    step = (stop - start) / float(length)
+    step = int(np.ceil(step))
+    sequence = range(start, stop, step)
+
+    return sequence
 
 
 def maxsteps(value, maxval = 500):
@@ -71,6 +77,13 @@ def maxsteps(value, maxval = 500):
     return(nsteps, stepsize)
 
 
+def get_weights(w = 1.7, length = 20):
+
+    """Returns a list of weights, based on quadratic function"""
+
+    return [w**i for i in range(length, 0, -1)]
+
+
 def points_to_vec(pt1, pt2):
 
     vx = pt2[0] - pt1[0]
@@ -89,7 +102,7 @@ def angle_to_vec(angle):
 
 def points_to_angle(pt1, pt2 = None):
 
-    """ Returns the angle of a vector based on eiher one or two points"""
+    """Returns the angle of a vector based on eiher one or two points"""
 
     vx, vy = pt1 if pt2 is None else points_to_vec(pt, pt2)
     angle = np.round(np.arctan2(vx, vy) * 180 / np.pi,2)
@@ -133,7 +146,6 @@ def distoline(point, line):
     segment_dist : the perpendicular distance to the theoretical infinite line
     (x_seg, y_seg) : the relative x and y coordinates to the line
     endpoint_dist : minimum distance to the end point on the line
-
     """
 
     # unit vector

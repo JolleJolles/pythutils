@@ -1,7 +1,5 @@
 #! /usr/bin/env python
-#
-# Python toolset for the mechanistic study of animal behaviour
-# Copyright (c) 2018 Jolle Jolles <j.w.jolles@gmail.com>
+# Copyright (c) 2018 - 2019 Jolle Jolles <j.w.jolles@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,24 +13,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from __future__ import print_function
 from setuptools import setup, find_packages
 
-exec(open('animlab/__version__.py').read())
+exec(open('py-utils/__version__.py').read())
 
-DESCRIPTION = """
-AnimLab: Python toolset for the mechanistic study of animal behaviour
-"""
+DESCRIPTION = """py-utils: A collection of python utilities."""
 LONG_DESCRIPTION = """\
-AnimLab is a collection of python methods to help facilitate the automated and
-controlled study of animal behaviour.
+py-utils is a python package with a collection of python utilities functions
 """
 
-DISTNAME = 'animlab'
+DISTNAME = 'py-utils'
 MAINTAINER = 'Jolle Jolles'
 MAINTAINER_EMAIL = 'j.w.jolles@gmail.com'
 URL = 'http://jollejolles.com'
-DOWNLOAD_URL = 'https://github.com/JolleJolles/AnimLab'
+DOWNLOAD_URL = 'https://github.com/JolleJolles/py-utils'
 LICENSE = 'Apache Software License 2.0'
 
 
@@ -43,17 +37,21 @@ def check_dependencies():
     install_requires = []
 
     try:
-        import multiprocess
-    except ImportError:
-        install_requires.append('multiprocess')
-    try:
         import numpy
     except ImportError:
         install_requires.append('numpy')
     try:
+        import numpy
+    except ImportError:
+        install_requires.append('pandas')
+    try:
         import yaml
     except ImportError:
         install_requires.append('pyyaml')
+    try:
+        import h5py
+    except ImportError:
+        install_requires.append('h5py')
 
     return install_requires
 
@@ -72,7 +70,7 @@ if __name__ == "__main__":
           download_url=DOWNLOAD_URL,
           version=__version__,
           install_requires=install_requires,
-          packages=['animlab'],
+          packages=['py-utils'],
           classifiers=[
                      'Intended Audience :: Science/Research',
                      'Programming Language :: Python :: 2.7',
