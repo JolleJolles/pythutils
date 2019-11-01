@@ -19,10 +19,18 @@ import io
 import os
 import re
 import sys
+import time
 import socket
 import fractions
 
 class Logger(object):
+
+    """
+    Class to log the output of the command line to a log file. Should be written
+    to sys.stdout, e.g. sys.stdout = Logger("log.txt"). Output is written to
+    file after python instance is closed.
+    """
+
     def __init__(self, filename):
         self.terminal = sys.stdout
         self.log = open(filename, "a")
@@ -35,9 +43,11 @@ class Logger(object):
         pass
 
 
-def deleteline(n=1):
+def removeline(linenr=1):
 
-    for _ in range(n):
+    """Removes printed lines in terminal. Linenr starts with current line"""
+
+     _ in range(n):
         sys.stdout.write('\x1b[1A')
         sys.stdout.write('\x1b[2K')
 
