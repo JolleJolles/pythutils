@@ -14,6 +14,7 @@
 # limitations under the License.
 
 from __future__ import division
+
 import numpy as np
 
 def uneven(value):
@@ -88,12 +89,18 @@ def get_weights(w = 1.7, length = 20):
     return [w**i for i in range(length, 0, -1)]
 
 
-def points_to_vec(pt1, pt2):
+def points_to_vec(pt1, pt2, flip = False):
 
-    """Converts the coordinate of two points (pt1 > pt2) to a vector"""
+    """
+    Converts the coordinate of two points (pt1 > pt2) to a vector
+
+    flip: bool, default = False
+        If the coordinate system should be flipped such that higher y-coords
+        are lower (e.g. needed when working with images in opencv).
+    """
 
     vx = pt2[0] - pt1[0]
-    vy = pt1[1] - pt2[1]
+    vy = pt1[1] - pt2[1] if flip else pt2[1] - pt1[1]
 
     return vx, vy
 
@@ -111,15 +118,19 @@ def angle_to_vec(angle):
     return vx, vy
 
 
-def points_to_angle(pt1, pt2 = None):
+def points_to_angle(pt1, pt2 = None, flip = False):
 
     """
     Returns the angle of a vector from the origin to a single point or the angle
     between two points. Uses a coordinate system that points north and ranges
     from -180 to 180 degrees.
+
+    flip: bool, default = False
+        If the coordinate system should be flipped such that higher y-coords
+        are lower (e.g. needed when working with images in opencv).
     """
 
-    vx, vy = pt1 if pt2 is None else points_to_vec(pt1, pt2)
+    vx, vy = pt1 if pt2 is None else points_to_vec(pt1, pt2, flip)
     angle = np.round(np.arctan2(vx, vy) * 180 / np.pi,2)
 
     return angle
@@ -127,26 +138,30 @@ def points_to_angle(pt1, pt2 = None):
 
 def points_to_dist(pt1, pt2):
 
+    """Computes the distance between two points"""
+
     if None in pt1 or None in pt2:
-        vel = None
+        dist = None
     else:
         vx, vy = points_to_vec(pt1, pt2)
-        vel = np.linalg.norm([(vx, vy)])
+        dist = np.linalg.norm([(vx, vy)])
 
     return dist
 
 
 def diff_series(series, period = 1):
 
+    """Shifts a pandas series upwards with a given period"""
+
     series2 = series.shift(periods = -period)
 
     return series2 - series
 
 
-def distoline(point, line):
+def dist_to_segment(pt, segment):
 
     """
-    Calculate the distance between a point and a line segment
+    Calculates the distance between a point and a non-infinite line segment
 
     Explanation
     ----------
@@ -156,28 +171,32 @@ def distoline(point, line):
     project to the line segment, we calculate the distance to both endpoints
     and take the shortest distance.
 
+    Input
+    ----------
+    point : tuple of the point's coordinates
+    line : tuple of segment endpoints' coordinates
+
     Returns
     -------
-    segment_dist : the perpendicular distance to the theoretical infinite line
-    (x_seg, y_seg) : the relative x and y coordinates to the line
-    endpoint_dist : minimum distance to the end point on the line
+    dist : minimum distance to the end point on the line
+    coords : the relative x and y coordinates to the line
     """
 
     # unit vector
-    unit_line = line[1] - line[0]
-    norm_unit_line = unit_line / np.linalg.norm(unit_line)
+    segment = np.array(segment)
+    uline = segment[1] - segment[0]
+    norm_uline = uline / np.linalg.norm(uline)
 
     # compute the perpendicular distance to the theoretical infinite line
-    segment_dist = (np.linalg.norm(np.cross(line[1] - line[0], line[0] - point)) / np.linalg.norm(unit_line))
-    diff = ((norm_unit_line[0] * (point[0] - line[0][0])) + (norm_unit_line[1] * (point[1] - line[0][1])))
-    x_seg = (norm_unit_line[0] * diff) + line[0][0]
-    y_seg = (norm_unit_line[1] * diff) + line[0][1]
+    dott_product = np.cross(segment[1] - segment[0], segment[0] - pt)
+    dist_infline = (np.linalg.norm(dott_product / np.linalg.norm(uline)))
+    diff = (norm_uline[0] * (pt[0] - segment[0][0])) + \
+           (norm_uline[1] * (pt[1] - segment[0][1]))
+    x_seg = np.round((norm_uline[0] * diff) + segment[0][0])
+    y_seg = np.round((norm_uline[1] * diff) + segment[0][1])
 
-    coords = (x_seg, y_seg)
-    distance = segment_dist
-
-    linept1dis = np.linalg.norm(line[0] - point)
-    linept2dis = np.linalg.norm(line[1] - point)
+    linept1dis = np.linalg.norm(segment[0] - pt)
+    linept2dis = np.linalg.norm(segment[1] - pt)
     endpoint_dist = min(linept1dis, linept2dis)
 
     # decide if the intersection point falls on the line segment
@@ -188,12 +207,12 @@ def distoline(point, line):
     is_betw_x = lp1_x <= x_seg <= lp2_x or lp2_x <= x_seg <= lp1_x
     is_betw_y = lp1_y <= y_seg <= lp2_y or lp2_y <= y_seg <= lp1_y
 
-#    if is_betw_x and is_betw_y:
-#        coords = (x_seg, y_seg)
-#        distance = segment_dist
-#    else:
-#        # if not, then return the minimum distance to the segment endpoints
-#        #coords = (line[0][0],line[0][1]) if linept1dis<=linept2dis else (line[1][0],line[1][1])
-#        distance = endpoint_dist
+    if is_betw_x and is_betw_y:
+        dist = dist_infline
+        coords = (x_seg, y_seg)
+    else:
+        # if not, then return the minimum distance to the segment endpoints
+        dist = endpoint_dist
+        coords = (line[0][0],line[0][1]) if linept1dis<=linept2dis else (line[1][0],line[1][1])
 
-    return segment_dist, (x_seg, y_seg), endpoint_dist
+    return dist, coords
