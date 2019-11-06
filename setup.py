@@ -18,9 +18,6 @@ from setuptools import setup, find_packages
 exec(open('pythutils/__version__.py').read())
 
 DESCRIPTION = """pythutils: a collection of utility functions for Python"""
-LONG_DESCRIPTION = """\
-pythutils is a python package with a collection of utily functions
-"""
 
 DISTNAME = 'pythutils'
 MAINTAINER = 'Jolle Jolles'
@@ -66,7 +63,7 @@ if __name__ == "__main__":
           maintainer=MAINTAINER,
           maintainer_email=MAINTAINER_EMAIL,
           description=DESCRIPTION,
-          long_description=LONG_DESCRIPTION,
+          long_description=readme,
           long_description_content_type="text/markdown",
           url=URL,
           download_url=DOWNLOAD_URL,
