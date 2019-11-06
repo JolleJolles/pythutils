@@ -17,16 +17,22 @@ import pandas as pd
 import numpy as np
 
 def _list_to_coords(list):
+
     coords = [(int(i),int(j)) for i,j in list if i==i]
     loclist = [c for c,i in enumerate(list) if i[0] == i[0]]
+
     return coords, loclist
 
 
 def create_emptydf(cols = ["x","y","fx","fy"], ids = [1], first = 1, last = None):
 
     """
-    Creates an emtpy pandas df with frame and cid columns as well as user
-    provided columns for provided frame range
+    Creates an emtpy pandas dataframe, aimed to hold coordinate data
+
+    cols : a list of columns
+    ids : a list of animal ids
+    first : start frame
+    last : last frame
     """
 
     try:
@@ -77,6 +83,8 @@ def pd_to_coords(pdat, loc = None, array = False, columns = ["x","y"],
 
 
 def dfchange(df1, df2):
+
+    """Determines the differences between two pandas dataframes"""
 
     dfchanges = df2.loc[df2[~df2.isin(df1)].dropna(how="all").index,]
     nchanges = dfchanges.shape[0]
