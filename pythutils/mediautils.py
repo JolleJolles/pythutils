@@ -26,13 +26,15 @@ from pythutils.mathutils import closenr
 
 def check_media(mediafile):
 
+    """Runs some basic checks on a mediafile"""
+
     ext = get_ext(mediafile)
     vidtypes = [".mov",".mp4",".avi"]
     imgtypes = [".jpg", ".png", ".jpeg", ".bmp"]
     ftype = "vid" if ext in vidtypes else "img" if ext in imgtypes else None
     filedir = os.path.dirname(mediafile)
 
-    assert ftype != None, "File neither Video or image file.."
+    assert ftype != None, "File neither video or image file.."
     if filedir != "":
         assert os.path.isdir(filedir), "File directory does not exist.."
     assert os.path.isfile(mediafile), "File does not exist.."
@@ -46,7 +48,7 @@ def check_media(mediafile):
 
 def getimg(mediafile):
 
-    """Acquires numpy array from media file, video or image"""
+    """Acquires a numpy array from a video or image"""
 
     try:
         cap = cv2.VideoCapture(mediafile)
@@ -57,12 +59,19 @@ def getimg(mediafile):
     return img
 
 
-def get_vid_params(vid):
+def get_vid_params(mediafile):
 
-    fps = int(vid.get(cv2.CAP_PROP_FPS))
-    width = int(vid.get(cv2.CAP_PROP_FRAME_WIDTH))
-    height = int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    fcount = int(vid.get(cv2.CAP_PROP_FRAME_COUNT))
+    """Gets video parameters from file or video instance"""
+
+    if type(mediafile) is str:
+        assert get_ext(mediafile) in [".mov",".mp4",".avi"], "File not a video.."
+        mediafile = cv2.VideoCapture(mediafile)
+
+    assert mediafile.read()[0], "Video could not be read.."
+    fps = int(mediafile.get(cv2.CAP_PROP_FPS))
+    width = int(mediafile.get(cv2.CAP_PROP_FRAME_WIDTH))
+    height = int(mediafile.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    fcount = int(mediafile.get(cv2.CAP_PROP_FRAME_COUNT))
 
     return fps, width, height, fcount
 
@@ -71,19 +80,16 @@ def videowriter(filein, w, h, fps, resizeval):
 
     """Creates a vidout instance using the opencv VideoWriter class"""
 
-    #fourcc = cv2.VideoWriter_fourcc("M","P","4","V")
-    fileout = filein[:-5] + ".mp4"
+    fileout = filein[:-len(get_ext(filein))] + ".mp4"
     viddims = (w, h) if resizeval == 1 else (int(w*resizeval), int(h*resizeval))
     vidout = cv2.VideoWriter(fileout, 0x00000020, fps, viddims)
 
     return vidout
 
 
-def safe_count(vidfile):
+def safe_framecount(vidfile):
 
-    """
-    Returns a safe total framecount of a video by frame-by-frame counting
-    """
+    """Saves video frame counter that counts frame-by-frame"""
 
     cap = cv2.VideoCapture(vidfile)
     vidlength = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -102,9 +108,7 @@ def safe_count(vidfile):
 
 def crop(image, pt1, pt2):
 
-    """
-    Returns an imaged cropped to a region of interest based on TL and BR corner
-    """
+    """Crops image based on based on top left and bottom right corner"""
 
     cropped = image[pt1[1]:pt2[1], pt1[0]:pt2[0]]
 
@@ -112,6 +116,8 @@ def crop(image, pt1, pt2):
 
 
 def zoom_to_roi(zoom, resolution):
+
+    """Gets region of interest coordinates from x,y,w,h zoom parameters"""
 
     x1 = int(zoom[0] * resolution[0])
     x2 = int((zoom[0]+zoom[2]) * resolution[0])
@@ -122,6 +128,9 @@ def zoom_to_roi(zoom, resolution):
 
 
 def roi_to_zoom(roi, resolution):
+
+    """Gets x,y,w,h zoom parameters from region of interest coordinates"""
+
     ((x1,y1),(x2,y2)) = roi
     z0 = x1 / float(resolution[0])
     z1 = y1 / float(resolution[1])
@@ -132,12 +141,19 @@ def roi_to_zoom(roi, resolution):
 
 
 def picamconv(resolution):
+
+    """Adapts video resolution to work with raspberry pi camera"""
+
     width = closenr(resolution[0],32)
     height = closenr(resolution[1],16)
+
     return (width, height)
 
 
 def fix_vidshape(res1,res2):
+
+    """Compares two resolutions and get missing x and y coords"""
+
     xmin,ymin = 0,0
     xmult = (float(res2[0])/res1[0])
     ymult = (float(res2[1])/res1[1])
@@ -151,13 +167,14 @@ def fix_vidshape(res1,res2):
 
 def newdims(img = None, resize = 1, dims = None):
 
-    """Returns new dimensions based on resize value"""
+    """Returns new dimensions of an image array based on resize value"""
 
     if dims is None:
-        if img is not None:
-            dims = (img.shape[1],img.shape[0])
-        else:
+        if img is None:
             print("No img or dims provided..")
+            return
+        else:
+            dims = (img.shape[1],img.shape[0])
             return
 
     width = int(dims[0] * resize)
@@ -166,10 +183,10 @@ def newdims(img = None, resize = 1, dims = None):
     return (width, height)
 
 
-def imresize(img, resize = 1, dims = None, back = False):
+def imgresize(img, resize = 1, dims = None, back = False):
 
     """
-    Returns resized image based on resizevalue or provided dims
+    Returns resized image based on resizevalue or provided dimensions
 
     Parameters
     ----------
@@ -196,7 +213,7 @@ def add_transimg(bgimg, transimg, offsets):
 
     """
     Adds a semi-transparent (4-channel) image to a 3-channel background
-    image. Images are arrays.
+    image. Images need to be arrays.
     """
 
     h, w, c = transimg.shape
