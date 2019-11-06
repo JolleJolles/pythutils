@@ -11,11 +11,12 @@ pip install git+https://github.com/JolleJolles/pythutils.git
 
 Usage
 --------
-To use utility functions, e.g.:
+To use the various utility functions, e.g.:
 
     from pythutils.timeutils import clock
     from pythutils.fileutils import listfiles
     from pythutils.mathutils import points_to_angle
+    from pythutils.sysutils import isrpi
 
 
 
