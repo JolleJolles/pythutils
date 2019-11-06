@@ -1,6 +1,4 @@
 #! /usr/bin/env python
-#
-# Python toolset for the mechanistic study of animal behaviour
 # Copyright (c) 2018 - 2019 Jolle Jolles <j.w.jolles@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,28 +13,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# A simple script that draws a crosshair and rectangle Dynamically
+import time
+import datetime
 
-import cv2
-import numpy as np
-import animlab.imutils as alimu
+def clock():
 
-mouse = animu.mouse_events()
+    """Simple running clock that prints on the same line"""
 
-cv2.namedWindow('image')
-cv2.setMouseCallback('image', mouse.draw)
+    while True:
+        print(datetime.datetime.now().strftime("%H:%M:%S"), end="\r", flush=True)
+        time.sleep(1)
 
-while(1):
-    frame = np.zeros((512,512,3), np.uint8)+55
-    draw_frame = frame.copy()
 
-    alimu.draw_crosshair(draw_frame, mouse.pointer)
-    alimu.draw_rectangle(draw_frame, mouse.pointer, mouse.rect, mouse.drawing)
+def now(timeformat = "date"):
 
-    cv2.imshow('image', draw_frame)
+    """Returns current date or time"""
 
-    k = cv2.waitKey(20) & 0xFF
-    if k == 27:
-        break
+    if timeformat == "date":
+        return datetime.datetime.now().strftime("%y/%m/%d")
 
-cv2.destroyAllWindows()
+    elif timeformat == "time":
+        return datetime.datetime.now().strftime("%H:%M:%S")
+
+    else:
+        print("No right time format provided..")

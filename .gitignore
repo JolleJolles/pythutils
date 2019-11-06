@@ -2,7 +2,3 @@
 *.ipynb_checkpoints
 *.pyc
 *.html
-animtrack.egg-info/dependency_links.txt
-animtrack.egg-info/PKG-INFO
-animtrack.egg-info/SOURCES.txt
-animtrack.egg-info/top_level.txt

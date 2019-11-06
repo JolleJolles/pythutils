@@ -1,7 +1,5 @@
 #! /usr/bin/env python
-#
-# Python toolset for the mechanistic study of animal behaviour
-# Copyright (c) 2018 Jolle Jolles <j.w.jolles@gmail.com>
+# Copyright (c) 2015 - 2018 Jolle Jolles <j.w.jolles@gmail.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,9 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from .__version__ import __version__
+__version__ = "1.0.0"
 
-from .utils import *
-from .imutils import *
-from .mathutils import *
-from .convert import *
+# For documentation of all changes, see CHANGELOG
