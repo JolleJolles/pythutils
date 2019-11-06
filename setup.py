@@ -25,7 +25,7 @@ pythutils is a python package with a collection of utily functions
 DISTNAME = 'pythutils'
 MAINTAINER = 'Jolle Jolles'
 MAINTAINER_EMAIL = 'j.w.jolles@gmail.com'
-URL = 'http://jollejolles.com'
+URL = 'https://github.com/JolleJolles'
 DOWNLOAD_URL = 'https://github.com/JolleJolles/pythutils'
 LICENSE = 'Apache Software License 2.0'
 
@@ -54,7 +54,7 @@ def check_dependencies():
         install_requires.append('h5py')
 
     return install_requires
-    
+
 
 if __name__ == "__main__":
 

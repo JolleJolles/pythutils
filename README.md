@@ -1,12 +1,12 @@
-# AnimLab
-**pythutils: a collection of utility functions for Python**
+# pythutils
+**A collection of utility functions for Python**
 
 Installation
 ------------
 
 To install pythutils, open a terminal window and enter:
 ```bash
-pip install git+https://github.com/JolleJolles/pythutils.git
+pip install pythutils
 ```
 
 Usage
