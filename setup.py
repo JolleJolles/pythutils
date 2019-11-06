@@ -80,7 +80,7 @@ if __name__ == "__main__":
                      'Topic :: Scientific/Engineering :: Visualization',
                      'Topic :: Scientific/Engineering :: Image Recognition',
                      'Topic :: Scientific/Engineering :: Information Analysis',
-                     'Topic :: Multimedia :: Video'
+                     'Topic :: Multimedia :: Video',
                      'Operating System :: POSIX',
                      'Operating System :: Unix',
                      'Operating System :: MacOS'],
