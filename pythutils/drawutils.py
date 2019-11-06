@@ -17,27 +17,28 @@ from __future__ import print_function
 
 import cv2
 
-def _textdims(text, size, thickness = 1):
+def textdims(text, size, thickness = 1):
+
+    """Get uniform text dimensions for printing text with opencv"""
 
     tw, th = cv2.getTextSize(text, cv2.FONT_HERSHEY_SIMPLEX, size, thickness)[0]
 
-    topy = fontsize*1 if any(x in ["i","j"] for x in text) else 0
-    boty = fontsize*2 if any(x in "Q" for x in text) else 0
-    boty = fontsize*7 if any(x in ["g","j","y","p","q"] for x in text) else boty
+    topy = size*1 if any(x in ["i","j"] for x in text) else 0
+    boty = size*2 if any(x in "Q" for x in text) else 0
+    boty = size*7 if any(x in ["g","j","y","p","q"] for x in text) else boty
 
     return (tw, th), topy, boty
 
 
 class mouse_events:
 
-    """ Stores a series of coordinates related to mouse events """
+    """Stores a series of coordinates related to mouse events"""
 
     def __init__(self):
 
         self.drawing = False
         self.rect = ()
         self.pointer = ()
-
 
     def draw(self,event,x,y,flags,param):
 
@@ -58,6 +59,8 @@ class mouse_events:
 
 
 def namedcols(colname = None, printlist = False, BRG = True):
+
+    """Acquire RGB/BRG colors from a color name"""
 
     collist = {'black': (0, 0, 0),
                  'navy': (0, 0, 128),
@@ -220,50 +223,64 @@ def namedcols(colname = None, printlist = False, BRG = True):
         return col
 
 
-def draw_text(img, text, loc = (0, 0), fontsize = 1, col = (0,0,0), margin = 5,
+ddef draw_text(img, text, loc = (0, 0), size = 1, col = (0,0,0), margin = 5,
               thickness = 1, bgcol = None):
 
-    (tw, th), topy, boty = _textdims(text, fontsize)
+    """
+    Draw text on opencv image
+
+    img : an image array
+    text : the text to draw
+    loc : the location of the text relative to topleft
+    size : the size of the text
+    col : the color of the text
+    margin : the margin of the text
+    thickness : the weight of the text
+    bgcol : the potential background color of the text
+
+    """
+
+    (tw, th), topy, boty = textdims(text, size)
+    topy = topy + int(thickness/2)
+    boty += int(thickness/2)
 
     if bgcol is not None:
         topleftout = (loc[0], loc[1])
-        botrightx = loc[0] + margin + tw + margin
-        botrighty = loc[1] + margin + th + topy + boty + margin
-        botright = (botrightx, botrighty)
+        botrightx = loc[0] + margin + tw + margin + 1
+        botrighty = loc[1] + margin + th + topy + boty + margin + 1
+        botrightout = (botrightx, botrighty)
         cv2.rectangle(img, topleftout, botrightout, bgcol, -1)
 
     botlefin = (int(loc[0]+margin), int(loc[1]+margin+th+topy))
-    cv2.putText(img, text, botlefin, cv2.FONT_HERSHEY_SIMPLEX, fontsize,
+    cv2.putText(img, text, botlefin, cv2.FONT_HERSHEY_SIMPLEX, size,
                 col, thickness, cv2.LINE_AA)
 
 
-def draw_cross(img, pts, col = "white", thickness = 2):
+def draw_cross(img, pt1 = (1,1), pt2 = None, col = "white", thickness = 2):
 
-    """ Draws a cross """
+    """Draws a cross"""
 
-    if pts:
-        cv2.line(img, (1,1), (pts[0], pts[1]), namedcols(col), thickness)
-        cv2.line(img, (pts[0], 1), (1, pts[1]), namedcols(col), thickness)
+    pt2 = (img.shape[1],img.shape[0]) if pt2 == None else pt2
+    cv2.line(img, pt1, (pt2[0], pt2[1]), namedcols(col), thickness)
+    cv2.line(img, (pt2[0], pt1[0]), (pt1[1], pt2[1]), namedcols(col), thickness)
 
 
 def draw_crosshair(img, pt, radius = 5, col = "white"):
 
     """ Draws a crosshair """
 
-    if pt:
-        hline = (pt[0] - radius, pt[1]), (pt[0] + radius, pt[1])
-        tline = (pt[0], pt[1] - radius), (pt[0], pt[1] + radius)
-        cv2.line(img, hline[0], hline[1], namedcols(col), 1)
-        cv2.line(img, tline[0], tline[1], namedcols(col), 1)
+    hline = (pt[0] - radius, pt[1]), (pt[0] + radius, pt[1])
+    tline = (pt[0], pt[1] - radius), (pt[0], pt[1] + radius)
+    cv2.line(img, hline[0], hline[1], namedcols(col), 1)
+    cv2.line(img, tline[0], tline[1], namedcols(col), 1)
 
 
 def draw_rectangle(img, pointer, rect, drawing = False, col = "red"):
 
-    """ Draws a rectangle with option to show it dynamically """
+    """Draws a rectangle with option to show it dynamically"""
 
     if drawing:
         cv2.rectangle(img, rect[0], pointer, namedcols(col), 2)
 
     else:
-        if rect:
-            cv2.rectangle(img, rect[0], rect[1], namedcols(col), 2)
+        cv2.rectangle(img, rect[0], rect[1], namedcols(col), 2)
