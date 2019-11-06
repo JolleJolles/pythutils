@@ -17,10 +17,9 @@ from setuptools import setup, find_packages
 
 exec(open('pythutils/__version__.py').read())
 
-DESCRIPTION = """pythutils: A collection of python utilities."""
+DESCRIPTION = """pythutils: a collection of utility functions for Python"""
 LONG_DESCRIPTION = """\
-pythutils is a python package with a collection of helpful python utilities
-functions
+pythutils is a python package with a collection of utily functions
 """
 
 DISTNAME = 'pythutils'
@@ -55,6 +54,7 @@ def check_dependencies():
         install_requires.append('h5py')
 
     return install_requires
+    
 
 if __name__ == "__main__":
 
