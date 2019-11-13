@@ -87,7 +87,7 @@ def loadh5data(filename, dataset = "data"):
     return dataset
 
 
-def name(filename, ext = ".csv", action = "newfile"):
+def name(filename, ext = "", action = "newfile"):
 
     """
     Gets the name for a file with required extension, and will either overwrite
