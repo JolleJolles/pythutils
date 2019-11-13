@@ -52,16 +52,10 @@ def removeline(linenr=1):
         sys.stdout.write('\x1b[2K')
 
 
-def lineprint(text, stamp=True, sameline=False, newline=True, reset=False,
-              **kwargs):
+def lineprint(text, stamp=True, **kwargs):
 
     """
-    Advanced printing functionality. Can add a simple timestap at the start of
-    the to be printed line with the hostname (stamp=True) or with a custom label
-    (stamp=True, label=CUS), add text add the end of the previous line of text
-    (sameline=True), or overwrite the previous line completely (sameline=True,
-    reset=True). To not have whiteline at beginning of new lineprint add
-    newline=False.
+    Print text with simple timestap (stamp=True) and hostname (label=XXX) added
     """
 
     global line, label
@@ -81,24 +75,7 @@ def lineprint(text, stamp=True, sameline=False, newline=True, reset=False,
     if stamp:
         text = time.strftime("%H:%M:%S") + " [" + label + "] - " + text
 
-    if sameline:
-        if reset:
-            line = text
-            sys.stdout.write("\r")
-            sys.stdout.write(" "*100)
-        else:
-            text = line + " " + text
-        line = "\r" + text
-        print(line, end="\r")
-    elif newline:
-        line = "\n"+text
-        print(line, end="\r")
-    else:
-        line = text
-        if line == "":
-            print(line, end=' ')
-        else:
-            print(text, end="\r")
+    print(text)
 
 
 def homedir():
