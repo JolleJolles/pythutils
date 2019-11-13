@@ -111,5 +111,5 @@ def name(filename, ext = "", action = "newfile"):
         names = [os.path.splitext(x)[0] for x in names]
         suffixes = [x.replace(filename, '') for x in names]
         suffixes = [int(x[1]) for x in suffixes if x.startswith('_')]
-        suffix = 1 if len(suffixes)==0 else max(suffixes)+1
+        suffix = 2 if len(suffixes)==0 else max(suffixes)+1
         return '%s_%d%s' % (filename, suffix, ext)
