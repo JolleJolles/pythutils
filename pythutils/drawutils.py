@@ -223,7 +223,7 @@ def namedcols(colname = None, printlist = False, BRG = True):
         return col
 
 
-ddef draw_text(img, text, loc = (0, 0), size = 1, col = (0,0,0), margin = 5,
+def draw_text(img, text, loc = (0, 0), size = 1, col = (0,0,0), margin = 5,
               thickness = 1, bgcol = None):
 
     """
