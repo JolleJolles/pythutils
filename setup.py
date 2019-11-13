@@ -38,7 +38,7 @@ def check_dependencies():
     except ImportError:
         install_requires.append('numpy')
     try:
-        import numpy
+        import pandas
     except ImportError:
         install_requires.append('pandas')
     try:
