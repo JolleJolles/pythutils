@@ -132,10 +132,10 @@ def roi_to_zoom(roi, resolution):
     """Gets x,y,w,h zoom parameters from region of interest coordinates"""
 
     ((x1,y1),(x2,y2)) = roi
-    z0 = x1 / float(resolution[0])
-    z1 = y1 / float(resolution[1])
-    z2 = (x2-x1) / float(resolution[0])
-    z3 = (y2-y1) / float(resolution[1])
+    z0 = x1 / resolution[0]
+    z1 = y1 / resolution[1]
+    z2 = (x2-x1) / resolution[0]
+    z3 = (y2-y1) / resolution[1]
 
     return (z0, z1, z2, z3)
 
@@ -155,12 +155,12 @@ def fix_vidshape(res1,res2):
     """Compares two resolutions and get missing x and y coords"""
 
     xmin,ymin = 0,0
-    xmult = (float(res2[0])/res1[0])
-    ymult = (float(res2[1])/res1[1])
+    xmult = (res2[0]/res1[0])
+    ymult = (res2[1]/res1[1])
     if xmult > ymult:
-        xmin = int((res2[0]-(res1[0]*ymult))/2.)
+        xmin = int((res2[0]-(res1[0]*ymult))/2)
     if ymult > xmult:
-        ymin = int((res2[0]-(res1[0]*xmult))/2.)
+        ymin = int((res2[0]-(res1[0]*xmult))/2)
 
     return xmin, ymin
 
@@ -218,7 +218,7 @@ def add_transimg(bgimg, transimg, offsets):
 
     h, w, c = transimg.shape
     fix = np.zeros((h, w, 3), np.uint8)
-    a = transimg[:, :, 3] / 255.0  #alpha
+    a = transimg[:, :, 3] / 255  #alpha
     o = offsets
     fix[:,:,0] = (1.-a)*bgimg[o[1]:o[1]+h, o[0]:o[0]+w, 0]+a*transimg[:,:,0]
     fix[:,:,1] = (1.-a)*bgimg[o[1]:o[1]+h, o[0]:o[0]+w, 1]+a*transimg[:,:,1]

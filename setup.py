@@ -14,6 +14,7 @@
 # limitations under the License.
 
 from setuptools import setup, find_packages
+import sys
 
 exec(open('pythutils/__version__.py').read())
 
@@ -23,7 +24,7 @@ DISTNAME = 'pythutils'
 MAINTAINER = 'Jolle Jolles'
 MAINTAINER_EMAIL = 'j.w.jolles@gmail.com'
 URL = 'https://github.com/JolleJolles'
-DOWNLOAD_URL = 'https://github.com/JolleJolles/pythutils/archive/1.0.0.tar.gz'
+DOWNLOAD_URL = 'https://github.com/JolleJolles/pythutils/archive/1.1.0.tar.gz'
 LICENSE = 'Apache Software License 2.0'
 
 
@@ -36,7 +37,10 @@ def check_dependencies():
     try:
         import numpy
     except ImportError:
-        install_requires.append('numpy')
+        if sys.version_info[0] == 2:
+            install_requires.append('numpy=1.16.5')
+        if sys.version_info[0] == 3:
+            install_requires.append('numpy')
     try:
         import pandas
     except ImportError:

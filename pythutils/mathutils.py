@@ -53,7 +53,7 @@ def seqcount(start, stop, steplength):
     certain steplength
     """
 
-    step = (stop - start) / float(length)
+    step = (stop - start) / length
     step = int(np.ceil(step))
     sequence = range(start, stop, step)
 
