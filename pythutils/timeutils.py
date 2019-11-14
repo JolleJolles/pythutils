@@ -15,6 +15,7 @@
 
 from __future__ import print_function
 
+import sys
 import time
 import datetime
 
@@ -23,7 +24,8 @@ def clock():
     """Simple running clock that prints on the same line"""
 
     while True:
-        print(datetime.datetime.now().strftime("%H:%M:%S"), end="\r", flush=True)
+    	print(datetime.datetime.now().strftime("%H:%M:%S"), end="\r")
+	    sys.stdout.flush()
         time.sleep(1)
 
 
