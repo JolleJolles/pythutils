@@ -44,7 +44,10 @@ def check_dependencies():
     try:
         import pandas
     except ImportError:
-        install_requires.append('pandas')
+        if sys.version_info[0] == 2:
+            install_requires.append('pandas==0.24.2')
+        if sys.version_info[0] == 3:
+            install_requires.append('pandas')
     try:
         import yaml
     except ImportError:
