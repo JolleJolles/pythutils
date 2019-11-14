@@ -38,7 +38,7 @@ def check_dependencies():
         import numpy
     except ImportError:
         if sys.version_info[0] == 2:
-            install_requires.append('numpy=1.16.5')
+            install_requires.append('numpy==1.16.5')
         if sys.version_info[0] == 3:
             install_requires.append('numpy')
     try:
