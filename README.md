@@ -20,7 +20,11 @@ To use the various utility functions, e.g.:
     from pythutils.sysutils import isrpi
 
 ## Development
-For an overview of version changes see the [CHANGELOG](https://github.com/JolleJolles/pythutils/blob/master/CHANGELOG) and for detailed changes see the [commits page](https://github.com/JolleJolles/pythutils/commits/). Please submit bugs or feature requests to the GitHub issue tracker [here](https://github.com/JolleJolles/pythutils/issues).
+*pythutils* is developed by [Dr Jolle Jolles](http://jollejolles.com) at the Max Planck Institute of Animal Behavior, Konstanz, Germany.
+
+For an overview of version changes see the [CHANGELOG](https://github.com/JolleJolles/pythutils/blob/master/CHANGELOG) and for detailed changes see the [commits page](https://github.com/JolleJolles/pythutils/commits/).
+
+Please submit bugs or feature requests to the GitHub issue tracker [here](https://github.com/JolleJolles/pythutils/issues).
 
 ## License
 Released under a Apache 2.0 License. See [LICENSE](https://github.com/JolleJolles/pythutils/blob/master/LICENSE) for details.

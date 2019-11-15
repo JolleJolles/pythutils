@@ -24,7 +24,7 @@ DISTNAME = "pythutils"
 MAINTAINER = "Jolle Jolles"
 MAINTAINER_EMAIL = "j.w.jolles@gmail.com"
 URL = "https://github.com/JolleJolles"
-DOWNLOAD_URL = "https://github.com/JolleJolles/pythutils/archive/1.1.0.tar.gz"
+DOWNLOAD_URL = "https://github.com/JolleJolles/pythutils/archive/1.1.1.tar.gz"
 LICENSE = "Apache Software License 2.0"
 
 

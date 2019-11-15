@@ -1,6 +1,8 @@
 All notable changes to this package will be documented in this file. For a
 complete changelog, see https://github.com/JolleJolles/pythutils/commits/
 
+2019-11-14 - version 1.1.1
+    * Various small fixes to setup file
 2019-11-14 - version 1.1.0
     * Made python 2.7 compatible
 2019-11-06 - version 1.0.0
