@@ -24,46 +24,13 @@ DISTNAME = "pythutils"
 MAINTAINER = "Jolle Jolles"
 MAINTAINER_EMAIL = "j.w.jolles@gmail.com"
 URL = "https://github.com/JolleJolles"
-DOWNLOAD_URL = "https://github.com/JolleJolles/pythutils/archive/1.1.1.tar.gz"
-LICENSE = "Apache Software License 2.0"
-
+DOWNLOAD_URL = "https://github.com/JolleJolles/pythutils/archive/1.1.2.tar.gz"
 
 with open("README.md") as f:
     readme = f.read()
 
-def check_dependencies():
-
-    install_requires = []
-
-    try:
-        import numpy
-    except ImportError:
-        if sys.version_info[0] == 2:
-            install_requires.append('numpy==1.16.5')
-        if sys.version_info[0] == 3:
-            install_requires.append("numpy")
-    try:
-        import pandas
-    except ImportError:
-        if sys.version_info[0] == 2:
-            install_requires.append('pandas==0.24.2')
-        if sys.version_info[0] == 3:
-            install_requires.append('pandas')
-    try:
-        import yaml
-    except ImportError:
-        install_requires.append("pyyaml")
-    try:
-        import h5py
-    except ImportError:
-        install_requires.append("h5py")
-
-    return install_requires
-
 
 if __name__ == "__main__":
-
-    install_requires = check_dependencies()
 
     setup(name=DISTNAME,
           author=MAINTAINER,
@@ -76,8 +43,16 @@ if __name__ == "__main__":
           url=URL,
           download_url=DOWNLOAD_URL,
           version=__version__,
-          install_requires=install_requires,
+          license="License :: OSI Approved :: Apache Software License",
+          platforms=["Windows", "Linux", "Mac OS-X"],
           packages=["pythutils"],
+          install_requires=[
+                     "numpy==1.16.5; python_version>='2' and python_version<'3'",
+                     "numpy; python_version>='3'",
+                     "pandas==0.24.2; python_version>='2' and python_version<'3'",
+                     "pandas; python_version>='3'",
+                     "pyyaml",
+                     "h5py"],
           classifiers=[
                      "Intended Audience :: Science/Research",
                      "Programming Language :: Python :: 2.7",
