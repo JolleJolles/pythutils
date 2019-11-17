@@ -176,7 +176,6 @@ def newdims(img = None, resize = 1, dims = None):
             return
         else:
             dims = (img.shape[1],img.shape[0])
-            return
 
     width = int(dims[0] * resize)
     height = int(dims[1] * resize)
