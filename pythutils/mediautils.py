@@ -82,7 +82,8 @@ def videowriter(filein, w, h, fps, resizeval):
 
     fileout = filein[:-len(get_ext(filein))] + ".mp4"
     viddims = (w, h) if resizeval == 1 else (int(w*resizeval), int(h*resizeval))
-    vidout = cv2.VideoWriter(fileout, 0x00000020, fps, viddims)
+    fourcc = cv2.VideoWriter_fourcc(*"mp4v")
+    vidout = cv2.VideoWriter(fileout, fourcc, fps, viddims)
 
     return vidout
 
