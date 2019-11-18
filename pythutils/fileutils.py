@@ -55,6 +55,27 @@ def listfiles(filedir = ".", filetype = "", keepdir = False, nested = False):
     return outlist
 
 
+def commonpref(pathlist = None, remove = False):
+
+    """Given a list of paths, returns the longest common leading component"""
+
+    if pathlist is None: return ""
+    s1 = min(pathlist)
+    s2 = max(pathlist)
+    for i, c in enumerate(s1):
+        if c != s2[i]:
+            commcomp = s1[:i]
+            break
+
+    if remove:
+        for each in range(len(pathlist)):
+            pathlist[each] = pathlist[each].split(commcomp, 1)[-1]
+        return pathlist
+
+    else:
+        return commcomp
+
+
 def get_ext(filename):
 
     """Returns file extension in lower case"""
