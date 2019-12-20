@@ -33,22 +33,26 @@ def listfiles(filedir = ".", filetype = "", keepdir = False, nested = False):
         If all nested files should be listed
     """
 
-    if filetype == "dir":
-        outlist = [i for i in os.listdir(filedir) if os.path.isdir(os.path.join(filedir, i))]
-
-    elif nested:
+    if nested:
         outlist = []
         for root, dirs, files in os.walk(filedir):
              for file in files:
                 if file.endswith(filetype):
-                    outlist.append(file)
+                    if keepdir:
+                        outlist.append(os.path.join(root, file))
+                    else:
+                        outlist.append(file)
 
     else:
-        outlist = [each for each in os.listdir(filedir) if each.endswith(filetype)]
-        outlist = [i for i in outlist if not i.startswith('.')]
+        if filetype == "dir":
+            outlist = [i for i in os.listdir(filedir) if os.path.isdir(os.path.join(filedir, i))]
 
-    if keepdir:
-        outlist = [filedir + "/" + i  for i in outlist]
+        else:
+            outlist = [each for each in os.listdir(filedir) if each.endswith(filetype)]
+            outlist = [i for i in outlist if not i.startswith('.')]
+
+        if keepdir:
+            outlist = [filedir + "/" + i  for i in outlist]
 
     outlist = sorted(outlist)
 

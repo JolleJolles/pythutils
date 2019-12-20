@@ -1,6 +1,9 @@
 All notable changes to this package will be documented in this file. For a
 complete changelog, see https://github.com/JolleJolles/pythutils/commits/
 
+Not yet integrated
+* improved listfiles function to include full dir for nested
+
 2019-11-16 - version 1.1.4
     * Added function to extract common prefix of files
 2019-11-16 - version 1.1.3
