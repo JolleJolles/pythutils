@@ -3,6 +3,7 @@ complete changelog, see https://github.com/JolleJolles/pythutils/commits/
 
 Not yet integrated
 * improved listfiles function to include full dir for nested
+* added move file function
 
 2019-11-16 - version 1.1.4
     * Added function to extract common prefix of files

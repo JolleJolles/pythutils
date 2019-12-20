@@ -19,6 +19,22 @@ import yaml
 import h5py
 import pandas
 
+
+def move(file, newdir):
+
+    """Moves a file to new location"""
+
+    assert os.path.isfile(file), "Provided file does not exist.."
+    newdir = os.getcwd()+"/"+newdir if os.path.split(newdir)[0]=="" else newdir
+    assert os.path.isdir(newdir), "Provided newdir is no directory.."
+
+    path, filename = os.path.split(file)
+    print(path, filename)
+    if path == "":
+        path = os.getcwd()
+    os.rename(path+"/"+filename, newdir+"/"+filename)
+
+
 def listfiles(filedir = ".", filetype = "", keepdir = False, nested = False):
 
     """
