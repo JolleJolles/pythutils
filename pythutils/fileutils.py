@@ -81,6 +81,66 @@ def listfiles(filedir = ".", filetype = "", keepdir = False, keepext = True,
     return outlist
 
 
+def filechecker(indir = "", outdir = "", move = True, type=".h264", 
+                sleeptime = 2, function = None, functionparams = ("file")):
+
+        """
+        Repeatedly checks a directory for (new) files
+
+        Parameters
+        ===========
+        indir : str, default = ""
+            Directory with original files to monitor
+        outdir : str, default = ""
+            Directory with new files to monitor
+        type : str, default = ".h264"
+            The type of file to monitor
+        sleeptime : int, default = 2
+            Time in seconds between subsequent checks of file folder
+        function :
+            function to use with the files to check
+        functionparams :
+            parameters for the function to use
+        """
+
+        global interrupted
+        interrupted = False
+        def keythread():
+            global interrupted
+            input()
+            interrupted = True
+        Thread(target=keythread).start()
+
+        assert function is not None, "No function is provided"
+        indir = os.getcwd() if indir == "" else indir
+        assert os.path.exists(indir), "in-directory does not exist.."
+        outdir = indir if outdir == "" else outdir
+        assert os.path.exists(outdir), "out-directory does not exist.."
+
+        rootdir = os.getcwd()
+        os.chdir(indir)
+
+        while not interrupted:
+            files = listfiles(indir, type, keepdir = False)
+            if not move:
+                old = listfiles(indir, type, keepext = False)
+                new = listfiles(outdir, type, keepext = False)
+                files = [files[i] for i,file in enumerate(old) if file not in new]
+            for file in files:
+                if "file" == functionparams:
+                    function(file)
+                elif "file" in functionparams:
+                    function(file, *functionparams[1:])
+                else:
+                    function(*functionparams)
+
+            lineprint("No files found, rechecking in "+str(sleeptime)+"s..")
+            time.sleep(sleeptime)
+
+        os.chdir(rootdir)
+        lineprint("Filechecking stopped..")
+
+
 def commonpref(pathlist = None, remove = False):
 
     """Given a list of paths, returns the longest common leading component"""
