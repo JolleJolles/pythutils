@@ -35,7 +35,8 @@ def move(file, newdir):
     os.rename(path+"/"+filename, newdir+"/"+filename)
 
 
-def listfiles(filedir = ".", filetype = "", keepdir = False, nested = False):
+def listfiles(filedir = ".", filetype = "", keepdir = False, keepext = True,
+              nested = False):
 
     """
     Returns a list of (nested) files or directories
@@ -45,6 +46,8 @@ def listfiles(filedir = ".", filetype = "", keepdir = False, nested = False):
         Filetype for the files to be listed. If filetype is dir, it will return
     keepdir: bool; default=False
         If the original directory should be kept as part of the filename
+    keepext: bool; defaul=True
+        If the file extension should be kept in the filenames
     nested: bool; default=False
         If all nested files should be listed
     """
@@ -71,6 +74,9 @@ def listfiles(filedir = ".", filetype = "", keepdir = False, nested = False):
             outlist = [filedir + "/" + i  for i in outlist]
 
     outlist = sorted(outlist)
+
+    if not keepext:
+        outlist = [os.path.splitext(file)[0] for file in outlist]
 
     return outlist
 
