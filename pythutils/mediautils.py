@@ -117,6 +117,18 @@ def crop(image, pt1, pt2):
     return cropped
 
 
+def checkroi(roi, resolution):
+
+    """Make sure roi coordinates are within resolution"""
+
+    x1 = min(roi[0][0],1)
+    y1 = min(roi[0][1],1)
+    x2 = min(roi[1][0],resolution[0])
+    y2 = min(roi[1][1],resolution[1])
+
+    return ((x1,y1),(x2,y2))
+
+
 def zoom_to_roi(zoom, resolution):
 
     """Gets region of interest coordinates from x,y,w,h zoom parameters"""
