@@ -121,8 +121,8 @@ def checkroi(roi, resolution):
 
     """Make sure roi coordinates are within resolution"""
 
-    x1 = min(roi[0][0],1)
-    y1 = min(roi[0][1],1)
+    x1 = max(roi[0][0],1)
+    y1 = max(roi[0][1],1)
     x2 = min(roi[1][0],resolution[0])
     y2 = min(roi[1][1],resolution[1])
 
