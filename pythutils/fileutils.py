@@ -19,7 +19,24 @@ import yaml
 import h5py
 import pandas
 
-def listfiles(filedir = ".", filetype = "", keepdir = False, nested = False):
+
+def move(file, newdir):
+
+    """Moves a file to new location"""
+
+    assert os.path.isfile(file), "Provided file does not exist.."
+    newdir = os.getcwd()+"/"+newdir if os.path.split(newdir)[0]=="" else newdir
+    assert os.path.isdir(newdir), "Provided newdir is no directory.."
+
+    path, filename = os.path.split(file)
+    print(path, filename)
+    if path == "":
+        path = os.getcwd()
+    os.rename(path+"/"+filename, newdir+"/"+filename)
+
+
+def listfiles(filedir = ".", filetype = "", keepdir = False, keepext = True,
+              nested = False):
 
     """
     Returns a list of (nested) files or directories
@@ -29,31 +46,99 @@ def listfiles(filedir = ".", filetype = "", keepdir = False, nested = False):
         Filetype for the files to be listed. If filetype is dir, it will return
     keepdir: bool; default=False
         If the original directory should be kept as part of the filename
+    keepext: bool; defaul=True
+        If the file extension should be kept in the filenames
     nested: bool; default=False
         If all nested files should be listed
     """
 
-    if filetype == "dir":
-        outlist = [i for i in os.listdir(filedir) if os.path.isdir(os.path.join(filedir, i))]
-
-    elif nested:
+    if nested:
         outlist = []
         for root, dirs, files in os.walk(filedir):
              for file in files:
                 if file.endswith(filetype):
-                    outlist.append(file)
+                    if keepdir:
+                        outlist.append(os.path.join(root, file))
+                    else:
+                        outlist.append(file)
 
     else:
-        outlist = [each for each in os.listdir(filedir) if each.endswith(filetype)]
-        outlist = [i for i in outlist if not i.startswith('.')]
+        if filetype == "dir":
+            outlist = [i for i in os.listdir(filedir) if os.path.isdir(os.path.join(filedir, i))]
 
-    if keepdir:
-        outlist = [filedir + "/" + i  for i in outlist]
+        else:
+            outlist = [each for each in os.listdir(filedir) if each.endswith(filetype)]
+            outlist = [i for i in outlist if not i.startswith('.')]
+
+        if keepdir:
+            outlist = [filedir + "/" + i  for i in outlist]
 
     outlist = sorted(outlist)
 
+    if not keepext:
+        outlist = [os.path.splitext(file)[0] for file in outlist]
+
     return outlist
 
+
+def filechecker(indir = "", outdir = "", move = True, type=".h264", 
+                sleeptime = 2, function = None, functionparams = ("file")):
+
+        """
+        Repeatedly checks a directory for (new) files
+
+        Parameters
+        ===========
+        indir : str, default = ""
+            Directory with original files to monitor
+        outdir : str, default = ""
+            Directory with new files to monitor
+        type : str, default = ".h264"
+            The type of file to monitor
+        sleeptime : int, default = 2
+            Time in seconds between subsequent checks of file folder
+        function :
+            function to use with the files to check
+        functionparams :
+            parameters for the function to use
+        """
+
+        global interrupted
+        interrupted = False
+        def keythread():
+            global interrupted
+            input()
+            interrupted = True
+        Thread(target=keythread).start()
+
+        assert function is not None, "No function is provided"
+        indir = os.getcwd() if indir == "" else indir
+        assert os.path.exists(indir), "in-directory does not exist.."
+        outdir = indir if outdir == "" else outdir
+        assert os.path.exists(outdir), "out-directory does not exist.."
+
+        rootdir = os.getcwd()
+        os.chdir(indir)
+
+        while not interrupted:
+            files = listfiles(indir, type, keepdir = False)
+            if not move:
+                old = listfiles(indir, type, keepext = False)
+                new = listfiles(outdir, type, keepext = False)
+                files = [files[i] for i,file in enumerate(old) if file not in new]
+            for file in files:
+                if "file" == functionparams:
+                    function(file)
+                elif "file" in functionparams:
+                    function(file, *functionparams[1:])
+                else:
+                    function(*functionparams)
+
+            lineprint("No files found, rechecking in "+str(sleeptime)+"s..")
+            time.sleep(sleeptime)
+
+        os.chdir(rootdir)
+        lineprint("Filechecking stopped..")
 
 def commonpref(pathlist = None, remove = False):
 

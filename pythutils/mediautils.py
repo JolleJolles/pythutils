@@ -117,6 +117,18 @@ def crop(image, pt1, pt2):
     return cropped
 
 
+def checkroi(roi, resolution):
+
+    """Make sure roi coordinates are within resolution"""
+
+    x1 = max(roi[0][0],1)
+    y1 = max(roi[0][1],1)
+    x2 = min(roi[1][0],resolution[0])
+    y2 = min(roi[1][1],resolution[1])
+
+    return ((x1,y1),(x2,y2))
+
+
 def zoom_to_roi(zoom, resolution):
 
     """Gets region of interest coordinates from x,y,w,h zoom parameters"""
@@ -134,10 +146,10 @@ def roi_to_zoom(roi, resolution):
     """Gets x,y,w,h zoom parameters from region of interest coordinates"""
 
     ((x1,y1),(x2,y2)) = roi
-    z0 = x1 / resolution[0]
-    z1 = y1 / resolution[1]
-    z2 = (x2-x1) / resolution[0]
-    z3 = (y2-y1) / resolution[1]
+    z0 = round(x1 / resolution[0],2)
+    z1 = round(y1 / resolution[1],2)
+    z2 = round((x2-x1) / resolution[0],2)
+    z3 = round((y2-y1) / resolution[1],2)
 
     return (z0, z1, z2, z3)
 
