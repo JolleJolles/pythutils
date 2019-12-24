@@ -140,7 +140,6 @@ def filechecker(indir = "", outdir = "", move = True, type=".h264",
         os.chdir(rootdir)
         lineprint("Filechecking stopped..")
 
-
 def commonpref(pathlist = None, remove = False):
 
     """Given a list of paths, returns the longest common leading component"""

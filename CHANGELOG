@@ -9,15 +9,21 @@ Not yet integrated
     * improved listfiles function to include full dir for nested
     * added move file function
     * Added new filechecker function
+
 2019-11-16 - version 1.1.4
     * Added function to extract common prefix of files
+
 2019-11-16 - version 1.1.3
     * Improved videowriter for opencv
+
 2019-11-16 - version 1.1.2
     * Further improvements to setup file, especially for dependencies
+
 2019-11-15 - version 1.1.1
     * Various small fixes to setup file
+
 2019-11-14 - version 1.1.0
     * Made python 2.7 compatible
+
 2019-11-06 - version 1.0.0
     * Public release on PyPI
