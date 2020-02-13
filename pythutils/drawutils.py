@@ -223,6 +223,19 @@ def namedcols(colname = None, printlist = False, BRG = True):
         return col
 
 
+def get_spaced_colors(colnr):
+
+    """Gets a specified nr of colors, equally spaced on the color spectrum"""
+
+    maxval = 255**3
+    interval = int(maxval/(colnr+0.5))
+    colshex = [hex(I)[2:].zfill(6) for I in list(range(0, maxval, interval))]
+    colsrgb = [(int(i[:2], 16), int(i[2:4], 16), int(i[4:], 16)) for i in colshex]
+    colsrgb = colrgb[1:]
+
+    return colsrgb
+
+
 def draw_text(img, text, loc = (0, 0), size = 1, col = (0,0,0), margin = 5,
               thickness = 1, bgcol = None):
 
