@@ -8,6 +8,7 @@ Not yet integrated
     * Added function to draw a dotted or dashed line on an image
     * Added function to draw a semi-transparent polyline with decreasing
       width on an image
+    * Added function to convert opencv contour object to tuple
 
 2019-12-24 - version 1.1.5
     * roi_to_zoom function now rounds the zoom values

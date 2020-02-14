@@ -90,3 +90,12 @@ def dfchange(df1, df2):
     nchanges = dfchanges.shape[0]
 
     return dfchanges, nchanges
+
+
+def contour_to_tuple(contour):
+
+    """Convert contour to tuple"""
+
+    conttuple = [(row[0][0], row[0][1]) for row_idx, row in enumerate(contour)]
+
+    return conttuple
