@@ -299,7 +299,7 @@ def draw_rectangle(img, pointer, rect, drawing = False, col = "red"):
         cv2.rectangle(img, rect[0], rect[1], namedcols(col), 2)
 
 
-def draw_bicircles(img, pt, resizeval = 1, col1 = "black", col2 = "white", 
+def draw_bicircles(img, pt, resizeval = 1, col1 = "black", col2 = "white",
                    minsize = 3, maxsize = 15, stepsize = 3):
 
     """Draws a range of increasing bi-colored circles"""
@@ -309,4 +309,30 @@ def draw_bicircles(img, pt, resizeval = 1, col1 = "black", col2 = "white",
         col = namedcols(col1) if i%2==0 else namedcols(col2)
         cv2.circle(img, pt, 0, col, int(size*resizeval))
 
-    return img
+
+def draw_sliced_line(img, pt1, pt2, color, thickness = 1, style = "dotted",
+                     gap = 5):
+
+    """Draw a dashed or dotted line on an image"""
+
+    col = namedcols(color)
+    dist =((pt1[0]-pt2[0])**2+(pt1[1]-pt2[1])**2)**.5
+    pts= []
+
+    for i in np.arange(0, dist, gap):
+        r = i/dist
+        x = int((pt1[0]*(1-r)+pt2[0]*r)+.5)
+        y = int((pt1[1]*(1-r)+pt2[1]*r)+.5)
+        pts.append((x,y))
+
+    if style == "dotted":
+        for pt in pts:
+            cv2.circle(img, pt, thickness, color, -1)
+
+    if style == "dashed":
+        s = e = pts[0]
+        for i,pt in enumerate(pts):
+            s = e
+            e = pt
+            if i%2 == 1:
+                cv2.line(img, s, e, color, thickness)
