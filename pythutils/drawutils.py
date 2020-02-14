@@ -336,3 +336,27 @@ def draw_sliced_line(img, pt1, pt2, color, thickness = 1, style = "dotted",
             e = pt
             if i%2 == 1:
                 cv2.line(img, s, e, color, thickness)
+
+
+def draw_traj(img, coordlist = [], color = "green", thick_min = 8,
+              thick_max = 13, opacity = 0.5):
+
+    """Draws a semi-transparent polyline with decreasing width on an image"""
+
+    col = namedcols(color)
+    img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    mask = img2.copy()
+
+    thicklist = np.linspace(thick_min, thick_max, len(coordlist))
+    thicklist = (thicklist**4 / thick_max**4) * thick_max
+
+    for i in list(range(1, (len(coordlist) - 1))):
+        thickness = int(thicklist[i])
+        if coordlist[i] != coordlist[i] or coordlist[i-1] != coordlist[i-1]:
+            continue
+        elif None in sum((coordlist[i], coordlist[i-1]),()):
+            continue
+
+        cv2.line(mask, coordlist[i], coordlist[i-1], col, thickness)
+
+    cv2.addWeighted(mask, opacity, img2, 1-opacity, 0, img)

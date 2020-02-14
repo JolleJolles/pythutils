@@ -6,6 +6,8 @@ Not yet integrated
       colors on the color spectrum
     * Added function to draw bi-coloured circles of increasing size on an image
     * Added function to draw a dotted or dashed line on an image
+    * Added function to draw a semi-transparent polyline with decreasing
+      width on an image
 
 2019-12-24 - version 1.1.5
     * roi_to_zoom function now rounds the zoom values
