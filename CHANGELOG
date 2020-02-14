@@ -4,6 +4,7 @@ complete changelog, see https://github.com/JolleJolles/pythutils/commits/
 Not yet integrated
     * Added get_spaced_colors function for getting a list of equally spaced
       colors on the color spectrum
+    * Added function to draw increasing bi-coloured circles at a point
 
 2019-12-24 - version 1.1.5
     * roi_to_zoom function now rounds the zoom values

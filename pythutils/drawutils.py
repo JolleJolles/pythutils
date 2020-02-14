@@ -280,7 +280,7 @@ def draw_cross(img, pt1 = (1,1), pt2 = None, col = "white", thickness = 2):
 
 def draw_crosshair(img, pt, radius = 5, col = "white"):
 
-    """ Draws a crosshair """
+    """Draws a crosshair"""
 
     hline = (pt[0] - radius, pt[1]), (pt[0] + radius, pt[1])
     tline = (pt[0], pt[1] - radius), (pt[0], pt[1] + radius)
@@ -297,3 +297,16 @@ def draw_rectangle(img, pointer, rect, drawing = False, col = "red"):
 
     else:
         cv2.rectangle(img, rect[0], rect[1], namedcols(col), 2)
+
+
+def draw_bicircles(img, pt, resizeval = 1, col1 = "black", col2 = "white", 
+                   minsize = 3, maxsize = 15, stepsize = 3):
+
+    """Draws a range of increasing bi-colored circles"""
+
+    sizes = list(reversed(range(minsize, maxsize+stepsize, stepsize)))
+    for i, size in enumerate(sizes):
+        col = namedcols(col1) if i%2==0 else namedcols(col2)
+        cv2.circle(img, pt, 0, col, int(size*resizeval))
+
+    return img
