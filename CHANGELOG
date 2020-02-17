@@ -3,6 +3,15 @@ complete changelog, see https://github.com/JolleJolles/pythutils/commits/
 
 Not yet integrated
 
+2020-02-17 - version 1.2.0
+    * Added get_spaced_colors function for getting a list of equally spaced
+      colors on the color spectrum
+    * Added function to draw bi-coloured circles of increasing size on an image
+    * Added function to draw a dotted or dashed line on an image
+    * Added function to draw a semi-transparent polyline with decreasing
+      width on an image
+    * Added function to convert opencv contour object to tuple
+
 2019-12-24 - version 1.1.5
     * roi_to_zoom function now rounds the zoom values
     * Added checkroi function to make sure roi is within resolution region

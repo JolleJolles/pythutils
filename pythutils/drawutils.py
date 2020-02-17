@@ -223,6 +223,19 @@ def namedcols(colname = None, printlist = False, BRG = True):
         return col
 
 
+def get_spaced_colors(colnr):
+
+    """Gets a specified nr of colors, equally spaced on the color spectrum"""
+
+    maxval = 255**3
+    interval = int(maxval/(colnr+0.5))
+    colshex = [hex(I)[2:].zfill(6) for I in list(range(0, maxval, interval))]
+    colsrgb = [(int(i[:2], 16), int(i[2:4], 16), int(i[4:], 16)) for i in colshex]
+    colsrgb = colrgb[1:]
+
+    return colsrgb
+
+
 def draw_text(img, text, loc = (0, 0), size = 1, col = (0,0,0), margin = 5,
               thickness = 1, bgcol = None):
 
@@ -267,7 +280,7 @@ def draw_cross(img, pt1 = (1,1), pt2 = None, col = "white", thickness = 2):
 
 def draw_crosshair(img, pt, radius = 5, col = "white"):
 
-    """ Draws a crosshair """
+    """Draws a crosshair"""
 
     hline = (pt[0] - radius, pt[1]), (pt[0] + radius, pt[1])
     tline = (pt[0], pt[1] - radius), (pt[0], pt[1] + radius)
@@ -284,3 +297,66 @@ def draw_rectangle(img, pointer, rect, drawing = False, col = "red"):
 
     else:
         cv2.rectangle(img, rect[0], rect[1], namedcols(col), 2)
+
+
+def draw_bicircles(img, pt, resizeval = 1, col1 = "black", col2 = "white",
+                   minsize = 3, maxsize = 15, stepsize = 3):
+
+    """Draws a range of increasing bi-colored circles"""
+
+    sizes = list(reversed(range(minsize, maxsize+stepsize, stepsize)))
+    for i, size in enumerate(sizes):
+        col = namedcols(col1) if i%2==0 else namedcols(col2)
+        cv2.circle(img, pt, 0, col, int(size*resizeval))
+
+
+def draw_sliced_line(img, pt1, pt2, color, thickness = 1, style = "dotted",
+                     gap = 5):
+
+    """Draw a dashed or dotted line on an image"""
+
+    col = namedcols(color)
+    dist =((pt1[0]-pt2[0])**2+(pt1[1]-pt2[1])**2)**.5
+    pts= []
+
+    for i in np.arange(0, dist, gap):
+        r = i/dist
+        x = int((pt1[0]*(1-r)+pt2[0]*r)+.5)
+        y = int((pt1[1]*(1-r)+pt2[1]*r)+.5)
+        pts.append((x,y))
+
+    if style == "dotted":
+        for pt in pts:
+            cv2.circle(img, pt, thickness, color, -1)
+
+    if style == "dashed":
+        s = e = pts[0]
+        for i,pt in enumerate(pts):
+            s = e
+            e = pt
+            if i%2 == 1:
+                cv2.line(img, s, e, color, thickness)
+
+
+def draw_traj(img, coordlist = [], color = "green", thick_min = 8,
+              thick_max = 13, opacity = 0.5):
+
+    """Draws a semi-transparent polyline with decreasing width on an image"""
+
+    col = namedcols(color)
+    img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    mask = img2.copy()
+
+    thicklist = np.linspace(thick_min, thick_max, len(coordlist))
+    thicklist = (thicklist**4 / thick_max**4) * thick_max
+
+    for i in list(range(1, (len(coordlist) - 1))):
+        thickness = int(thicklist[i])
+        if coordlist[i] != coordlist[i] or coordlist[i-1] != coordlist[i-1]:
+            continue
+        elif None in sum((coordlist[i], coordlist[i-1]),()):
+            continue
+
+        cv2.line(mask, coordlist[i], coordlist[i-1], col, thickness)
+
+    cv2.addWeighted(mask, opacity, img2, 1-opacity, 0, img)
