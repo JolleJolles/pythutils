@@ -52,7 +52,7 @@ def removeline(linenr=1):
         sys.stdout.write('\x1b[2K')
 
 
-def lineprint(text, stamp=True, **kwargs):
+def lineprint(text, stamp=True, newline=True, **kwargs):
 
     """
     Print text with simple timestap (stamp=True) and hostname (label=XXX) added
@@ -75,7 +75,10 @@ def lineprint(text, stamp=True, **kwargs):
     if stamp:
         text = time.strftime("%H:%M:%S") + " [" + label + "] - " + text
 
-    print(text)
+    if newline:
+        print(text)
+    else:
+        print(text, end=" ")
 
 
 def homedir():
