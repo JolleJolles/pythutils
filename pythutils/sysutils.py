@@ -26,21 +26,30 @@ import fractions
 class Logger(object):
 
     """
-    Class to log the output of the command line to a log file. Should be written
-    to sys.stdout, e.g. sys.stdout = Logger("log.txt"). Output is written to
-    file after python instance is closed.
+    Class to log output of the command line to a log file
     """
 
     def __init__(self, filename):
-        self.terminal = sys.stdout
-        self.log = open(filename, "a")
-    def __getattr__(self, attr):
-        return getattr(self.terminal, attr)
-    def write(self, message):
-        self.terminal.write(message)
-        self.log.write(message)
-    def flush(self):
-        pass
+        self.filename = filename
+
+    class Transcript:
+        def __init__(self, filename):
+            self.terminal = sys.stdout
+            self.log = open(filename, "a")
+        def __getattr__(self, attr):
+            return getattr(self.terminal, attr)
+        def write(self, message):
+            self.terminal.write(message)
+            self.log.write(message)
+        def flush(self):
+            pass
+
+    def start(self):
+        sys.stdout = self.Transcript(self.filename)
+
+    def stop(self):
+        sys.stdout.log.close()
+        sys.stdout = sys.stdout.terminal
 
 
 def removeline(linenr=1):

@@ -2,6 +2,10 @@ All notable changes to this package will be documented in this file. For a
 complete changelog, see https://github.com/JolleJolles/pythutils/commits/
 
 Latest changes:
+
+2020-02-24 - version 1.2.1
+    * improved logger class for easier starting and stopping of logging across
+      systems
     * enabled sameline printing in lineprint function
     * fixed varname in seqcount function
 
