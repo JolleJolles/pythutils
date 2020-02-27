@@ -89,6 +89,18 @@ def get_weights(w = 1.7, length = 20):
     return [w**i for i in range(length, 0, -1)]
 
 
+def fix_rect(rectCoords):
+
+    """Fixes the coordinates of a rectangle to be LT to BR"""
+
+    x1 = min(rectCoords[0][0], rectCoords[1][0])
+    y1 = min(rectCoords[0][1], rectCoords[1][1])
+    x2 = max(rectCoords[0][0], rectCoords[1][0])
+    y2 = max(rectCoords[0][1], rectCoords[1][1])
+
+    return ((x1,y1),(x2,y2))
+
+
 def points_to_vec(pt1, pt2, flip = False):
 
     """
