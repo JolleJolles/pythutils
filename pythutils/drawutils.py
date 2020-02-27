@@ -38,7 +38,8 @@ class mouse_events:
 
         self.pos = (0,0)
         self.pts = []
-        self.posup = None
+        self.posDown = None
+        self.posUp = None
         self.drawing = False
 
     def draw(self, event, x, y, flags, param):
@@ -47,6 +48,7 @@ class mouse_events:
             self.pos = (x,y)
 
         if event == cv2.EVENT_LBUTTONDOWN:
+            self.posDown = (x,y)
             self.pts.append((x,y))
             self.posup = None
 
