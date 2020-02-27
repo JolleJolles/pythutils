@@ -36,26 +36,24 @@ class mouse_events:
 
     def __init__(self):
 
+        self.pos = (0,0)
+        self.pts = []
+        self.posup = None
         self.drawing = False
-        self.rect = ()
-        self.pointer = ()
 
-    def draw(self,event,x,y,flags,param):
+    def draw(self, event, x, y, flags, param):
 
-        self.pointer = (x,y)
+        if event == cv2.EVENT_MOUSEMOVE:
+            self.pos = (x,y)
 
         if event == cv2.EVENT_LBUTTONDOWN:
-            self.drawing = True
-            self.rect = [(x,y)]
+            self.pts.append((x,y))
+            self.posup = None
 
         elif event == cv2.EVENT_LBUTTONUP:
-            self.drawing = False
-            self.rect.append((x, y))
-            x1 = min(self.rect[0][0], self.rect[1][0])
-            y1 = min(self.rect[0][1], self.rect[1][1])
-            x2 = max(self.rect[0][0], self.rect[1][0])
-            y2 = max(self.rect[0][1], self.rect[1][1])
-            self.rect = ((x1,y1),(x2,y2))
+            self.posup = (x,y)
+
+        self.drawing = True
 
 
 def namedcols(colname = None, printlist = False, BRG = True):
