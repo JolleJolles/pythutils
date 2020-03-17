@@ -2,14 +2,21 @@ All notable changes to this package will be documented in this file. For a
 complete changelog, see https://github.com/JolleJolles/pythutils/commits/
 
 Latest changes:
-    * Further generalised mouse_events class
-    * Added a function to fix the coordinates of a rectangle to be from LT to BR
+    * Further generalised and improved mouse_events class
+    * Added a function to fix the coordinates of two-point to be from LT to BR
+    * Fixed draw_sliced_line function
+    * Added draw_hcross function
+    * Added helper class to view dictionary as an object
+    * Fixed get_ext function for non-string input
+    * Improved check_media function to work with streams
+    * Added simple midpoint function
+    * Added pandas query function
 
 2020-02-24 - version 1.2.1
-    * improved logger class for easier starting and stopping of logging across
+    * Improved logger class for easier starting and stopping of logging across
       systems
-    * enabled sameline printing in lineprint function
-    * fixed varname in seqcount function
+    * Enabled sameline printing in lineprint function
+    * Fixed varname in seqcount function
 
 2020-02-17 - version 1.2.0
     * Added get_spaced_colors function for getting a list of equally spaced
