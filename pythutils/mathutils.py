@@ -89,14 +89,14 @@ def get_weights(w = 1.7, length = 20):
     return [w**i for i in range(length, 0, -1)]
 
 
-def fix_rect(rectCoords):
+def sort_twoPoint(coords):
 
-    """Fixes the coordinates of a rectangle to be LT to BR"""
+    """Fixes the coordinates of a two-point to be LT to BR"""
 
-    x1 = min(rectCoords[0][0], rectCoords[1][0])
-    y1 = min(rectCoords[0][1], rectCoords[1][1])
-    x2 = max(rectCoords[0][0], rectCoords[1][0])
-    y2 = max(rectCoords[0][1], rectCoords[1][1])
+    x1 = min(coords[0][0], coords[1][0])
+    y1 = min(coords[0][1], coords[1][1])
+    x2 = max(coords[0][0], coords[1][0])
+    y2 = max(coords[0][1], coords[1][1])
 
     return ((x1,y1),(x2,y2))
 
@@ -148,7 +148,17 @@ def points_to_angle(pt1, pt2 = None, flip = False):
     return angle
 
 
-def points_to_dist(pt1, pt2):
+def midpoint(pt1, pt2):
+
+    """Computes the midpoint between two points"""
+
+    x = pt2[0]+int((pt1[0]-pt2[0])/2)
+    y = pt2[1]+int((pt1[1]-pt2[1])/2)
+
+    return (x,y)
+
+
+def ptsToDist(pt1, pt2):
 
     """Computes the distance between two points"""
 
