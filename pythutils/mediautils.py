@@ -24,26 +24,33 @@ from pythutils.fileutils import get_ext
 from pythutils.mathutils import closenr
 
 
-def check_media(mediafile):
+def check_media(source, internal=False):
 
-    """Runs some basic checks on a mediafile"""
+    """Runs some basic checks on a mediafile or stream"""
 
-    ext = get_ext(mediafile)
-    vidtypes = [".mov",".mp4",".avi"]
-    imgtypes = [".jpg", ".png", ".jpeg", ".bmp"]
-    ftype = "vid" if ext in vidtypes else "img" if ext in imgtypes else None
-    filedir = os.path.dirname(mediafile)
-
+    ext = get_ext(str(source))
+    ftype = None
+    if ext in [".mov",".mp4",".avi"]:
+        ftype = "vid"
+    if ext in [".jpg", ".png", ".jpeg", ".bmp"]:
+        ftype = "img"
+    if type(source) == int:
+        ftype = "stream"
     assert ftype != None, "File neither video or image file.."
-    if filedir != "":
-        assert os.path.isdir(filedir), "File directory does not exist.."
-    assert os.path.isfile(mediafile), "File does not exist.."
 
-    if ftype == "vid":
-        cap = cv2.VideoCapture(mediafile)
+    if ftype == "img" or ftype == "vid":
+        filedir = os.path.dirname(source)
+        if filedir != "":
+            assert os.path.isdir(filedir), "File directory does not exist.."
+        assert os.path.isfile(source), "File does not exist.."
+
+
+    if ftype == "vid" or ftype == "stream":
+        cap = cv2.VideoCapture(source)
         assert cap.read()[0], "Video source opened but failed to read images.."
 
-    print("Mediafile okay.. ", end = "")
+    if not internal:
+        print("Mediafile okay.. ", end = "")
 
 
 def getimg(mediafile):
