@@ -52,6 +52,14 @@ class Logger(object):
         sys.stdout = sys.stdout.terminal
 
 
+class objectview:
+
+    """Transforms dictionary into an object"""
+
+    def __init__(self, dic):
+        self.__dict__ = dic
+
+
 def removeline(linenr=1):
 
     """Removes printed lines in terminal. Linenr starts with current line"""
