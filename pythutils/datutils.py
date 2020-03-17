@@ -92,6 +92,16 @@ def dfchange(df1, df2):
     return dfchanges, nchanges
 
 
+def to_query(cols, vals):
+
+    """Returns a query from a list of columns and values"""
+
+    query = ['{} == "{}"'.format(cols[i],vals[i]) for i,_ in enumerate(cols)]
+    query = ' and '.join(query)
+
+    return query
+
+
 def contour_to_tuple(contour):
 
     """Convert contour to tuple"""
