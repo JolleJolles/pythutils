@@ -24,7 +24,7 @@ DISTNAME = "pythutils"
 MAINTAINER = "Jolle Jolles"
 MAINTAINER_EMAIL = "j.w.jolles@gmail.com"
 URL = "https://github.com/JolleJolles"
-DOWNLOAD_URL = "https://github.com/JolleJolles/pythutils/archive/1.2.1.tar.gz"
+DOWNLOAD_URL = "https://github.com/JolleJolles/pythutils/archive/1.3.0.tar.gz"
 
 with open("README.md") as f:
     readme = f.read()
