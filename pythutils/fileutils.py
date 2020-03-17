@@ -81,7 +81,7 @@ def listfiles(filedir = ".", filetype = "", keepdir = False, keepext = True,
     return outlist
 
 
-def filechecker(indir = "", outdir = "", move = True, type=".h264", 
+def filechecker(indir = "", outdir = "", move = True, type=".h264",
                 sleeptime = 2, function = None, functionparams = ("file")):
 
         """
@@ -140,7 +140,7 @@ def filechecker(indir = "", outdir = "", move = True, type=".h264",
         os.chdir(rootdir)
         lineprint("Filechecking stopped..")
 
-        
+
 def commonpref(pathlist = None, remove = False):
 
     """Given a list of paths, returns the longest common leading component"""
@@ -166,7 +166,7 @@ def get_ext(filename):
 
     """Returns file extension in lower case"""
 
-    return os.path.splitext(filename)[-1].lower()
+    return os.path.splitext(str(filename))[-1].lower()
 
 
 def loadyml(filename, value = None, add = True):
