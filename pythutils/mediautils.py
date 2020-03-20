@@ -36,21 +36,31 @@ def check_media(source, internal=False):
         ftype = "img"
     if type(source) == int:
         ftype = "stream"
-    assert ftype != None, "File neither video or image file.."
+    if ftype == None:
+        print("File neither video or image file..")
+        return False
 
     if ftype == "img" or ftype == "vid":
         filedir = os.path.dirname(source)
         if filedir != "":
-            assert os.path.isdir(filedir), "File directory does not exist.."
-        assert os.path.isfile(source), "File does not exist.."
-
+            if not os.path.isdir(filedir):
+                print("File directory does not exist..")
+                return False
+        if not os.path.isfile(source):
+            print("File does not exist..")
+            return False
 
     if ftype == "vid" or ftype == "stream":
         cap = cv2.VideoCapture(source)
-        assert cap.read()[0], "Video source opened but failed to read images.."
+        flag, frame = cap.read()
+        if not flag:
+            print("Video source opened but failed to read images..")
+            return False
 
     if not internal:
         print("Mediafile okay.. ", end = "")
+
+    return True
 
 
 def getimg(mediafile):
@@ -71,10 +81,12 @@ def get_vid_params(mediafile):
     """Gets video parameters from file or video instance"""
 
     if type(mediafile) is str:
-        assert get_ext(mediafile) in [".mov",".mp4",".avi"], "File not a video.."
+        if get_ext(mediafile) not in [".mov",".mp4",".avi"]:
+            raise TypeError("File not a video..")
         mediafile = cv2.VideoCapture(mediafile)
 
-    assert mediafile.read()[0], "Video could not be read.."
+    if not mediafile.read()[0]:
+        raise RuntimeError("Video could not be read..")
     fps = int(mediafile.get(cv2.CAP_PROP_FPS))
     width = int(mediafile.get(cv2.CAP_PROP_FRAME_WIDTH))
     height = int(mediafile.get(cv2.CAP_PROP_FRAME_HEIGHT))

@@ -24,9 +24,11 @@ def move(file, newdir):
 
     """Moves a file to new location"""
 
-    assert os.path.isfile(file), "Provided file does not exist.."
+    if not os.path.isfile(file):
+        raise OSError("Provided file does not exist..")
     newdir = os.getcwd()+"/"+newdir if os.path.split(newdir)[0]=="" else newdir
-    assert os.path.isdir(newdir), "Provided newdir is no directory.."
+    if not os.path.isdir(newdir):
+        raise OSError("Provided newdir is no directory..")
 
     path, filename = os.path.split(file)
     print(path, filename)
@@ -111,11 +113,14 @@ def filechecker(indir = "", outdir = "", move = True, type=".h264",
             interrupted = True
         Thread(target=keythread).start()
 
-        assert function is not None, "No function is provided"
+        if function is None:
+            raise Inputerror("No function is provided")
         indir = os.getcwd() if indir == "" else indir
-        assert os.path.exists(indir), "in-directory does not exist.."
+        if not os.path.exists(indir):
+            raise OSError("in-directory does not exist..")
         outdir = indir if outdir == "" else outdir
-        assert os.path.exists(outdir), "out-directory does not exist.."
+        if not os.path.exists(outdir)
+            raise OSError("out-directory does not exist..")
 
         rootdir = os.getcwd()
         os.chdir(indir)
