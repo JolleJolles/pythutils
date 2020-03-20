@@ -119,7 +119,7 @@ def filechecker(indir = "", outdir = "", move = True, type=".h264",
         if not os.path.exists(indir):
             raise OSError("in-directory does not exist..")
         outdir = indir if outdir == "" else outdir
-        if not os.path.exists(outdir)
+        if not os.path.exists(outdir):
             raise OSError("out-directory does not exist..")
 
         rootdir = os.getcwd()
