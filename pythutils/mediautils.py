@@ -95,7 +95,7 @@ def get_vid_params(mediafile):
     return fps, width, height, fcount
 
 
-def videowriter(filein, w, h, fps, resizeval):
+def videowriter(filein, w, h, fps, resizeval = 1):
 
     """Creates a vidout instance using the opencv VideoWriter class"""
 
