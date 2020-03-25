@@ -21,7 +21,7 @@ import cv2
 import numpy as np
 
 from pythutils.fileutils import get_ext
-from pythutils.mathutils import closenr
+from pythutils.mathutils import closenr, sort_points
 
 
 def check_media(source, internal=False):
@@ -143,7 +143,7 @@ def fourpt_transform(image, pts):
     to obtain a top-down view
     """
 
-    rect = order_points(pts)
+    rect = sort_points(pts)
     (tl, tr, br, bl) = rect
 
     widthA = np.sqrt(((br[0] - bl[0]) ** 2) + ((br[1] - bl[1]) ** 2))
