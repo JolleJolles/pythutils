@@ -101,6 +101,24 @@ def sort_twoPoint(coords):
     return ((x1,y1),(x2,y2))
 
 
+def sort_points(pts):
+
+    """
+    Initializes a list of coordinates that will be ordered from top-left to
+    bottom-left in clockwise order
+    """
+
+    rect = np.zeros((4, 2), dtype = "float32")
+    s = pts.sum(axis = 1)
+    rect[0] = pts[np.argmin(s)]
+    rect[2] = pts[np.argmax(s)]
+    diff = np.diff(pts, axis = 1)
+    rect[1] = pts[np.argmin(diff)]
+    rect[3] = pts[np.argmax(diff)]
+
+    return rect
+
+
 def points_to_vec(pt1, pt2, flip = False):
 
     """
