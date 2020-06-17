@@ -208,8 +208,9 @@ def name(filename, ext = "", action = "newfile"):
 
     dirname, filename = os.path.split(filename)
     dirname = '.' if dirname == '' else dirname
-    filename = os.path.splitext(filename)[0]
+    filename, ext = os.path.splitext(filename)
     names = [x for x in os.listdir(dirname) if x.startswith(filename)]
+    names = [x for x in names if os.path.splitext(x)[1]==ext]
 
     if len(names) == 0 or action == "append":
         return filename+ext
