@@ -3,9 +3,16 @@
 
 ## Installation
 
-To install pythutils, open a terminal window and enter:
-```bash
+To install the latest release of `pythutils`, open a terminal window and enter:
+
+```
 pip install pythutils
+```
+
+To install the latest development version, enter:
+
+```
+pip install git+https://github.com/JolleJolles/pythutils.git --upgrade
 ```
 
 ## Dependencies
