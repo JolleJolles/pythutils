@@ -205,7 +205,7 @@ def picamconv(resolution):
 
     """Adapts video resolution to work with raspberry pi camera"""
 
-    width = closenr(resolution[0],16)
+    width = closenr(resolution[0],32)
     height = closenr(resolution[1],16)
 
     return (width, height)
