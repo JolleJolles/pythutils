@@ -37,7 +37,7 @@ def move(file, newdir):
     os.rename(path+"/"+filename, newdir+"/"+filename)
 
 
-def listfiles(filedir = ".", filetype = "", keepdir = False, keepext = True,
+def listfiles(dir = ".", type = "", keepdir = False, keepext = True,
               nested = False):
 
     """
@@ -56,20 +56,20 @@ def listfiles(filedir = ".", filetype = "", keepdir = False, keepext = True,
 
     if nested:
         outlist = []
-        for root, dirs, files in os.walk(filedir):
+        for root, dirs, files in os.walk(dir):
              for file in files:
-                if file.endswith(filetype):
+                if file.endswith(type):
                     if keepdir:
                         outlist.append(os.path.join(root, file))
                     else:
                         outlist.append(file)
 
     else:
-        if filetype == "dir":
-            outlist = [i for i in os.listdir(filedir) if os.path.isdir(os.path.join(filedir, i))]
+        if type == "dir":
+            outlist = [i for i in os.listdir(dir) if os.path.isdir(os.path.join(dir, i))]
 
         else:
-            outlist = [each for each in os.listdir(filedir) if each.endswith(filetype)]
+            outlist = [each for each in os.listdir(dir) if each.endswith(type)]
             outlist = [i for i in outlist if not i.startswith('.')]
 
         if keepdir:
