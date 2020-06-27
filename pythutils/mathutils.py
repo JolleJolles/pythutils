@@ -15,6 +15,7 @@
 
 from __future__ import division
 
+import math
 import numpy as np
 
 def uneven(value):
@@ -256,3 +257,18 @@ def dist_to_segment(pt, segment):
         coords = (line[0][0],line[0][1]) if linept1dis<=linept2dis else (line[1][0],line[1][1])
 
     return dist, coords
+
+
+def maxrect(dims, maxdims = (1640,1232), decimals = 2):
+
+    """
+    Computes the maximal-sized rectangle with the same radio of dimensions as
+    the rectangle provided, within the maximum dimensions
+    """
+
+    ratio = float(dims[1])/dims[0]
+    maxpix = maxdims[0]*maxdims[1]
+    w = round(math.sqrt(maxpix/ratio),decimals)
+    h = round(w*ratiod,decimals)
+
+    return (w,h)
