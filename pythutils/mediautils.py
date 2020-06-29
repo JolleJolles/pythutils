@@ -201,12 +201,12 @@ def roi_to_zoom(roi, resolution):
     return (z0, z1, z2, z3)
 
 
-def picamconv(resolution):
+def picamconv(resolution, maxres = (1632, 1232)):
 
     """Adapts video resolution to work with raspberry pi camera"""
 
-    width = closenr(resolution[0],32)
-    height = closenr(resolution[1],16)
+    width = min(closenr(resolution[0],32), maxres[0])
+    height = min(closenr(resolution[1],16), maxres[1])
 
     return (width, height)
 
