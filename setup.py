@@ -51,8 +51,7 @@ if __name__ == "__main__":
                      "numpy; python_version>='3'",
                      "pandas==0.24.2; python_version>='2' and python_version<'3'",
                      "pandas; python_version>='3'",
-                     "pyyaml",
-                     "h5py"],
+                     "pyyaml"],
           classifiers=[
                      "Intended Audience :: Science/Research",
                      "Programming Language :: Python :: 2.7",
