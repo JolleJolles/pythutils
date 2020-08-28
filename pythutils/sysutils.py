@@ -125,7 +125,8 @@ def isrpi(message=False):
                     found = True
                     label, value = line.strip().split(':', 1)
                     value = value.strip()
-                    if value not in ('BCM2708','BCM2709','BCM2835','BCM2836'):
+                    if value not in ('BCM2708','BCM2709','BCM2835','BCM2836',
+                                     'BCM2837','BCM2837B0','BCM2711'):
                         return False
             if not found:
                 raise ValueError("""Unable to determine if system is rpi or
