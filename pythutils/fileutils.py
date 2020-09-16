@@ -42,8 +42,9 @@ def listfiles(dir = ".", type = "", keepdir = False, keepext = True,
     """
     Returns a list of (nested) files or directories
 
-    filedir: str; default="."
-    filetype: str or tuple of strings; default=""
+    dir: str; default="."
+        Directory that should be checked
+    type: str or tuple of strings; default=""
         Filetype for the files to be listed. If filetype is dir, it will return
     keepdir: bool; default=False
         If the original directory should be kept as part of the filename
@@ -72,7 +73,7 @@ def listfiles(dir = ".", type = "", keepdir = False, keepext = True,
             outlist = [i for i in outlist if not i.startswith('.')]
 
         if keepdir:
-            outlist = [filedir + "/" + i  for i in outlist]
+            outlist = [dir + "/" + i  for i in outlist]
 
     outlist = sorted(outlist)
 
