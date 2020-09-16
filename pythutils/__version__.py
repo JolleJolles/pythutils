@@ -13,6 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-__version__ = "1.3.7"
+__version__ = "1.3.8"
 
 # For documentation of all changes, see CHANGELOG

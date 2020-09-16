@@ -24,7 +24,7 @@ DISTNAME = "pythutils"
 MAINTAINER = "Jolle Jolles"
 MAINTAINER_EMAIL = "j.w.jolles@gmail.com"
 URL = "https://github.com/JolleJolles"
-DOWNLOAD_URL = "https://github.com/JolleJolles/pythutils/archive/1.3.7.tar.gz"
+DOWNLOAD_URL = "https://github.com/JolleJolles/pythutils/archive/1.3.8.tar.gz"
 
 with open("README.md") as f:
     readme = f.read()
@@ -49,8 +49,6 @@ if __name__ == "__main__":
           install_requires=[
                      "numpy==1.16.5; python_version>='2' and python_version<'3'",
                      "numpy; python_version>='3'",
-                     "pandas==0.24.2; python_version>='2' and python_version<'3'",
-                     "pandas; python_version>='3'",
                      "pyyaml"],
           classifiers=[
                      "Intended Audience :: Science/Research",

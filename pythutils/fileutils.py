@@ -16,8 +16,6 @@
 import os
 import ast
 import yaml
-import pandas
-
 
 def move(file, newdir):
 
@@ -193,6 +191,7 @@ def loadyml(filename, value = None, add = True):
 def loadh5data(filename, dataset = "data"):
 
     import h5py
+    import pandas
     h5file = h5py.File(filename, 'r')
     dataset = pandas.DataFrame(h5file[dataset][:])
     h5file.close()

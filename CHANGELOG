@@ -2,6 +2,9 @@ All notable changes to this package will be documented in this file. For a
 complete changelog, see https://github.com/JolleJolles/pythutils/commits/
 
 Latest changes:
+2020-09-16 - version 1.3.8
+    * Removed pandas as general requirement as only needed for specific functions
+
 2020-09-16 - version 1.3.7
     * Fixed typos in listfiles function
 
