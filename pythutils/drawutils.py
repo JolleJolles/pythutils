@@ -222,6 +222,8 @@ def namedcols(colname = None, printlist = False, BRG = True):
 
     if printlist:
         print(collist)
+    elif type(colname) == tuple and len(colname) == 3:
+        return colname
     elif colname not in collist:
         print("colname does not exist..")
     else:
