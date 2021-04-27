@@ -12,7 +12,7 @@ pip install pythutils
 To install the latest development version, enter:
 
 ```
-pip install git+https://github.com/JolleJolles/pythutils.git --upgrade
+pip install git+https://github.com/JolleJolles/pythutils.git --upgrade --force-reinstall
 ```
 
 ## Dependencies
