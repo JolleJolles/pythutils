@@ -96,6 +96,7 @@ def to_query(cols, vals):
 
     """Returns a query from a list of columns and values"""
 
+    vals = ["'"+val+"'" if isinstance(val,str) else val for val in vals]
     query = ['{} == "{}"'.format(cols[i],vals[i]) for i,_ in enumerate(cols)]
     query = ' and '.join(query)
 
