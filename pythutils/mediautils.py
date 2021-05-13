@@ -127,10 +127,13 @@ def safe_framecount(vidfile):
     return count
 
 
-def crop(image, pt1, pt2):
+def crop(image, pt1, pt2=None):
 
     """Crops image based on based on top left and bottom right corner"""
 
+    if pt2 == None:
+        pt2 = pt1[1]
+        pt1 = pt1[0]
     cropped = image[pt1[1]:pt2[1], pt1[0]:pt2[0]]
 
     return cropped
