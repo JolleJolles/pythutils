@@ -370,8 +370,7 @@ def draw_traj(img, coordlist = [], color = "green", thick_min = 8,
     """Draws a semi-transparent polyline with decreasing width on an image"""
 
     col = namedcols(color)
-    img2 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-    mask = img2.copy()
+    mask = img.copy()
 
     thicklist = np.linspace(thick_min, thick_max, len(coordlist))
     thicklist = (thicklist**4 / thick_max**4) * thick_max
@@ -385,4 +384,4 @@ def draw_traj(img, coordlist = [], color = "green", thick_min = 8,
 
         cv2.line(mask, coordlist[i], coordlist[i-1], col, thickness)
 
-    cv2.addWeighted(mask, opacity, img2, 1-opacity, 0, img)
+    cv2.addWeighted(mask, opacity, img, 1-opacity, 0, img)

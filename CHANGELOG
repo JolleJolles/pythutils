@@ -7,6 +7,8 @@ Not yet in latest release:
     * improved to_query function to better accomodate different instances
 2021-05-13
     * Improved crop function to also work with one list/tuple of two points
+2021-05-17
+    * Fixed draw_traj function color space
 
 Latest changes:
 2021-04-09 - version 1.3.9
