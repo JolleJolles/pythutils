@@ -240,7 +240,7 @@ def get_spaced_colors(colnr):
     interval = int(maxval/(colnr+0.5))
     colshex = [hex(I)[2:].zfill(6) for I in list(range(0, maxval, interval))]
     colsrgb = [(int(i[:2], 16), int(i[2:4], 16), int(i[4:], 16)) for i in colshex]
-    colsrgb = colrgb[1:]
+    colsrgb = colsrgb[1:]
 
     return colsrgb
 
