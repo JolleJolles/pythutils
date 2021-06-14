@@ -371,7 +371,8 @@ def draw_traj(img, coordlist = [], color = "green", thick_min = 8,
     mask = img.copy()
 
     thicklist = np.linspace(thick_min, thick_max, len(coordlist))
-    thicklist = (thicklist**4 / thick_max**4) * thick_max
+    thicklist = (thicklist**4 / thick_max**4) * thick_max + 1
+    thicklist = [max(i,1) for i in thicklist]
 
     for i in list(range(1, (len(coordlist) - 1))):
         thickness = int(thicklist[i])
