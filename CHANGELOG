@@ -4,6 +4,7 @@ complete changelog, see https://github.com/JolleJolles/pythutils/commits/
 Not yet in latest release:
 2021-06-13:
     * Fixed name error of get_spaced_colors function
+    * Improved get_spaced_colors function and renamed to uniqcols
 2021-04-27:
     * Changed line about installation of development version in readme
     * improved to_query function to better accomodate different instances

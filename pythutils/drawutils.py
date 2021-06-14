@@ -17,6 +17,7 @@ from __future__ import print_function
 
 import cv2
 import numpy as np
+import seaborn as sns
 
 from pythutils.mathutils import sort_twoPoint
 
@@ -232,17 +233,14 @@ def namedcols(colname = None, printlist = False, BRG = True):
         return col
 
 
-def get_spaced_colors(colnr):
+def uniqcols(colnr, colorspace="husl", rgb=True):
 
     """Gets a specified nr of colors, equally spaced on the color spectrum"""
 
-    maxval = 255**3
-    interval = int(maxval/(colnr+0.5))
-    colshex = [hex(I)[2:].zfill(6) for I in list(range(0, maxval, interval))]
-    colsrgb = [(int(i[:2], 16), int(i[2:4], 16), int(i[4:], 16)) for i in colshex]
-    colsrgb = colsrgb[1:]
-
-    return colsrgb
+    cols = sns.color_palette(colorspace, colnr)
+    if rgb:
+        cols = [tuple([(int(i*255)) for i in col])[::-1] for col in cols]
+    return cols
 
 
 def draw_text(img, text, loc = (0, 0), size = 1, col = "black", margin = 5,
