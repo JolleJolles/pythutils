@@ -49,7 +49,8 @@ if __name__ == "__main__":
           install_requires=[
                      "numpy==1.16.5; python_version>='2' and python_version<'3'",
                      "numpy; python_version>='3'",
-                     "pyyaml"],
+                     "pyyaml",
+                     "objsize"],
           classifiers=[
                      "Intended Audience :: Science/Research",
                      "Programming Language :: Python :: 2.7",

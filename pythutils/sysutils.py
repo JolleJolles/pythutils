@@ -22,6 +22,7 @@ import sys
 import time
 import socket
 import fractions
+from objsize import get_deep_size
 
 class Logger(object):
 
@@ -58,6 +59,21 @@ class objectview:
 
     def __init__(self, dic):
         self.__dict__ = dic
+
+
+def get_size(object):
+
+    """Gets the size in bytes of an object"""
+
+    size_bytes = get_deep_size(object)
+    if size_bytes == 0:
+        return "0B"
+    size_name = ("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
+    i = int(math.floor(math.log(size_bytes, 1024)))
+    p = math.pow(1024, i)
+    s = round(size_bytes / p, 2)
+
+    return "%s %s" % (s, size_name[i])
 
 
 def removeline(linenr=1):
