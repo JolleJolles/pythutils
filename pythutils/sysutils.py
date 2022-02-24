@@ -24,6 +24,21 @@ import socket
 import fractions
 from objsize import get_deep_size
 
+class Suppressor(object):
+
+    """Suppressed the output of a function"""
+    def __enter__(self):
+        self.stdout = sys.stdout
+        sys.stdout = self
+
+    def __exit__(self, type, value, traceback):
+        sys.stdout = self.stdout
+        if type is not None:
+            print("exception")
+
+    def write(self, x): pass
+
+
 class Logger(object):
 
     """
