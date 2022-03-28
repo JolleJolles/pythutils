@@ -27,7 +27,7 @@ To use the various utility functions, e.g.:
     from pythutils.sysutils import isrpi
 
 ## Development
-*pythutils* is developed by [Dr Jolle Jolles](http://jollejolles.com) at the Max Planck Institute of Animal Behavior, Konstanz, Germany.
+*pythutils* is developed by [Dr Jolle Jolles](http://jollejolles.com).
 
 For an overview of version changes see the [CHANGELOG](https://github.com/JolleJolles/pythutils/blob/master/CHANGELOG) and for detailed changes see the [commits page](https://github.com/JolleJolles/pythutils/commits/).
 
