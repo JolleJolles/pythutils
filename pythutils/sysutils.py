@@ -181,3 +181,19 @@ def checkfrac(input):
     transformed_text = re.sub(r'([\d.]+)', r'fractions.Fraction("\1")', input)
 
     return eval(transformed_text)
+
+def get_google_drive_path():
+    """Automatically detect Google Drive path on Windows and macOS."""
+    possible_paths = [
+        os.path.expanduser("~/Google Drive"),  # Common Mac location
+        os.path.expanduser("~/Library/CloudStorage/GoogleDrive-*"),  # Newer Mac Google Drive path
+        "G:/My Drive",  # Windows default Google Drive
+        "H:/My Drive",  # Alternative Windows Google Drive
+        "/Volumes/GoogleDrive",  # External mount on macOS
+    ]
+
+    for path in possible_paths:
+        if os.path.exists(path):
+            return path
+
+    raise FileNotFoundError("Google Drive path not found. Please set it manually.")
