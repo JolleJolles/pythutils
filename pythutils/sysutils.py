@@ -201,8 +201,8 @@ def get_google_drive_path():
     
     # Check common Windows paths
     windows_paths = [
-        "G:/My Drive",  # Standard Google Drive path on Windows
-        "H:/My Drive",  # Alternative drive letter
+        "G:\My Drive",  # Standard Google Drive path on Windows
+        "H:\My Drive",  # Alternative drive letter
     ]
 
     for path in windows_paths:
