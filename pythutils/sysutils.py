@@ -188,9 +188,9 @@ def get_google_drive_path():
     
     # Check common macOS paths
     macos_paths = [
-        os.path.expanduser("~/Google Drive"),  # Older Google Drive location
-        os.path.expanduser("~/Library/CloudStorage/GoogleDrive-*"),  # Newer macOS location
-        "/Volumes/GoogleDrive-*",  # Mounted volume location
+        os.path.expanduser("~/Google Drive/My Drive"),  # Older Google Drive location
+        os.path.expanduser("~/Library/CloudStorage/GoogleDrive-*/My Drive"),  # Newer macOS location
+        "/Volumes/GoogleDrive-*/My Drive",  # Mounted volume location
     ]
 
     for path in macos_paths:
