@@ -2,7 +2,7 @@ All notable changes to this package will be documented in this file. For a
 complete changelog, see https://github.com/JolleJolles/pythutils/commits/
 
 Not yet in latest release:
-2025-03-18 - version 1.3.18
+2025-03-18 - version 1.3.19
     * Added get_google_drive_path function to sysutils
 
 2022-09-18 - version 1.3.17

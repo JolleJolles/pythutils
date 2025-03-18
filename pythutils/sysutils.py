@@ -183,16 +183,28 @@ def checkfrac(input):
     return eval(transformed_text)
 
 def get_google_drive_path():
-    """Automatically detect Google Drive path on Windows and macOS."""
-    possible_paths = [
-        os.path.expanduser("~/Google Drive"),  # Common Mac location
-        os.path.expanduser("~/Library/CloudStorage/GoogleDrive-*"),  # Newer Mac Google Drive path
-        "G:/My Drive",  # Windows default Google Drive
-        "H:/My Drive",  # Alternative Windows Google Drive
-        "/Volumes/GoogleDrive",  # External mount on macOS
+    """Automatically detect Google Drive location on macOS and Windows."""
+    
+    # Check common macOS paths
+    macos_paths = [
+        os.path.expanduser("~/Google Drive"),  # Older Google Drive location
+        os.path.expanduser("~/Library/CloudStorage/GoogleDrive-*"),  # Newer macOS location
+        "/Volumes/GoogleDrive-*",  # Mounted volume location
     ]
 
-    for path in possible_paths:
+    for path in macos_paths:
+        # Use glob to match wildcard paths (GoogleDrive-XXXXX)
+        matched_paths = glob.glob(path)
+        if matched_paths:
+            return matched_paths[0]  # Return the first match found
+    
+    # Check common Windows paths
+    windows_paths = [
+        "G:/My Drive",  # Standard Google Drive path on Windows
+        "H:/My Drive",  # Alternative drive letter
+    ]
+
+    for path in windows_paths:
         if os.path.exists(path):
             return path
 
