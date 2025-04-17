@@ -57,7 +57,7 @@ class mouse_events:
 
 def namedcols(colname = None, printlist = False, BRG = True):
 
-    """Acquire RGB/BRG colors from a color name"""
+    """Return BGR/RGB color for a given color name. Falls back to gray if name not found."""
 
     collist = {'black': (0, 0, 0),
              'navy': (0, 0, 128),
@@ -212,14 +212,24 @@ def namedcols(colname = None, printlist = False, BRG = True):
 
     if printlist:
         print(collist)
-    elif type(colname) == tuple and len(colname) == 3:
+        return
+
+    if isinstance(colname, tuple) and len(colname) == 3:
         return colname
-    elif colname not in collist:
-        print("colname does not exist..")
-    else:
-        col = collist[colname]
-        col = (col[2],col[1],col[0]) if BRG else col
-        return col
+
+    if not isinstance(colname, str):
+        return (200, 200, 200) if BRG else (200, 200, 200)
+
+    # Normalize the name
+    name = colname.lower().strip()
+    if "_" in name:
+        name = name.split("_")[0]
+
+    # Lookup
+    col = collist.get(name, (200, 200, 200))  # Default to light gray if not found
+
+    # Return BGR if requested
+    return (col[2], col[1], col[0]) if BRG else col
 
 
 def uniqcols(colnr, colorspace="husl", rgb=True):
@@ -353,23 +363,22 @@ def draw_sliced_line(img, pt1, pt2, color, thickness = 1, style = "dotted",
 
 def draw_traj(img, coordlist = [], color = "green", thick_min = 8,
               thick_max = 13, opacity = 0.5):
-
     """Draws a semi-transparent polyline with decreasing width on an image"""
 
-    col = namedcols(color)
+    # Only call namedcols if color is a string
+    col = namedcols(color) if isinstance(color, str) else color
     mask = img.copy()
 
     thicklist = np.linspace(thick_min, thick_max, len(coordlist))
     thicklist = (thicklist**4 / thick_max**4) * thick_max + 1
     thicklist = [max(i,1) for i in thicklist]
 
-    for i in list(range(1, (len(coordlist) - 1))):
+    for i in range(1, len(coordlist) - 1):
         thickness = int(thicklist[i])
         if coordlist[i] != coordlist[i] or coordlist[i-1] != coordlist[i-1]:
             continue
         elif None in sum((coordlist[i], coordlist[i-1]),()):
             continue
-
         cv2.line(mask, coordlist[i], coordlist[i-1], col, thickness)
 
     cv2.addWeighted(mask, opacity, img, 1-opacity, 0, img)
