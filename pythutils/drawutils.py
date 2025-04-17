@@ -59,7 +59,7 @@ def namedcols(colname = None, printlist = False, BRG = True):
 
     """Return BGR/RGB color for a given color name. Falls back to gray if name not found."""
 
-    collist = {'black': (0, 0, 0),
+    collist = {'black': (50, 50, 50),
              'navy': (0, 0, 128),
              'navyblue': (0, 0, 128),
              'darkblue': (0, 0, 139),
