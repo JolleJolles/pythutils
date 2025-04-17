@@ -23,46 +23,44 @@ def move(file, newdir):
     os.rename(path+"/"+filename, newdir+"/"+filename)
 
 
+import os
+
 def listfiles(dir=".", type="", keepdir=False, keepext=True, nested=False):
     """
     Returns a list of (nested) files or directories.
 
     Parameters
     ----------
-    dir : str, default="."
+    dir : str
         Directory that should be checked.
-
-    type : str or tuple of strings, default=""
-        File extension(s) to filter. Case-insensitive.
-        If "dir", it returns folders instead of files.
-
-    keepdir : bool, default=False
-        If True, includes the directory path in the output.
-
-    keepext : bool, default=True
-        If False, strips the file extension from filenames.
-
-    nested : bool, default=False
-        If True, lists files in all subfolders recursively.
+    type : str or tuple of str
+        File extension(s) to match (case-insensitive).
+    keepdir : bool
+        If True, returns full path to each file.
+    keepext : bool
+        If False, strips file extensions from results.
+    nested : bool
+        If True, looks recursively in subfolders.
     """
+
+    if isinstance(type, str):
+        type = (type,) if type else ()
 
     outlist = []
 
     if nested:
         for root, dirs, files in os.walk(dir):
             for file in files:
-                if file.lower().endswith(type.lower()):
+                if not file.startswith('.') and file.lower().endswith(tuple(ext.lower() for ext in type)):
                     filepath = os.path.join(root, file) if keepdir else file
                     outlist.append(filepath)
     else:
-        if type == "dir":
-            outlist = [i for i in os.listdir(dir)
-                       if os.path.isdir(os.path.join(dir, i))]
-        else:
-            files = os.listdir(dir)
-            files = [f for f in files if f.lower().endswith(type.lower())]
-            files = [f for f in files if not f.startswith('.')]
-            outlist = [os.path.join(dir, f) if keepdir else f for f in files]
+        entries = os.listdir(dir)
+        files = [f for f in entries if os.path.isfile(os.path.join(dir, f))]
+        for f in files:
+            if not f.startswith('.') and (not type or f.lower().endswith(tuple(ext.lower() for ext in type))):
+                filepath = os.path.join(dir, f) if keepdir else f
+                outlist.append(filepath)
 
     outlist = sorted(outlist)
 
