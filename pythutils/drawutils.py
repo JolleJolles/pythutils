@@ -365,11 +365,13 @@ def draw_traj(img, coordlist = [], color = "green", thick_min = 8,
               thick_max = 13, opacity = 0.5):
     """Draws a semi-transparent polyline with decreasing width on an image"""
 
-    # Override black to visible gray
-    if isinstance(color, str) and color.lower() == "black":
-        col = (50, 50, 50)  # Dark gray instead of true black
+    if isinstance(color, tuple) and len(color) == 3:
+        col = color  # Assume it's already in BGR
+    elif isinstance(color, str):
+        # Always get color as BGR
+        col = namedcols(color, BRG=True)
     else:
-        col = namedcols(color)
+        col = (0, 255, 0)  # default to green
 
     mask = img.copy()
 
