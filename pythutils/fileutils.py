@@ -1,17 +1,6 @@
-#! /usr/bin/env python
-# Copyright (c) 2018 - 2019 Jolle Jolles <j.w.jolles@gmail.com>
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at:
-#
-# http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+#!/usr/bin/env python
+# Copyright (c) 2018 - 2025 Jolle Jolles <j.w.jolles@gmail.com>
+# Licensed under the Apache License, Version 2.0
 
 import os
 import ast
@@ -34,44 +23,46 @@ def move(file, newdir):
     os.rename(path+"/"+filename, newdir+"/"+filename)
 
 
-def listfiles(dir = ".", type = "", keepdir = False, keepext = True,
-              nested = False):
-
+def listfiles(dir=".", type="", keepdir=False, keepext=True, nested=False):
     """
-    Returns a list of (nested) files or directories
+    Returns a list of (nested) files or directories.
 
-    dir: str; default="."
-        Directory that should be checked
-    type: str or tuple of strings; default=""
-        Filetype for the files to be listed. If filetype is dir, it will return
-    keepdir: bool; default=False
-        If the original directory should be kept as part of the filename
-    keepext: bool; defaul=True
-        If the file extension should be kept in the filenames
-    nested: bool; default=False
-        If all nested files should be listed
+    Parameters
+    ----------
+    dir : str, default="."
+        Directory that should be checked.
+
+    type : str or tuple of strings, default=""
+        File extension(s) to filter. Case-insensitive.
+        If "dir", it returns folders instead of files.
+
+    keepdir : bool, default=False
+        If True, includes the directory path in the output.
+
+    keepext : bool, default=True
+        If False, strips the file extension from filenames.
+
+    nested : bool, default=False
+        If True, lists files in all subfolders recursively.
     """
+
+    outlist = []
 
     if nested:
-        outlist = []
         for root, dirs, files in os.walk(dir):
-             for file in files:
-                if file.endswith(type):
-                    if keepdir:
-                        outlist.append(os.path.join(root, file))
-                    else:
-                        outlist.append(file)
-
+            for file in files:
+                if file.lower().endswith(type.lower()):
+                    filepath = os.path.join(root, file) if keepdir else file
+                    outlist.append(filepath)
     else:
         if type == "dir":
-            outlist = [i for i in os.listdir(dir) if os.path.isdir(os.path.join(dir, i))]
-
+            outlist = [i for i in os.listdir(dir)
+                       if os.path.isdir(os.path.join(dir, i))]
         else:
-            outlist = [each for each in os.listdir(dir) if each.endswith(type)]
-            outlist = [i for i in outlist if not i.startswith('.')]
-
-        if keepdir:
-            outlist = [dir + "/" + i  for i in outlist]
+            files = os.listdir(dir)
+            files = [f for f in files if f.lower().endswith(type.lower())]
+            files = [f for f in files if not f.startswith('.')]
+            outlist = [os.path.join(dir, f) if keepdir else f for f in files]
 
     outlist = sorted(outlist)
 
@@ -79,6 +70,7 @@ def listfiles(dir = ".", type = "", keepdir = False, keepext = True,
         outlist = [os.path.splitext(file)[0] for file in outlist]
 
     return outlist
+
 
 
 def filechecker(indir = "", outdir = "", move = True, type=".h264",

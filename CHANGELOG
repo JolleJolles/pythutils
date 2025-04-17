@@ -2,6 +2,12 @@ All notable changes to this package will be documented in this file. For a
 complete changelog, see https://github.com/JolleJolles/pythutils/commits/
 
 Not yet in latest release:
+2025-04-17 - version 1.3.23
+    * Improved listfiles function with case-insensitive extension matching
+    * Improved setup.py file with better version calling, dropped Python 2.7 support, replaced hardcoded version in download_url with dynamic one based on the version in __version__.py, and switched to find_packages()
+    * Added pyproject.toml file
+    * Cleaned up copyright statement across all files 
+
 2025-03-18 - version 1.3.22
     * Added get_google_drive_path function to sysutils
 
