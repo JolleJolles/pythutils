@@ -85,14 +85,19 @@ def get_vid_params(mediafile):
 
 
 def videowriter(filein, w, h, fps, resizeval = 1):
-
-    """Creates a vidout instance using the opencv VideoWriter class"""
+    """Creates a cv2.VideoWriter object and checks if it opened successfully"""
+    from pythutils.fileutils import get_ext
 
     ext = get_ext(filein)
     fileout = filein[:-len(ext)]+".mp4" if ext!="" else filein+".mp4"
+
     viddims = (w, h) if resizeval == 1 else (int(w*resizeval), int(h*resizeval))
     fourcc = cv2.VideoWriter_fourcc(*"mp4v")
     vidout = cv2.VideoWriter(fileout, fourcc, fps, viddims)
+
+    if not vidout.isOpened():
+        print(f"[ERROR] Failed to open VideoWriter for {fileout}")
+        return None
 
     return vidout
 
